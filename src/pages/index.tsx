@@ -6,7 +6,7 @@ import {hexToRgbA, rawRgbColorToCss} from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
 import {Preview} from "@components";
-import {CheckIcon, XIcon} from "@heroicons/react/solid";
+import {CheckIcon, ExclamationIcon, XIcon} from "@heroicons/react/solid";
 import {motion} from "framer-motion";
 import {Ellipsis} from "@components/Loader/Ellipsis";
 
@@ -109,6 +109,8 @@ const Home: NextPage = () => {
   };
 
   const [waiting, setWaiting] = useState(false)
+  const [error, setError] = useState(false)
+  const [recentError, setRecentError] = useState(setTimeout(() => {}))
 
   const [invalidRoom, setInvalidRoom] = useState(false);
   const [preset, setPreset] = useState(false);
@@ -136,8 +138,22 @@ const Home: NextPage = () => {
 
   // const [quality, setQuality] = useState(0);
 
+  const toggleError = () => {
+    setError(true)
+
+    clearTimeout(recentError)
+
+    const timeout = setTimeout(() => {
+      setError(false)
+    }, 3000)
+
+    setRecentError(timeout)
+
+  }
+
   const download = () => {
     if (invalidRoom) {
+      toggleError()
       return;
     }
 
@@ -175,6 +191,12 @@ const Home: NextPage = () => {
         <title>ระบบจัดตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
+      <div className="fixed w-full flex justify-center top-0">
+        <motion.div initial={{y: -40}} animate={error ? {y: 0} : {y: -40}} className="flex items-center space-x-1 px-4 py-1 bg-red-500 rounded-full shadow-lg text-white border border-red-600">
+          <ExclamationIcon className="w5 h-5 animate-pulse"/>
+          <span className="text-sm">หมายเลขห้องไม่ถูกต้อง</span>
+        </motion.div>
+      </div>
       <div className="flex justify-center items-center px-4 w-full min-h-screen transition-colors delay-300 py-4"
            style={{backgroundColor: rawRgbColorToCss(colors.c1)}}>
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg bg-white max-w-[500px]">
