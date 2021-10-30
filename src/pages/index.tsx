@@ -5,6 +5,14 @@ import React, {useState} from "react";
 import {hexToRgbA} from "@utils/hexToRgb";
 
 const Home: NextPage = () => {
+
+  const bgColors = ["bg-yellow-50", "bg-green-50", "bg-blue-50", "bg-pink-50"];
+
+  const getRandom = (arr: Array<string>) => {
+    return arr[Math.floor(Math.random() * arr.length)];
+  };
+
+  const [bgColor, setBgColor] = useState(getRandom(bgColors))
   const [preset, setPreset] = useState(false);
   const [qualityPanel, setQualityPanel] = useState(false);
 
@@ -22,20 +30,14 @@ const Home: NextPage = () => {
 
   const qualities = ["low", "standard", "high", "best"];
 
-  const bgColors = ["bg-yellow-50", "bg-green-50", "bg-blue-50", "bg-pink-50"];
-
   const [quality, setQuality] = useState(0);
-
-  const getRandom = (arr: Array<string>) => {
-    return arr[Math.floor(Math.random() * arr.length)];
-  };
 
   const resetDefault = () => {
     setColors(defaultColors);
   };
 
   return (
-    <div className={"flex justify-center items-center min-h-screen " + getRandom(bgColors)}>
+    <div className={"flex justify-center items-center min-h-screen " + bgColor}>
       <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-12 bg-white max-w-[500px]">
         <div>
           <h1 className="text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2564</h1>
