@@ -83,6 +83,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>ระบบจัดตารางเรียน 2/2021</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className={"flex justify-center items-center px-4 w-full min-h-screen " + bgColor}>
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-9 sm:space-y-12 bg-white max-w-[500px]">

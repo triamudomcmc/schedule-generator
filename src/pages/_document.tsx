@@ -25,7 +25,6 @@ export default class Document extends NextDocument {
           />
           <meta name="keywords" content="เตรียมอุดมศึกษา, กช., ตารางเรียน, ตารางสอน, กช. เตรียมอุดม" />
           <meta name="author" content="คณะกรรมการงานกิจกรรมพัฒนาผู้เรียน" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://schedule.tucm.cc" />
           <meta property="og:title" content="ระบบจัดตารางเรียน 2/2021" />
