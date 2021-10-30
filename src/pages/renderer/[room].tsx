@@ -6,6 +6,7 @@ import path from "path";
 import { rawRgbColorToCss } from "@utils/hexToRgb";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { isDarkOrLightHEX } from "@utils/isDarkOrLight";
 
 const defaultColors = {
   bg: "#FFFFFF",
@@ -184,7 +185,9 @@ const Room = ({ scheduleData }: RoomProps) => {
               <div className="mon-to-thurs">
                 {/* 1 */}
                 <div className="col">
-                  <div className="time">08.00-08.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    08.00-08.50
+                  </div>
                   {genSchedule(1)}
                 </div>
                 {/* break10 */}
@@ -201,7 +204,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 2 */}
                 <div className="col">
-                  <div className="time">09.00-09.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    09.00-09.50
+                  </div>
                   {genSchedule(2)}
                 </div>
                 {/* break10 */}
@@ -218,7 +223,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 3 */}
                 <div className="col">
-                  <div className="time">10.00-10.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    10.00-10.50
+                  </div>
                   {genSchedule(3)}
                 </div>
                 {/* break10 */}
@@ -235,7 +242,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 4 */}
                 <div className="col">
-                  <div className="time">11.00-11.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    11.00-11.50
+                  </div>
                   {genSchedule(4)}
                 </div>
                 {/* lunchbreak */}
@@ -252,7 +261,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 5 */}
                 <div className="col">
-                  <div className="time">13.00-13.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    13.00-13.50
+                  </div>
                   {genSchedule(5)}
                 </div>
                 {/* break10 */}
@@ -269,7 +280,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 6 */}
                 <div className="col">
-                  <div className="time">14.00-14.50</div>
+                  <div className="time" style={{ color: isDarkOrLightHEX(color.bg) === "light" ? "#404040" : "#eee" }}>
+                    14.00-14.50
+                  </div>
                   {genSchedule(6)}
                 </div>
               </div>
