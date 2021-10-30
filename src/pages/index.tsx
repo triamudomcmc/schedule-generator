@@ -200,7 +200,7 @@ const Home: NextPage = () => {
         </motion.div>
       </div>
       <div
-        className="flex justify-center items-center px-4 w-full min-h-screen transition-colors delay-300 py-4"
+        className="flex justify-center items-center px-4 w-full min-h-screen transition-colors py-4"
         style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
       >
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg bg-white max-w-[500px]">

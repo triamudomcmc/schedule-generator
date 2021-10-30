@@ -1,13 +1,17 @@
 import { ColorType } from "@components/ColorPicker";
 
 export const isDarkOrLightHEX = (color: string) => {
+  const _color = Array.from(color)
+    .filter((e) => e !== "#")
+    .join("");
+
   const colorCode =
-    color.length === 3
-      ? color
+    _color.length === 3
+      ? _color
           .split("")
           .map((e) => e + e)
           .join("")
-      : color;
+      : _color;
 
   // @ts-ignore
   const [a, b, c] = colorCode.matchAll(/[0-9a-fA-F]{2}/gi);
