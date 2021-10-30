@@ -6,6 +6,25 @@ import { hexToRgbA } from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
 
+const HomeIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-7 w-7 text-gray-400"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.4}
+        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+      />
+    </svg>
+  );
+};
+
 const Home: NextPage = () => {
   const bgColors = ["bg-yellow-50", "bg-green-50", "bg-blue-50", "bg-pink-50"];
 
@@ -101,20 +120,7 @@ const Home: NextPage = () => {
             <div className="flex sm:flex-row flex-col items-start sm:items-center sm:space-y-0 space-y-4 sm:space-x-8">
               <div className="relative w-48">
                 <span className="flex items-center absolute h-full pl-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.4}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
+                  <HomeIcon />
                 </span>
                 <input
                   onChange={(e) => {

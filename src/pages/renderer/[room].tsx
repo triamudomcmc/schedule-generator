@@ -1,11 +1,11 @@
-import {Logo} from "@components";
-import type {GetStaticPaths, GetStaticProps} from "next";
+import { Logo } from "@components";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
-import {rawRgbColorToCss} from "@utils/hexToRgb";
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import { rawRgbColorToCss } from "@utils/hexToRgb";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const defaultColors = {
   bg: "#FFFFFF",
@@ -16,7 +16,6 @@ const defaultColors = {
   c3: "#ADE374",
   c4: "#FF9417",
 };
-
 
 interface Data {
   name: string;
@@ -31,66 +30,64 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data"));
 
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data"))
-
-  const paths = files.filter((i) => (i.includes(".json"))).map((s) => ({
-    params: {room: s.replace(".json", "")}
-  }))
+  const paths = files
+    .filter((i) => i.includes(".json"))
+    .map((s) => ({
+      params: { room: s.replace(".json", "") },
+    }));
 
   return {
-    paths, fallback: false
-  }
+    paths,
+    fallback: false,
+  };
+};
 
-}
-
-export const getStaticProps: GetStaticProps = async ({params}) => {
-
-  const room = params?.room
-  let scheduleData: ScheduleData | null = null
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const room = params?.room;
+  let scheduleData: ScheduleData | null = null;
 
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/${room}.json`)).toString()
-    scheduleData = JSON.parse(raw)
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/${room}.json`)).toString();
+    scheduleData = JSON.parse(raw);
   }
 
   return {
     props: {
-      scheduleData: {...scheduleData, room: room}
-    }
-  }
-
-}
+      scheduleData: { ...scheduleData, room: room },
+    },
+  };
+};
 
 interface RoomProps {
-  scheduleData: ScheduleData,
-  query: any
+  scheduleData: ScheduleData;
+  query: any;
 }
 
-const Room = ({scheduleData}: RoomProps) => {
-  const router = useRouter()
+const Room = ({ scheduleData }: RoomProps) => {
+  const router = useRouter();
 
   useEffect(() => {
     if (!router.query.colorScheme) {
-      return
+      return;
     }
 
-    const colorScheme: string = router.query.colorScheme?.toString()
-    const parsed = JSON.parse(colorScheme)
+    const colorScheme: string = router.query.colorScheme?.toString();
+    const parsed = JSON.parse(colorScheme);
 
-    const cssColor: { [k: string]: string } = {}
+    const cssColor: { [k: string]: string } = {};
 
     Object.keys(parsed).forEach((k) => {
       // @ts-ignore
-      cssColor[k] = rawRgbColorToCss(parsed[k])
-    })
+      cssColor[k] = rawRgbColorToCss(parsed[k]);
+    });
 
     // @ts-ignore
-    setColor(cssColor)
+    setColor(cssColor);
+  }, [router.query.colorScheme]);
 
-  }, [router.query.colorScheme])
-
-  const [color, setColor] = useState(defaultColors)
+  const [color, setColor] = useState(defaultColors);
 
   const genSchedule = (period: number) => {
     return (
@@ -106,10 +103,10 @@ const Room = ({scheduleData}: RoomProps) => {
               : "" ?? "";
 
             return (
-              <div style={{backgroundColor: color.bg}} className="button" key={i}>
+              <div style={{ backgroundColor: color.bg }} className="button" key={i}>
                 <div className="text">
                   <strong className="subject">{name}</strong>
-                  <p className="teacher">{teacher?.replace("+", " ")}</p>
+                  <p className="teacher">{teacher?.replace(/\+/g, " ")}</p>
                 </div>
               </div>
             );
@@ -144,25 +141,26 @@ const Room = ({scheduleData}: RoomProps) => {
   ];
 
   return (
-      <div style={{backgroundColor: color.bg}}>
-        <div style={{backgroundColor: color.bg}} className="wrapper">
+    <>
+      <div style={{ backgroundColor: color.bg }}>
+        <div style={{ backgroundColor: color.bg }} className="wrapper">
           <div className="header">
             <div className="left">
               {/*<div className="bar"></div>*/}
               <div className="title-container">
-                <h1 className="title" style={{color: color.t1}}>
+                <h1 className="title" style={{ color: color.t1 }}>
                   ตารางเรียน
                 </h1>
-                <p className="subtitle" style={{color: color.t2}}>
+                <p className="subtitle" style={{ color: color.t2 }}>
                   ภาคเรียนที่ 2/2021
                 </p>
               </div>
             </div>
             <div className="right">
-              <h2 className="room" style={{color: color.t1}}>
+              <h2 className="room" style={{ color: color.t1 }}>
                 ห้อง {scheduleData.room} | {scheduleData.branch}
               </h2>
-              <div className="teacher" style={{color: color.t2}}>
+              <div className="teacher" style={{ color: color.t2 }}>
                 {scheduleData.teachers.map((teacher) => (
                   <p className="text" key={teacher}>
                     {teacher}
@@ -175,10 +173,10 @@ const Room = ({scheduleData}: RoomProps) => {
             <div className="days">
               {Days.map((day) => (
                 <div className="day" key={day.name}>
-                  <div className="button" style={{backgroundColor: day.color}}>
+                  <div className="button" style={{ backgroundColor: day.color }}>
                     {day.name}
                   </div>
-                  <div className="line" style={{backgroundColor: day.color}}></div>
+                  <div className="line" style={{ backgroundColor: day.color }}></div>
                 </div>
               ))}
             </div>
@@ -191,12 +189,12 @@ const Room = ({scheduleData}: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{backgroundColor: color.bg}} className="break10-button">
+                  <div style={{ backgroundColor: color.bg }} className="break10-button">
                     <p className="text">
                       พัก
-                      <br/>
+                      <br />
                       10
-                      <br/>
+                      <br />
                       นาที
                     </p>
                   </div>
@@ -208,12 +206,12 @@ const Room = ({scheduleData}: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{backgroundColor: color.bg}} className="break10-button">
+                  <div style={{ backgroundColor: color.bg }} className="break10-button">
                     <p className="text">
                       พัก
-                      <br/>
+                      <br />
                       10
-                      <br/>
+                      <br />
                       นาที
                     </p>
                   </div>
@@ -225,12 +223,12 @@ const Room = ({scheduleData}: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{backgroundColor: color.bg}} className="break10-button">
+                  <div style={{ backgroundColor: color.bg }} className="break10-button">
                     <p className="text">
                       พัก
-                      <br/>
+                      <br />
                       10
-                      <br/>
+                      <br />
                       นาที
                     </p>
                   </div>
@@ -242,12 +240,12 @@ const Room = ({scheduleData}: RoomProps) => {
                 </div>
                 {/* lunchbreak */}
                 <div className="col">
-                  <div style={{backgroundColor: color.bg}} className="lunch-button">
+                  <div style={{ backgroundColor: color.bg }} className="lunch-button">
                     <p className="text">
                       พัก
-                      <br/>
+                      <br />
                       กลาง
-                      <br/>
+                      <br />
                       วัน
                     </p>
                   </div>
@@ -259,12 +257,12 @@ const Room = ({scheduleData}: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{backgroundColor: color.bg}} className="break10-button">
+                  <div style={{ backgroundColor: color.bg }} className="break10-button">
                     <p className="text">
                       พัก
-                      <br/>
+                      <br />
                       10
-                      <br/>
+                      <br />
                       นาที
                     </p>
                   </div>
@@ -284,9 +282,10 @@ const Room = ({scheduleData}: RoomProps) => {
               */}
             </div>
           </div>
-          <Logo color={color.t1}/>
+          <Logo color={color.t1} />
         </div>
       </div>
+    </>
   );
 };
 

@@ -1,35 +1,3 @@
-/* 2388px * 1668px*/
-
-/*
-card
-32px
-18px
-
-time
-26px
-
-day
-36px
-
-10break
-24px
-
-bigbreak, rordor
-36px
-
-title
-122px
-
-secondary-term
-36px
-
-room
-42px
-
-teachers
-32px
-*/
-
 $width: 2388px;
 $height: 1668px;
 
@@ -61,7 +29,7 @@ body {
   bottom: 48px;
 }
 
-.header {
+.wrapper > .header {
   display: flex;
   width: $width - 302px;
   padding-top: 320px;
@@ -70,7 +38,7 @@ body {
   align-items: center;
 }
 
-.header > .left {
+.wrapper > .header > .left {
   display: flex;
   align-items: center;
 
@@ -88,7 +56,7 @@ body {
   */
 }
 
-.header > .left > .title-container {
+.wrapper > .header > .left > .title-container {
   display: inline-block;
   /*margin-left: 48px;*/
 
@@ -104,7 +72,7 @@ body {
   }
 }
 
-.header > .right {
+.wrapper > .header > .right {
   text-align: right;
 
   > .room {
@@ -120,20 +88,20 @@ body {
   }
 }
 
-.main {
+.wrapper > .main {
   width: $width - 302px;
   margin: 200px auto 0 auto;
   position: relative;
 }
 
-.main > .days {
+.wrapper > .main > .days {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
 
-.main > .days > .day {
+.wrapper > .main > .days > .day {
   width: 100%;
   position: relative;
   margin-bottom: 116px;
@@ -302,4 +270,7 @@ body {
       transform: translate(-50%, -50%);
     }
   }
+}
+
+.popup {
 }
