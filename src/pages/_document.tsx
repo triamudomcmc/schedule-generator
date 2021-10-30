@@ -32,7 +32,7 @@ export default class Document extends NextDocument {
             property="og:description"
             content="ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด"
           />
-          <meta property="og:image" content="/preview.jpeg" />
+          <meta property="og:image" content="/preview.png" />
 
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content="https://schedule.tucm.cc" />
@@ -41,7 +41,7 @@ export default class Document extends NextDocument {
             property="twitter:description"
             content="ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด"
           />
-          <meta property="twitter:image" content="/preview.jpeg" />
+          <meta property="twitter:image" content="/preview.png" />
         </Head>
         <body>
           <Main />
