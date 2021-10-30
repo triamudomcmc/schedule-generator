@@ -99,7 +99,7 @@ const Home: NextPage = () => {
           <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2564</h1>
           <p className="text-gray-400 sm:block hidden">ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
           <p className="text-gray-400 sm:block hidden">จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
-          <p className="sm:hidden block text-gray-400 sm:text-base text-xs">
+          <p className="sm:hidden block text-gray-400 sm:text-base text-sm">
             ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.
             จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
           </p>
