@@ -27,6 +27,17 @@ export const isDarkOrLightHEX = (color: string) => {
 
 };
 
+export const isDarkOrLightRGBAString = (color: string) => {
+  const st = color.replace("rgba(", "").replace(")", "").split(", ")
+  const [r, g, b] = st
+
+  if (0.299 * parseInt(r, 16) + 0.587 * parseInt(g, 16) + 0.114 * parseInt(b, 16) > 196) {
+    return "light"; // light
+  } else {
+    return "dark"; // dark
+  }
+}
+
 export const isDarkOrLightRGBA = (color: ColorType) => {
   const { r, g, b } = color;
   if (0.299 * parseInt(r, 16) + 0.587 * parseInt(g, 16) + 0.114 * parseInt(b, 16) > 196) {
