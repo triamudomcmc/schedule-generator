@@ -1,4 +1,5 @@
 import { Preview } from "@components";
+import { hexToRgbA } from "@utils/hexToRgb";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -12,13 +13,13 @@ const rooms = [
 
 const Theme = {
   Purple: {
-    bg: "#FFFFFF",
-    t1: "#8861DC",
-    t2: "#B99CF8",
-    c1: "#B99CF8",
-    c2: "#A787EC",
-    c3: "#916CDF",
-    c4: "#8860DC",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#8861DC"),
+    t2: hexToRgbA("#B99CF8"),
+    c1: hexToRgbA("#B99CF8"),
+    c2: hexToRgbA("#A787EC"),
+    c3: hexToRgbA("#916CDF"),
+    c4: hexToRgbA("#8860DC"),
   },
 };
 
@@ -29,7 +30,7 @@ const Home: NextPage = () => {
         <title>ระบบจัดตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      {/*<Preview theme={Theme.Default} />*/}
+      <Preview rawTheme={Theme.Purple} />
       <div className="popup">
         <div className="header">
           <h1 className="title">ระบบจัดการตารางเรียน 2/2021</h1>

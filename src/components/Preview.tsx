@@ -43,7 +43,7 @@ const Preview: NextPage<PreviewProps> = ({ rawTheme }) => {
   }, [rawTheme]);
 
   return (
-    <svg viewBox="0 0 2388 1668" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 2388 1668" fill="none" xmlns="http://www.w3.org/2000/svg" className="preview">
       <rect width="2388" height="1668" fill={theme.bg} />
       <g clipPath="url(#clip0_268:51429)">
         <g filter="url(#filter0_d_268:51429)">
