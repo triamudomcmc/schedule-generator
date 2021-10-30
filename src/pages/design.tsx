@@ -9,7 +9,6 @@ const Theme = {
   tuesday: "#FF92A6",
   wednesday: "#ADE374",
   thursday: "#FF9417",
-  logo: "#599BA4",
 };
 
 interface MockDataSchedule {
@@ -308,7 +307,7 @@ const Design: NextPage = () => {
             */}
           </div>
         </main>
-        <Logo color={Theme.logo} />
+        <Logo color={Theme.primary} />
       </article>
     </>
   );
