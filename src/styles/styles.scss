@@ -36,14 +36,12 @@ $height: 1668px;
 body {
   margin: 0;
   padding: 0;
-  background-color: #333;
   font-family: "IBM Plex Sans Thai", sans-serif;
   font-size: 16px;
 }
 
 .wrapper {
-  border: 1px solid #000;
-  margin: 300px auto;
+  border: 0px solid #ffffff;
   width: $width;
   height: $height;
   /*
@@ -66,7 +64,8 @@ body {
 .header {
   display: flex;
   width: $width - 302px;
-  margin: 192px auto 0 auto;
+  padding-top: 192px;
+  margin: 0 auto 0 auto;
   justify-content: space-between;
   align-items: center;
 }

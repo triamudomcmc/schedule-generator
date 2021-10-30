@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import reactCSS from "reactcss"
 import { SketchPicker } from 'react-color'
 
-interface ColorType {
+export interface ColorType {
   r: string,
   g: string,
   b: string,
