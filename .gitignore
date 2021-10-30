@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# batch export
+/output/
+
 # production
 /build
 
