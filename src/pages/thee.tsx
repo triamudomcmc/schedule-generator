@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <title>ระบบจัดตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Preview theme={Theme.Purple} />
+      {/*<Preview theme={Theme.Default} />*/}
       <div className="popup">
         <div className="header">
           <h1 className="title">ระบบจัดการตารางเรียน 2/2021</h1>

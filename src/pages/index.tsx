@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { hexToRgbA } from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
+import {Preview} from "@components";
 
 const HomeIcon = () => {
   return (
@@ -230,6 +231,9 @@ const Home: NextPage = () => {
               */}
             </div>
           </div>
+          <div>
+            <Preview rawTheme={colors} />
+          </div>
           <div className="space-y-4 sm:space-y-6">
             <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex items-start sm:items-center flex-col sm:flex-row">
@@ -239,8 +243,7 @@ const Home: NextPage = () => {
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        prev.bg = c;
-                        return prev;
+                        return {...prev, bg: c};
                       });
                     }}
                     defaultColor={colors.bg}
@@ -248,8 +251,7 @@ const Home: NextPage = () => {
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        prev.t1 = c;
-                        return prev;
+                        return {...prev, t1: c};
                       });
                     }}
                     defaultColor={colors.t1}
@@ -257,8 +259,7 @@ const Home: NextPage = () => {
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        prev.t2 = c;
-                        return prev;
+                        return {...prev, t2: c};
                       });
                     }}
                     defaultColor={colors.t2}
@@ -269,8 +270,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      prev.c1 = c;
-                      return prev;
+                      return {...prev, c1: c};
                     });
                   }}
                   defaultColor={colors.c1}
@@ -278,8 +278,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      prev.c2 = c;
-                      return prev;
+                      return {...prev, c2: c};
                     });
                   }}
                   defaultColor={colors.c2}
@@ -287,8 +286,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      prev.c3 = c;
-                      return prev;
+                      return {...prev, c3: c};
                     });
                   }}
                   defaultColor={colors.c3}
@@ -296,8 +294,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      prev.c4 = c;
-                      return prev;
+                      return {...prev, c4: c};
                     });
                   }}
                   defaultColor={colors.c4}
