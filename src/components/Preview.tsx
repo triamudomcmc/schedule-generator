@@ -1,4 +1,7 @@
 import { NextPage } from "next";
+import {rawRgbColorToCss} from "@utils/hexToRgb";
+import {ColorType} from "@components/ColorPicker";
+import {useEffect, useState} from "react";
 
 const Default = {
   bg: "#FFFFFF",
@@ -11,25 +14,50 @@ const Default = {
 };
 
 interface Scheme {
-  bg: string;
-  t1: string;
-  t2: string;
-  c1: string;
-  c2: string;
-  c3: string;
-  c4: string;
+  bg: ColorType;
+  t1: ColorType;
+  t2: ColorType;
+  c1: ColorType;
+  c2: ColorType;
+  c3: ColorType;
+  c4: ColorType;
 }
 
 interface PreviewProps {
-  theme: Scheme;
+  rawTheme: Scheme;
 }
 
-const Preview: NextPage<PreviewProps> = ({ theme = Default }) => {
+const defaultColors = {
+  bg: "#FFFFFF",
+  t1: "#599BA4",
+  t2: "#DEA54B",
+  c1: "#F4CD00",
+  c2: "#FF92A6",
+  c3: "#ADE374",
+  c4: "#FF9417",
+};
+
+const Preview: NextPage<PreviewProps> = ({ rawTheme  }) => {
+
+  const [theme, setTheme] = useState(defaultColors)
+
+  useEffect(() => {
+
+    const cssColor: { [k: string]: string } = {};
+
+    Object.keys(rawTheme).forEach((k) => {
+      // @ts-ignore
+      cssColor[k] = rawRgbColorToCss(rawTheme[k]);
+    });
+
+
+    // @ts-ignore
+    setTheme(cssColor)
+  }, [rawTheme])
+
+
   return (
     <svg
-      style={{ zIndex: -1, position: "absolute", top: "-30px", left: 0, width: "100vw", height: "100vh" }}
-      width="2388"
-      height="1668"
       viewBox="0 0 2388 1668"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
