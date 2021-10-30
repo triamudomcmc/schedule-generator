@@ -109,7 +109,7 @@ const Room = ({scheduleData}: RoomProps) => {
               <div style={{backgroundColor: color.bg}} className="button" key={i}>
                 <div className="text">
                   <strong className="subject">{name}</strong>
-                  <p className="teacher">{teacher.replace("+", " ")}</p>
+                  <p className="teacher">{teacher?.replace("+", " ")}</p>
                 </div>
               </div>
             );
