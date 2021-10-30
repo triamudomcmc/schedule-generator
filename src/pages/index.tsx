@@ -93,16 +93,20 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={"flex justify-center items-center min-h-screen " + bgColor}>
-      <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-12 bg-white max-w-[500px]">
+    <div className={"flex justify-center items-center px-4 w-full min-h-screen " + bgColor}>
+      <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-9 sm:space-y-12 bg-white max-w-[500px]">
         <div>
-          <h1 className="text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2564</h1>
-          <p className="text-gray-400">ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
-          <p className="text-gray-400">จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
+          <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2564</h1>
+          <p className="text-gray-400 sm:block hidden">ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
+          <p className="text-gray-400 sm:block hidden">จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
+          <p className="sm:hidden block text-gray-400 sm:text-base text-xs">
+            ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.
+            จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
+          </p>
         </div>
-        <div className="space-y-6">
-          <h1 className="text-gray-600 font-medium text-2xl">ตั้งค่าตารางสอน</h1>
-          <div className="flex items-center space-x-8">
+        <div className="space-y-4 sm:space-y-6">
+          <h1 className="text-gray-600 font-medium text-xl sm:text-2xl">ตั้งค่าตารางเรียน</h1>
+          <div className="flex sm:flex-row flex-col items-start sm:items-center sm:space-y-0 space-y-4 sm:space-x-8">
             <div className="relative w-48">
               <span className="flex items-center absolute h-full pl-2">
                 <svg
@@ -158,24 +162,26 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-6">
-          <h1 className="text-gray-600 font-medium text-2xl">ปรับแต่งตารางสอน</h1>
-          <div className="flex items-center">
-            <h1 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h1>
-            <div className="flex justify-center space-x-1 mr-4">
-              <ColorPicker onChange={(c) => {setColors(prev => {prev.bg = c; return prev})}} defaultColor={colors.bg}/>
-              <ColorPicker onChange={(c) => {setColors(prev => {prev.t1 = c; return prev})}} defaultColor={colors.t1}/>
-              <ColorPicker onChange={(c) => {setColors(prev => {prev.t2 = c; return prev})}} defaultColor={colors.t2}/>
+        <div className="space-y-4 sm:space-y-6">
+          <h1 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h1>
+          <div className="flex items-start sm:items-center flex-col sm:flex-row">
+            <div className="flex items-center">
+              <h1 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h1>
+              <div className="flex justify-center space-x-1 mr-4">
+                <ColorPicker onChange={(c) => {setColors(prev => {prev.bg = c; return prev})}} defaultColor={colors.bg}/>
+                <ColorPicker onChange={(c) => {setColors(prev => {prev.t1 = c; return prev})}} defaultColor={colors.t1}/>
+                <ColorPicker onChange={(c) => {setColors(prev => {prev.t2 = c; return prev})}} defaultColor={colors.t2}/>
+              </div>
             </div>
-            <div className="flex justify-center space-x-1">
+            <div className="flex justify-center space-x-1 ml-[46px] mt-2 sm:ml-0 sm:mt-0">
               <ColorPicker onChange={(c) => {setColors(prev => {prev.c1 = c; return prev})}} defaultColor={colors.c1}/>
               <ColorPicker onChange={(c) => {setColors(prev => {prev.c2 = c; return prev})}} defaultColor={colors.c2}/>
               <ColorPicker onChange={(c) => {setColors(prev => {prev.c3 = c; return prev})}} defaultColor={colors.c3}/>
               <ColorPicker onChange={(c) => {setColors(prev => {prev.c4 = c; return prev})}} defaultColor={colors.c4}/>
             </div>
           </div>
-          <div className="flex items-center space-x-10">
-            <div className="flex relative w-[200px] h-[44px]">
+          <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row items-center space-x-0 sm:space-x-10">
+            <div className="flex relative w-full sm:w-[200px] h-[44px]">
               <div className="flex border border-gray-300 w-full rounded-xl">
                 <div className="flex items-center justify-center w-8/12">
                   <span className="text-gray-600 mt-1">PRESETS</span>
@@ -215,8 +221,8 @@ const Home: NextPage = () => {
                 </>
               )}
             </div>
-            <button onClick={download} className="bg-blue-500 text-white rounded-xl px-6 py-2.5">
-              <span>สร้างตารางสอน</span>
+            <button onClick={download} className="bg-blue-500 text-white rounded-xl px-6 py-2.5 w-full sm:w-max">
+              <span>สร้างตารางเรียน</span>
             </button>
           </div>
         </div>

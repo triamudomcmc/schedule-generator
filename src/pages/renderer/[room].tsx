@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const files = fs.readdirSync(path.join(process.cwd(), "_keep/data"))
 
-  const paths = files.map((s) => ({
+  const paths = files.filter((i) => (i.includes(".json"))).map((s) => ({
     params: {room: s.replace(".json", "")}
   }))
 
