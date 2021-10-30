@@ -149,7 +149,7 @@ const Home: NextPage = () => {
     setRecentError(timeout);
   };
 
-  const download = () => {
+  const download = async () => {
     if (invalidRoom) {
       toggleError();
       return;
@@ -166,12 +166,26 @@ const Home: NextPage = () => {
     };
 
     const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(requestColors)}`;
-    const a = document.createElement("a");
-    a.href = imgUrl;
-    a.download = `${room}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+
+    setWaiting(true);
+
+    const res = await fetch(imgUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    if (res.ok) {
+      const a = document.createElement("a");
+      a.href = window.URL.createObjectURL(await res.blob());
+      a.download = `${room}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    setWaiting(false);
   };
 
   const toggle = {
@@ -186,7 +200,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ระบบจัดตารางเรียน 2/2021</title>
+        <title>ระบบจัดการตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="fixed w-full flex justify-center top-0">
@@ -214,7 +228,7 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="space-y-2 mt-12">
-            <h2 className="text-gray-600 font-medium text-md sm:text-xl">ใส่เลขห้องเรียน</h2>
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ใส่เลขห้องเรียน</h2>
             <div className="flex sm:flex-row flex-col items-start sm:items-center">
               <div className="relative w-48">
                 <input
@@ -225,7 +239,7 @@ const Home: NextPage = () => {
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-md pl-4 pt-2 pb-1.5 w-full text-gray-500 text-md outline-none",
+                    "border border-gray-300 rounded-xl pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
@@ -273,9 +287,9 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="space-y-4 sm:space-y-6 mt-12">
-            <h2 className="text-gray-600 font-medium text-md sm:text-xl">ปรับแต่งตารางเรียน</h2>
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex flex-row items-center">
-              <h1 className="text-gray-600 font-medium text-md mr-2">ธีมสี: </h1>
+              <h1 className="text-gray-600 font-medium text-lg mr-2">ธีมสี: </h1>
               <div className="flex relative w-[240px] h-[44px]">
                 <div className="flex border border-gray-300 w-full rounded-xl">
                   <div className="flex items-center justify-center w-9/12 cursor-pointer">
@@ -314,7 +328,7 @@ const Home: NextPage = () => {
                               onClick={() => {
                                 setColors(cols);
                               }}
-                              className="flex text-gray-400 mb-1 py-1 cursor-pointer"
+                              className="flex text-gray-400 mb-1 cursor-pointer"
                               key={cols.name}
                             >
                               <div
@@ -323,7 +337,7 @@ const Home: NextPage = () => {
                               />
                               <h1
                                 className={classnames(
-                                  cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-black"
+                                  cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-gray-800"
                                 )}
                               >
                                 {cols.name}
@@ -339,7 +353,7 @@ const Home: NextPage = () => {
             </div>
             <div className="flex items-start sm:items-center flex-col sm:flex-row">
               <div className="flex items-center">
-                <h3 className="text-gray-600 font-medium text-md mr-2">ชุดสี: </h3>
+                <h3 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h3>
                 <div className="flex justify-center space-x-1 mr-4">
                   <ColorPicker
                     onChange={(c) => {
@@ -407,17 +421,16 @@ const Home: NextPage = () => {
             <Preview rawTheme={colors} />
           </div>
           <div className="flex justify-center mt-8 sm:mt-10">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
+            <button
               onClick={download}
               className={classnames(
-                "text-white rounded-xl px-6 w-full sm:w-max transition-colors",
-                waiting ? "pb-[10px] pt-[2px]" : "py-2.5"
+                "text-white rounded-xl w-full sm:w-max transition-colors",
+                waiting ? "pb-[10px] pt-[2px] px-[60px]" : "py-2.5 px-6"
               )}
               style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
             >
               {!waiting ? <span>สร้างตารางเรียน</span> : <Ellipsis className="w-10" />}
-            </motion.button>
+            </button>
           </div>
         </div>
       </div>
