@@ -1,4 +1,5 @@
-import "@styles/tailwind.css";
+import "@styles/tailwind.scss";
+import "@styles/styles.scss";
 import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {

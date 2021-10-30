@@ -1,0 +1,117 @@
+/* 2388px * 1668px*/
+
+/*
+card
+32px
+18px
+
+time
+26px
+
+day
+36px
+
+10break
+24px
+
+bigbreak, rordor
+36px
+
+title
+122px
+
+secondary-term
+36px
+
+room
+42px
+
+teachers
+32px
+*/
+
+$width: 2388px;
+$height: 1668px;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-size: 32px;
+}
+
+.wrapper {
+  border: 1px solid #000;
+  margin: 300px auto;
+  width: $width;
+  height: $height;
+  /*
+  aspect-ratio: 2388/1668;
+  height: 100vh;
+  */
+  background-color: #fff;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  width: 75px;
+  height: 59px;
+  left: 56px;
+  bottom: 56px;
+}
+
+.header {
+  display: flex;
+  width: $width - 302px;
+  margin: 192px auto 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > .left {
+  display: flex;
+  align-items: center;
+
+  > .bar {
+    width: 0px;
+    height: 250px;
+    left: 151px;
+    top: 212px;
+    background-color: #8e8e8e;
+    border: 6px solid #8e8e8e;
+    border-radius: 24px;
+    display: inline-block;
+  }
+}
+
+.header > .left > .title-container {
+  display: inline-block;
+  margin-left: 48px;
+
+  > .title {
+    font-size: 122px;
+    line-height: 1.15;
+  }
+
+  > .subtitle {
+    font-size: 36px;
+    margin-left: 32px;
+  }
+}
+
+.header > .right {
+  text-align: right;
+
+  > .room {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+
+  > .teacher {
+    > .text {
+      font-size: 32px;
+    }
+  }
+}

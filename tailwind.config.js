@@ -3,9 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      ui: [
-        "IBM Plex Sans Thai"
-      ]
+      ui: ["IBM Plex Sans Thai"],
+      roboto: ["Roboto"],
     },
     extend: {},
   },
@@ -13,4 +12,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};
