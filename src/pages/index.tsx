@@ -225,7 +225,7 @@ const Home: NextPage = () => {
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-xl pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
+                    "border border-gray-300 rounded-md pl-4 pt-2 pb-1.5 w-full text-gray-500 text-md outline-none",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
@@ -314,7 +314,7 @@ const Home: NextPage = () => {
                               onClick={() => {
                                 setColors(cols);
                               }}
-                              className="flex text-gray-400 mb-1 cursor-pointer"
+                              className="flex text-gray-400 mb-1 py-1 cursor-pointer"
                               key={cols.name}
                             >
                               <div
@@ -323,7 +323,7 @@ const Home: NextPage = () => {
                               />
                               <h1
                                 className={classnames(
-                                  cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-gray-800"
+                                  cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-black"
                                 )}
                               >
                                 {cols.name}
@@ -407,7 +407,8 @@ const Home: NextPage = () => {
             <Preview rawTheme={colors} />
           </div>
           <div className="flex justify-center mt-8 sm:mt-10">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
               onClick={download}
               className={classnames(
                 "text-white rounded-xl px-6 w-full sm:w-max transition-colors",
@@ -416,7 +417,7 @@ const Home: NextPage = () => {
               style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
             >
               {!waiting ? <span>สร้างตารางเรียน</span> : <Ellipsis className="w-10" />}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
