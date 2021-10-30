@@ -1,9 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import screenshot from "@pages/api/_lib/screenshot";
 
 type Data = {
   name: string;
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  res.status(200).json({ name: "Hello World!" });
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  const {
+    query: { room, colorScheme }
+  } = req
+
+
+  const file = await screenshot(
+    `http://${req.headers.host}/renderer/${room}?colorScheme=${colorScheme}`
+  )
+
+  res.setHeader('Content-Type', `image/png`)
+  res.setHeader(
+    'Cache-Control',
+    `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`
+  )
+  res.statusCode = 200
+  res.end(file)
 }

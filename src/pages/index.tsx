@@ -1,8 +1,9 @@
 import type {NextPage} from "next";
 import {ChevronDownIcon, PencilIcon} from "@heroicons/react/outline";
 import {ColorPicker} from "@components/ColorPicker";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {hexToRgbA} from "@utils/hexToRgb";
+import classnames from "classnames"
 
 const Home: NextPage = () => {
 
@@ -13,18 +14,58 @@ const Home: NextPage = () => {
   };
 
   const [bgColor, setBgColor] = useState(getRandom(bgColors))
+  const [invalidRoom, setInvalidRoom] = useState(false)
   const [preset, setPreset] = useState(false);
   const [qualityPanel, setQualityPanel] = useState(false);
+  const [room, setRoom] = useState("")
 
   const defaultColors = {
     bg: hexToRgbA("#FFFFFF"),
-    c1: hexToRgbA("#599BA4"),
-    c2: hexToRgbA("#F4CD00"),
-    c3: hexToRgbA("#FF92A6"),
-    c4: hexToRgbA("#ADE374"),
-    c5: hexToRgbA("#FF9417"),
-    c6: hexToRgbA("#45D2F1"),
+    t1: hexToRgbA("#599BA4"),
+    t2: hexToRgbA("#DEA54B"),
+    c1: hexToRgbA("#F4CD00"),
+    c2: hexToRgbA("#FF92A6"),
+    c3: hexToRgbA("#ADE374"),
+    c4: hexToRgbA("#FF9417"),
   };
+
+  const bloodyMary = {
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#D17474"),
+    t2: hexToRgbA("#E28B8B"),
+    c1: hexToRgbA("#EBB8B8"),
+    c2: hexToRgbA("#E49E9E"),
+    c3: hexToRgbA("#E08484"),
+    c4: hexToRgbA("#D17474"),
+  };
+
+
+  let rooms = [
+    276, 277, 278, 341, 342, 343, 344,
+    345, 437, 438, 446, 447, 448,  65,  66,
+    661, 662, 664, 665, 666, 667,  70,  71,
+    72, 834, 835, 842, 843, 844, 845, 846,
+    942, 943, 945, 946, 947,
+    332, 333, 334, 335, 336, 431,
+    432, 436, 443, 444, 445, 642, 651,
+    652, 654, 655, 656, 657, 812, 813,
+    814, 815, 822, 823, 824, 825, 832,
+    833, 931, 932, 933, 934, 935, 936,
+    937, 941,
+    125, 126, 143, 144, 145, 146, 153,
+    154, 155, 156, 222, 223, 224, 225, 226,
+    227, 228, 229,  28,  29,  32,  38,  39,
+    48,  49,  58,  59,  73,  74,  75,  76,
+    77,  78,  79,  80,  81
+  ]
+
+  useEffect(() => {
+    if (!rooms.includes(parseInt(room))) {
+      setInvalidRoom(true)
+    }else{
+      setInvalidRoom(false)
+    }
+  }, [room])
 
   const [colors, setColors] = useState(defaultColors);
 
@@ -34,6 +75,21 @@ const Home: NextPage = () => {
 
   const resetDefault = () => {
     setColors(defaultColors);
+  };
+
+
+  const download = () => {
+    if (invalidRoom) {
+      return
+    }
+
+    const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(colors)}`;
+    const a = document.createElement("a");
+    a.href = imgUrl;
+    a.download = `${room}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   };
 
   return (
@@ -65,8 +121,10 @@ const Home: NextPage = () => {
                 </svg>
               </span>
               <input
+                onChange={(e) => {setRoom(e.target.value)}}
+                value={room}
                 placeholder="เลขห้อง"
-                className="border border-gray-300 rounded-xl pl-12 pt-1.5 pb-0.5 w-full text-gray-500 text-xl"
+                className={classnames("border border-gray-300 rounded-xl pl-12 pt-1.5 pb-0.5 w-full text-gray-500 text-xl", invalidRoom ? "border-red-400" : " border-green-400")}
               />
             </div>
             <div className="flex items-center">
@@ -105,15 +163,15 @@ const Home: NextPage = () => {
           <div className="flex items-center">
             <h1 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h1>
             <div className="flex justify-center space-x-1 mr-4">
-              <ColorPicker defaultColor={colors.bg}/>
-              <ColorPicker defaultColor={colors.c1}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.bg = c; return prev})}} defaultColor={colors.bg}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.t1 = c; return prev})}} defaultColor={colors.t1}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.t2 = c; return prev})}} defaultColor={colors.t2}/>
             </div>
             <div className="flex justify-center space-x-1">
-              <ColorPicker defaultColor={colors.c2}/>
-              <ColorPicker defaultColor={colors.c3}/>
-              <ColorPicker defaultColor={colors.c4}/>
-              <ColorPicker defaultColor={colors.c5}/>
-              <ColorPicker defaultColor={colors.c6}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.c1 = c; return prev})}} defaultColor={colors.c1}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.c2 = c; return prev})}} defaultColor={colors.c2}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.c3 = c; return prev})}} defaultColor={colors.c3}/>
+              <ColorPicker onChange={(c) => {setColors(prev => {prev.c4 = c; return prev})}} defaultColor={colors.c4}/>
             </div>
           </div>
           <div className="flex items-center space-x-10">
@@ -145,7 +203,7 @@ const Home: NextPage = () => {
                     </div>
                     <div className="border-b border-gray-300 py-2">
                       <h1 className="mb-1.5">ธีม (ยังไม่เปิดใช้งาน)</h1>
-                      <h2 className="text-gray-400 mb-1">Christmas</h2>
+                      <h2 onClick={() => {setColors(bloodyMary)}} className="text-gray-400 mb-1 cursor-pointer hover:text-gray-500">Bloody Mary</h2>
                       <h2 className="text-gray-400 mb-1">Dracula</h2>
                     </div>
                     <div className="py-2">
@@ -157,7 +215,7 @@ const Home: NextPage = () => {
                 </>
               )}
             </div>
-            <button className="bg-blue-500 text-white rounded-xl px-6 py-2.5">
+            <button onClick={download} className="bg-blue-500 text-white rounded-xl px-6 py-2.5">
               <span>สร้างตารางสอน</span>
             </button>
           </div>
