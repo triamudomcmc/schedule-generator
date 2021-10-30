@@ -1,15 +1,5 @@
 import { NextPage } from "next";
 
-const Default = {
-  bg: "#FFFFFF",
-  t1: "#8861DC",
-  t2: "#B99CF8",
-  c1: "#B99CF8",
-  c2: "#A787EC",
-  c3: "#916CDF",
-  c4: "#8860DC",
-};
-
 interface Scheme {
   bg: string;
   t1: string;
@@ -24,10 +14,18 @@ interface PreviewProps {
   theme: Scheme;
 }
 
-const Preview: NextPage<PreviewProps> = ({ theme = Default }) => {
+const Preview: NextPage<PreviewProps> = ({ theme }) => {
   return (
     <svg
-      style={{ zIndex: -1, position: "absolute", top: "-30px", left: 0, width: "100vw", height: "100vh" }}
+      style={{
+        zIndex: -1,
+        filter: "blur(4px)",
+        position: "absolute",
+        top: "-30px",
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+      }}
       width="2388"
       height="1668"
       viewBox="0 0 2388 1668"

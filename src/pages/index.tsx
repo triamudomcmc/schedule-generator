@@ -25,6 +25,79 @@ const HomeIcon = () => {
   );
 };
 
+const Theme = {
+  Purple: {
+    name: "The Witches’ Craft",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#8861DC"),
+    t2: hexToRgbA("#B99CF8"),
+    c1: hexToRgbA("#B99CF8"),
+    c2: hexToRgbA("#A787EC"),
+    c3: hexToRgbA("#916CDF"),
+    c4: hexToRgbA("#8860DC"),
+  },
+  Red: {
+    name: "Bloody Mary",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#D17474"),
+    t2: hexToRgbA("#E28B8B"),
+    c1: hexToRgbA("#EBB8B8"),
+    c2: hexToRgbA("#E49E9E"),
+    c3: hexToRgbA("#E08484"),
+    c4: hexToRgbA("#D17474"),
+  },
+  Blue: {
+    name: "Fairy Godmother",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#53ABDC"),
+    t2: hexToRgbA("#88CBF1"),
+    c1: hexToRgbA("#9CD7F8"),
+    c2: hexToRgbA("#88CBF1"),
+    c3: hexToRgbA("#65BDEE"),
+    c4: hexToRgbA("#53ABDC"),
+  },
+  Pink: {
+    name: "Tooth Fairy",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#D2488B"),
+    t2: hexToRgbA("#EAA4C6"),
+    c1: hexToRgbA("#EDB7D2"),
+    c2: hexToRgbA("#EAA4C6"),
+    c3: hexToRgbA("#E387B3"),
+    c4: hexToRgbA("#DD6EA5"),
+  },
+  Orange: {
+    name: "Jack-O’-Lantern",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#EA984D"),
+    t2: hexToRgbA("#F8BA82"),
+    c1: hexToRgbA("#F8BA82"),
+    c2: hexToRgbA("#F1AB6A"),
+    c3: hexToRgbA("#EA984D"),
+    c4: hexToRgbA("#DD8E44"),
+  },
+  Black: {
+    name: "Dracula Untold",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#828282"),
+    t2: hexToRgbA("#A8A8A8"),
+    c1: hexToRgbA("#ADADAD"),
+    c2: hexToRgbA("#989898"),
+    c3: hexToRgbA("#828282"),
+    c4: hexToRgbA("#7C7C7C"),
+  },
+  Green: {
+    name: "Mr. Frankenstein",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#96C060"),
+    t2: hexToRgbA("#B5D889"),
+    c1: hexToRgbA("#BDDB99"),
+    c2: hexToRgbA("#B5D889"),
+    c3: hexToRgbA("#A8D174"),
+    c4: hexToRgbA("#96C060"),
+  },
+};
+
 const Home: NextPage = () => {
   const bgColors = ["bg-yellow-50", "bg-green-50", "bg-blue-50", "bg-pink-50"];
 
@@ -35,30 +108,9 @@ const Home: NextPage = () => {
   const [bgColor, setBgColor] = useState(getRandom(bgColors));
   const [invalidRoom, setInvalidRoom] = useState(false);
   const [preset, setPreset] = useState(false);
-  const [qualityPanel, setQualityPanel] = useState(false);
+  // const [qualityPanel, setQualityPanel] = useState(false);
   const [room, setRoom] = useState("");
-
-  const defaultColors = {
-    bg: hexToRgbA("#FFFFFF"),
-    t1: hexToRgbA("#599BA4"),
-    t2: hexToRgbA("#DEA54B"),
-    c1: hexToRgbA("#F4CD00"),
-    c2: hexToRgbA("#FF92A6"),
-    c3: hexToRgbA("#ADE374"),
-    c4: hexToRgbA("#FF9417"),
-  };
-
-  const bloodyMary = {
-    bg: hexToRgbA("#FFFFFF"),
-    t1: hexToRgbA("#D17474"),
-    t2: hexToRgbA("#E28B8B"),
-    c1: hexToRgbA("#EBB8B8"),
-    c2: hexToRgbA("#E49E9E"),
-    c3: hexToRgbA("#E08484"),
-    c4: hexToRgbA("#D17474"),
-  };
-
-  let rooms = [
+  const rooms = [
     276, 277, 278, 341, 342, 343, 344, 345, 437, 438, 446, 447, 448, 65, 66, 661, 662, 664, 665, 666, 667, 70, 71, 72,
     834, 835, 842, 843, 844, 845, 846, 942, 943, 945, 946, 947, 332, 333, 334, 335, 336, 431, 432, 436, 443, 444, 445,
     642, 651, 652, 654, 655, 656, 657, 812, 813, 814, 815, 822, 823, 824, 825, 832, 833, 931, 932, 933, 934, 935, 936,
@@ -74,22 +126,28 @@ const Home: NextPage = () => {
     }
   }, [room]);
 
-  const [colors, setColors] = useState(defaultColors);
+  const [colors, setColors] = useState(Theme.Purple);
 
-  const qualities = ["low", "standard", "high", "best"];
+  // const qualities = ["low", "standard", "high", "best"];
 
-  const [quality, setQuality] = useState(0);
-
-  const resetDefault = () => {
-    setColors(defaultColors);
-  };
+  // const [quality, setQuality] = useState(0);
 
   const download = () => {
     if (invalidRoom) {
       return;
     }
 
-    const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(colors)}`;
+    const requestColors = {
+      bg: colors.bg,
+      t1: colors.t1,
+      t2: colors.t2,
+      c1: colors.c1,
+      c2: colors.c2,
+      c3: colors.c3,
+      c4: colors.c4,
+    };
+
+    const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(requestColors)}`;
     const a = document.createElement("a");
     a.href = imgUrl;
     a.download = `${room}.jpg`;
@@ -108,32 +166,36 @@ const Home: NextPage = () => {
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-9 sm:space-y-12 bg-white max-w-[500px]">
           <div>
             <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2021</h1>
-            <p className="text-gray-400 sm:block hidden">ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
-            <p className="text-gray-400 sm:block hidden">จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
-            <p className="sm:hidden block text-gray-400 sm:text-base text-sm">
-              ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น
-              ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
+            <p className="text-sm text-gray-400 leading-5 mt-3">
+              ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.
+              <br />
+              จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
+              <br />
             </p>
           </div>
-          <div className="space-y-4 sm:space-y-6">
-            <h1 className="text-gray-600 font-medium text-xl sm:text-2xl">ตั้งค่าตารางเรียน</h1>
-            <div className="flex sm:flex-row flex-col items-start sm:items-center sm:space-y-0 space-y-4 sm:space-x-8">
+          <div className="space-y-2">
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ใส่เลขห้องเรียน</h2>
+            <div className="flex sm:flex-row flex-col items-start sm:items-center">
               <div className="relative w-48">
-                <span className="flex items-center absolute h-full pl-2">
-                  <HomeIcon />
-                </span>
                 <input
                   onChange={(e) => {
+                    if (e.target.value.length > 3) return;
                     setRoom(e.target.value);
                   }}
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-xl pl-12 pt-1.5 pb-0.5 w-full text-gray-500 text-xl",
+                    "border border-gray-300 rounded-md pl-4 py-3 w-full text-gray-500 text-xl",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
+                {
+                  <span className={`${invalidRoom ? "text-red-400" : "text-green-300"} text-xs mt-2`}>
+                    {invalidRoom ? "ไม่พบเลขห้องดังกล่าว" : "สำเร็จ"}
+                  </span>
+                }
               </div>
+              {/*
               <div className="flex items-center">
                 <h1 className="text-gray-600 font-medium text-lg mr-2">ความชัด:</h1>
                 <div
@@ -165,13 +227,14 @@ const Home: NextPage = () => {
                   )}
                 </div>
               </div>
+              */}
             </div>
           </div>
           <div className="space-y-4 sm:space-y-6">
-            <h1 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h1>
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex items-start sm:items-center flex-col sm:flex-row">
               <div className="flex items-center">
-                <h1 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h1>
+                <h3 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h3>
                 <div className="flex justify-center space-x-1 mr-4">
                   <ColorPicker
                     onChange={(c) => {
@@ -241,11 +304,11 @@ const Home: NextPage = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row items-center space-x-0 sm:space-x-10">
-              <div className="flex relative w-full sm:w-[200px] h-[44px]">
+            <div className="flex flex-row items-center">
+              <div className="flex relative w-[200px] h-[44px]">
                 <div className="flex border border-gray-300 w-full rounded-xl">
                   <div className="flex items-center justify-center w-8/12">
-                    <span className="text-gray-600 mt-1">PRESETS</span>
+                    <span className="text-gray-600 mt-1">{colors.name}</span>
                   </div>
                   <button
                     onClick={() => {
@@ -267,35 +330,29 @@ const Home: NextPage = () => {
                     <div className="absolute top-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
                       <div className="border-b border-gray-300 py-2">
                         <h1 className="mb-1.5">ชุดสี</h1>
-                        <h2 onClick={resetDefault} className="text-gray-400 mb-1 cursor-pointer">
-                          ค่าเริ่มต้น
-                        </h2>
-                      </div>
-                      <div className="border-b border-gray-300 py-2">
-                        <h1 className="mb-1.5">ธีม (ยังไม่เปิดใช้งาน)</h1>
-                        <h2
-                          onClick={() => {
-                            setColors(bloodyMary);
-                          }}
-                          className="text-gray-400 mb-1 cursor-pointer hover:text-gray-500"
-                        >
-                          Bloody Mary
-                        </h2>
-                        <h2 className="text-gray-400 mb-1">Dracula</h2>
-                      </div>
-                      <div className="py-2">
-                        <h1 className="mb-1.5">คำสั่งเพิ่มเติม</h1>
-                        <h2 className="text-gray-400 mb-1">นำเข้าชุดสี</h2>
-                        <h2 className="text-gray-400 mb-1">ส่งออกชุดสีนี้</h2>
+                        {Object.values(Theme).map((cols) => (
+                          <h2
+                            onClick={() => {
+                              setColors(cols);
+                            }}
+                            className="text-gray-400 mb-1 cursor-pointer"
+                            key={cols.name}
+                          >
+                            {cols.name}
+                          </h2>
+                        ))}
                       </div>
                     </div>
                   </>
                 )}
               </div>
-              <button onClick={download} className="bg-blue-500 text-white rounded-xl px-6 py-2.5 w-full sm:w-max">
-                <span>สร้างตารางเรียน</span>
-              </button>
             </div>
+            <button
+              onClick={download}
+              className="bg-blue-500 float-right text-white rounded-xl px-6 py-2.5 w-full sm:w-max"
+            >
+              <span>สร้างตารางเรียน</span>
+            </button>
           </div>
         </div>
       </div>

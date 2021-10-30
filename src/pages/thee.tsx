@@ -11,15 +11,6 @@ const rooms = [
 ];
 
 const Theme = {
-  Default: {
-    bg: "#FFFFFF",
-    t1: "#599BA4",
-    t2: "#DEA54B",
-    c1: "#F4CD00",
-    c2: "#FF92A6",
-    c3: "#ADE374",
-    c4: "#FF9417",
-  },
   Purple: {
     bg: "#FFFFFF",
     t1: "#8861DC",
@@ -38,15 +29,14 @@ const Home: NextPage = () => {
         <title>ระบบจัดตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Preview theme={Theme.Default} />
+      <Preview theme={Theme.Purple} />
       <div className="popup">
         <div className="header">
-          <h1>ระบบจัดการตารางเรียน 2/2021</h1>
-          <p>ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
-          <p>จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
-          <p>
-            ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
-          </p>
+          <h1 className="title">ระบบจัดการตารางเรียน 2/2021</h1>
+          <div className="description">
+            <p>ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
+            <p>จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
+          </div>
         </div>
       </div>
     </>
