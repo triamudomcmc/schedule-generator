@@ -126,7 +126,7 @@ const Design: NextPage = () => {
               <div className="button" key={i}>
                 <div className="text">
                   <strong className="subject">{name}</strong>
-                  <p className="teacher">{teacher}</p>
+                  <p className="teacher">{teacher.replace("+", " ")}</p>
                 </div>
               </div>
             );
