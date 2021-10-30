@@ -1,14 +1,14 @@
-import type { NextPage } from "next";
-import { ChevronUpIcon } from "@heroicons/react/outline";
-import { ColorPicker } from "@components/ColorPicker";
-import React, { useEffect, useState } from "react";
-import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
+import type {NextPage} from "next";
+import {ChevronUpIcon} from "@heroicons/react/outline";
+import {ColorPicker} from "@components/ColorPicker";
+import React, {useEffect, useState} from "react";
+import {hexToRgbA, rawRgbColorToCss} from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
-import { Preview } from "@components";
-import { CheckIcon, ExclamationIcon, XIcon } from "@heroicons/react/solid";
-import { motion } from "framer-motion";
-import { Ellipsis } from "@components/Loader/Ellipsis";
+import {Preview} from "@components";
+import {CheckIcon, ExclamationIcon, XIcon} from "@heroicons/react/solid";
+import {motion} from "framer-motion";
+import {Ellipsis} from "@components/Loader/Ellipsis";
 
 const HomeIcon = () => {
   return (
@@ -103,13 +103,14 @@ const Theme = {
 };
 
 const Home: NextPage = () => {
+
   const getRandom = (arr: Array<string>) => {
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  const [waiting, setWaiting] = useState(false);
-  const [error, setError] = useState(false);
-  const [recentError, setRecentError] = useState(setTimeout(() => {}));
+  const [waiting, setWaiting] = useState(false)
+  const [error, setError] = useState(false)
+  const [recentError, setRecentError] = useState(setTimeout(() => {}))
 
   const [invalidRoom, setInvalidRoom] = useState(false);
   const [preset, setPreset] = useState(false);
@@ -138,20 +139,21 @@ const Home: NextPage = () => {
   // const [quality, setQuality] = useState(0);
 
   const toggleError = () => {
-    setError(true);
+    setError(true)
 
-    clearTimeout(recentError);
+    clearTimeout(recentError)
 
     const timeout = setTimeout(() => {
-      setError(false);
-    }, 3000);
+      setError(false)
+    }, 3000)
 
-    setRecentError(timeout);
-  };
+    setRecentError(timeout)
 
-  const download = () => {
+  }
+
+  const download = async () => {
     if (invalidRoom) {
-      toggleError();
+      toggleError()
       return;
     }
 
@@ -166,55 +168,64 @@ const Home: NextPage = () => {
     };
 
     const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(requestColors)}`;
-    const a = document.createElement("a");
-    a.href = imgUrl;
-    a.download = `${room}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+
+    setWaiting(true)
+
+    const res = await fetch(imgUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include'
+    })
+
+    if (res.ok) {
+      const a = document.createElement("a");
+      a.href = window.URL.createObjectURL(await res.blob());
+      a.download = `${room}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    setWaiting(false)
+
   };
 
   const toggle = {
-    open: {
-      rotate: 0,
+    "open": {
+      rotate: 0
     },
-    close: {
-      rotate: 180,
-    },
-  };
+    "close": {
+      rotate: 180
+    }
+  }
 
   return (
     <>
       <Head>
-        <title>ระบบจัดตารางเรียน 2/2021</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ระบบจัดการตารางเรียน 2/2021</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
       <div className="fixed w-full flex justify-center top-0">
-        <motion.div
-          initial={{ y: -40 }}
-          animate={error ? { y: 0 } : { y: -40 }}
-          className="flex items-center space-x-1 px-4 py-1 bg-red-500 rounded-full shadow-lg text-white border border-red-600"
-        >
-          <ExclamationIcon className="w-5 h-5 animate-pulse" />
+        <motion.div initial={{y: -40}} animate={error ? {y: 0} : {y: -40}} className="flex items-center space-x-1 px-4 py-1 bg-red-500 rounded-full shadow-lg text-white border border-red-600">
+          <ExclamationIcon className="w-5 h-5 animate-pulse"/>
           <span className="text-sm">หมายเลขห้องไม่ถูกต้อง</span>
         </motion.div>
       </div>
-      <div
-        className="flex justify-center items-center px-4 w-full min-h-screen transition-colors delay-300 py-4"
-        style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
-      >
+      <div className="flex justify-center items-center px-4 w-full min-h-screen transition-colors delay-300 py-4"
+           style={{backgroundColor: rawRgbColorToCss(colors.c1)}}>
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg bg-white max-w-[500px]">
           <div>
             <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2021</h1>
             <p className="text-sm text-gray-400 leading-5 mt-3">
               ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
-              <br className="hidden sm:block" />
+              <br className="hidden sm:block"/>
               จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
-              <br />
+              <br/>
             </p>
           </div>
           <div className="space-y-2 mt-12">
-            <h2 className="text-gray-600 font-medium text-md sm:text-xl">ใส่เลขห้องเรียน</h2>
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ใส่เลขห้องเรียน</h2>
             <div className="flex sm:flex-row flex-col items-start sm:items-center">
               <div className="relative w-48">
                 <input
@@ -225,16 +236,12 @@ const Home: NextPage = () => {
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-md pl-4 pt-2 pb-1.5 w-full text-gray-500 text-md outline-none",
+                    "border border-gray-300 rounded-xl pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
                 <div className="flex items-center justify-end absolute top-0 h-full right-3.5">
-                  {!invalidRoom ? (
-                    <CheckIcon className="w-5 h-5 text-green-500" />
-                  ) : (
-                    <XIcon className="w-5 h-5 text-red-400" />
-                  )}
+                  {!invalidRoom ? <CheckIcon className="w-5 h-5 text-green-500"/> : <XIcon className="w-5 h-5 text-red-400"/>}
                 </div>
               </div>
               {/*
@@ -273,16 +280,13 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="space-y-4 sm:space-y-6 mt-12">
-            <h2 className="text-gray-600 font-medium text-md sm:text-xl">ปรับแต่งตารางเรียน</h2>
+            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex flex-row items-center">
-              <h1 className="text-gray-600 font-medium text-md mr-2">ธีมสี: </h1>
+              <h1 className="text-gray-600 font-medium text-lg mr-2">ธีมสี: </h1>
               <div className="flex relative w-[240px] h-[44px]">
                 <div className="flex border border-gray-300 w-full rounded-xl">
                   <div className="flex items-center justify-center w-9/12 cursor-pointer">
-                    <div
-                      style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
-                      className="w-5 h-5 rounded-full shadow-md mr-2"
-                    />
+                    <div style={{backgroundColor: rawRgbColorToCss(colors.t1)}} className="w-5 h-5 rounded-full shadow-md mr-2"/>
                     <span className="text-gray-600 mt-1">{colors.name}</span>
                   </div>
                   <button
@@ -292,14 +296,14 @@ const Home: NextPage = () => {
                     className="flex items-center justify-center w-3/12 border-l border-gray-300 cursor-pointer hover:bg-gray-100 transition-colors rounded-r-xl"
                   >
                     <motion.div variants={toggle} animate={preset ? "close" : "open"}>
-                      <ChevronUpIcon className="w-5 h-5 text-gray-700" />
+                      <ChevronUpIcon className="w-5 h-5 text-gray-700"/>
                     </motion.div>
                   </button>
                 </div>
                 {preset && (
                   <>
                     <div
-                      style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
+                      style={{position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px"}}
                       onClick={() => {
                         setPreset(false);
                       }}
@@ -307,27 +311,19 @@ const Home: NextPage = () => {
                     <div className="absolute bottom-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
                       <div className="py-2">
                         <h1 className="mb-2">ชุดสี</h1>
-                        <hr className="border-1 rounded-lg border-gray-300 mb-3" />
+                        <hr className="border-1 rounded-lg border-gray-300 mb-3"/>
                         <div className="space-y-2.5">
                           {Object.values(Theme).map((cols) => (
                             <div
                               onClick={() => {
                                 setColors(cols);
                               }}
-                              className="flex text-gray-400 mb-1 py-1 cursor-pointer"
+                              className="flex text-gray-400 mb-1 cursor-pointer"
                               key={cols.name}
                             >
-                              <div
-                                style={{ backgroundColor: rawRgbColorToCss(cols.t1) }}
-                                className="w-5 h-5 rounded-full shadow-md mr-2"
-                              />
+                              <div style={{backgroundColor: rawRgbColorToCss(cols.t1)}} className="w-5 h-5 rounded-full shadow-md mr-2"/>
                               <h1
-                                className={classnames(
-                                  cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-black"
-                                )}
-                              >
-                                {cols.name}
-                              </h1>
+                                className={classnames(cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-gray-800")}>{cols.name}</h1>
                             </div>
                           ))}
                         </div>
@@ -339,12 +335,12 @@ const Home: NextPage = () => {
             </div>
             <div className="flex items-start sm:items-center flex-col sm:flex-row">
               <div className="flex items-center">
-                <h3 className="text-gray-600 font-medium text-md mr-2">ชุดสี: </h3>
+                <h3 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h3>
                 <div className="flex justify-center space-x-1 mr-4">
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        return { ...prev, bg: c };
+                        return {...prev, bg: c};
                       });
                     }}
                     defaultColor={colors.bg}
@@ -352,7 +348,7 @@ const Home: NextPage = () => {
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        return { ...prev, t1: c };
+                        return {...prev, t1: c};
                       });
                     }}
                     defaultColor={colors.t1}
@@ -360,7 +356,7 @@ const Home: NextPage = () => {
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
-                        return { ...prev, t2: c };
+                        return {...prev, t2: c};
                       });
                     }}
                     defaultColor={colors.t2}
@@ -371,7 +367,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      return { ...prev, c1: c };
+                      return {...prev, c1: c};
                     });
                   }}
                   defaultColor={colors.c1}
@@ -379,7 +375,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      return { ...prev, c2: c };
+                      return {...prev, c2: c};
                     });
                   }}
                   defaultColor={colors.c2}
@@ -387,7 +383,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      return { ...prev, c3: c };
+                      return {...prev, c3: c};
                     });
                   }}
                   defaultColor={colors.c3}
@@ -395,7 +391,7 @@ const Home: NextPage = () => {
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
-                      return { ...prev, c4: c };
+                      return {...prev, c4: c};
                     });
                   }}
                   defaultColor={colors.c4}
@@ -404,20 +400,17 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="mt-6 sm:mt-10">
-            <Preview rawTheme={colors} />
+            <Preview rawTheme={colors}/>
           </div>
           <div className="flex justify-center mt-8 sm:mt-10">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
+            <button
               onClick={download}
-              className={classnames(
-                "text-white rounded-xl px-6 w-full sm:w-max transition-colors",
-                waiting ? "pb-[10px] pt-[2px]" : "py-2.5"
-              )}
-              style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
+              className={classnames("text-white rounded-xl w-full sm:w-max transition-colors", waiting ? "pb-[10px] pt-[2px] px-[60px]" : "py-2.5 px-6")}
+              style={{backgroundColor: rawRgbColorToCss(colors.t1)}}
             >
-              {!waiting ? <span>สร้างตารางเรียน</span> : <Ellipsis className="w-10" />}
-            </motion.button>
+              {!waiting ? <span>สร้างตารางเรียน</span>
+                :<Ellipsis className="w-10"/>}
+            </button>
           </div>
         </div>
       </div>
