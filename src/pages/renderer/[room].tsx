@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
 
   return {
     props: {
-      scheduleData
+      scheduleData: {...scheduleData, room: room}
     }
   }
 
