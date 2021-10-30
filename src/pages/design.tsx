@@ -2,10 +2,14 @@ import { Logo } from "@components";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-const Scheme = {
+const Theme = {
   primary: "#599BA4",
   secondary: "#DEA54B",
-  background: "#fff",
+  monday: "#F4CD00",
+  tuesday: "#FF92A6",
+  wednesday: "#ADE374",
+  thursday: "#FF9417",
+  logo: "#599BA4",
 };
 
 interface MockDataSchedule {
@@ -138,19 +142,19 @@ const Design: NextPage = () => {
   const Days = [
     {
       name: "จันทร์",
-      color: "#F4CD00",
+      color: Theme.monday,
     },
     {
       name: "อังคาร",
-      color: "#FF92A6",
+      color: Theme.tuesday,
     },
     {
       name: "พุธ",
-      color: "#ADE374",
+      color: Theme.wednesday,
     },
     {
       name: "พฤหัสฯ",
-      color: "#FF9417",
+      color: Theme.thursday,
     },
     /*
     {
@@ -170,15 +174,19 @@ const Design: NextPage = () => {
           <div className="left">
             {/*<div className="bar"></div>*/}
             <div className="title-container">
-              <h1 className="title">ตารางเรียน</h1>
-              <p className="subtitle">ภาคเรียนที่ 2/2021</p>
+              <h1 className="title" style={{ color: Theme.primary }}>
+                ตารางเรียน
+              </h1>
+              <p className="subtitle" style={{ color: Theme.secondary }}>
+                ภาคเรียนที่ 2/2021
+              </p>
             </div>
           </div>
           <div className="right">
-            <h2 className="room">
+            <h2 className="room" style={{ color: Theme.primary }}>
               ห้อง {Mock.room} | {Mock.branch}
             </h2>
-            <div className="teacher">
+            <div className="teacher" style={{ color: Theme.secondary }}>
               {Mock.teachers.map((teacher) => (
                 <p className="text" key={teacher}>
                   {teacher}
@@ -300,7 +308,7 @@ const Design: NextPage = () => {
             */}
           </div>
         </main>
-        <Logo color={Scheme.primary} />
+        <Logo color={Theme.logo} />
       </article>
     </>
   );
