@@ -58,7 +58,8 @@ body {
   position: absolute;
   width: 75px;
   height: 59px;
-  left: 56px;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 48px;
 }
 
@@ -74,6 +75,7 @@ body {
   display: flex;
   align-items: center;
 
+  /*
   > .bar {
     width: 0px;
     height: 250px;
@@ -84,20 +86,23 @@ body {
     border-radius: 24px;
     display: inline-block;
   }
+  */
 }
 
 .header > .left > .title-container {
   display: inline-block;
-  margin-left: 48px;
+  /*margin-left: 48px;*/
 
   > .title {
-    font-size: 122px;
+    font-size: 138.24px;
     line-height: 1.15;
+    font-weight: 600;
   }
 
   > .subtitle {
     font-size: 36px;
     margin-left: 32px;
+    font-weight: 500;
   }
 }
 
@@ -107,6 +112,7 @@ body {
   > .room {
     font-size: 42px;
     margin-bottom: 16px;
+    font-weight: 500;
   }
 
   > .teacher {
@@ -118,7 +124,7 @@ body {
 
 .main {
   width: $width - 302px;
-  margin: 150px auto 0 auto;
+  margin: 200px auto 0 auto;
   position: relative;
 }
 
@@ -132,7 +138,7 @@ body {
 .main > .days > .day {
   width: 100%;
   position: relative;
-  margin-bottom: 87px;
+  margin-bottom: 116px;
 
   > .button {
     position: relative;
@@ -170,12 +176,24 @@ body {
 }
 
 .schedules > .mon-to-thurs > .col {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-right: 15px;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  > .time {
+    font-family: "Roboto", sans-serif;
+    position: absolute;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
   }
 
   > .button {
@@ -185,9 +203,13 @@ body {
     border-radius: 20px;
     font-size: 36px;
     width: 197.5px;
-    height: 152px;
+    height: 162px;
     background-color: #fff;
-    margin-bottom: 32px;
+    margin-bottom: 52px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   > .break10-button {
@@ -198,7 +220,7 @@ body {
     width: 76px;
     height: 100%;
     background-color: #fff;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 
     > .text {
       text-align: center;
@@ -219,7 +241,7 @@ body {
     width: 130px;
     height: 100%;
     background-color: #fff;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 
     > .text {
       text-align: center;
@@ -239,16 +261,25 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  width: 100%;
 
   > .subject {
-    font-size: 32px;
+    width: 100%;
+    font-size: 24px;
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 10px;
     color: #000;
     font-weight: 400;
+    white-space: pre;
+    word-wrap: break-word;
   }
 
   > .teacher {
+    width: 100%;
     font-size: 18px;
     color: #a6a8ab;
+    word-wrap: break-word;
   }
 }
 

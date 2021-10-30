@@ -2,9 +2,27 @@ import { Logo } from "@components";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-const Mock = {
+const Scheme = {
+  primary: "#599BA4",
+  secondary: "#DEA54B",
+  background: "#fff",
+};
+
+interface MockDataSchedule {
+  name: string;
+  teacher: string;
+}
+
+interface MockData {
+  room: string;
+  branch: string;
+  teachers: string[];
+  data: Record<string, MockDataSchedule>;
+}
+
+const Mock: MockData = {
   room: "444",
-  branch: "วิทยาศาสตร์ - บริหาร",
+  branch: "วิทยาศาสตร์-บริหาร",
   teachers: ["ครูภวิชช์ อรุณวรรณ", "ครูยุพิน ผลเจริญ"],
   data: {
     "1:1": {
@@ -24,7 +42,7 @@ const Mock = {
       teacher: "ครูพิมลพรรณ",
     },
     "1:5": {
-      name: "สุขศึกษาและพลศึกษา",
+      name: "สุขศึกษา\nและพลศึกษา",
       teacher: "ครูพิชาธรณ์+ครูสุภัตรา",
     },
     "1:6": {
@@ -48,7 +66,7 @@ const Mock = {
       teacher: "ครูณัฐวัชร์",
     },
     "2:5": {
-      name: "กฎหมายที่ควรรู้/ตำรงชีวิต",
+      name: "กฎหมายที่ควรรู้\n/ตำรงชีวิต",
       teacher: "ครูธีรศักดิ์",
     },
     "3:1": {
@@ -90,30 +108,58 @@ const Mock = {
   },
 };
 
-const Days = [
-  {
-    name: "จันทร์",
-    color: "#F4CD00",
-  },
-  {
-    name: "อังคาร",
-    color: "#FF92A6",
-  },
-  {
-    name: "พุธ",
-    color: "#ADE374",
-  },
-  {
-    name: "พฤหัสฯ",
-    color: "#FF9417",
-  },
-  {
-    name: "ศุกร์",
-    color: "#45D2F1",
-  },
-];
-
 const Design: NextPage = () => {
+  const genSchedule = (period: number) => {
+    return (
+      <>
+        {Array(4)
+          .fill("")
+          .map((_, i) => {
+            const name = Mock?.data?.hasOwnProperty(`${i + 1}:${period}`)
+              ? Mock?.data[`${i + 1}:${period}`].name
+              : "" ?? "";
+            const teacher = Mock?.data?.hasOwnProperty(`${i + 1}:${period}`)
+              ? Mock?.data[`${i + 1}:${period}`].teacher
+              : "" ?? "";
+
+            return (
+              <div className="button" key={i}>
+                <div className="text">
+                  <strong className="subject">{name}</strong>
+                  <p className="teacher">{teacher}</p>
+                </div>
+              </div>
+            );
+          })}
+      </>
+    );
+  };
+
+  const Days = [
+    {
+      name: "จันทร์",
+      color: "#F4CD00",
+    },
+    {
+      name: "อังคาร",
+      color: "#FF92A6",
+    },
+    {
+      name: "พุธ",
+      color: "#ADE374",
+    },
+    {
+      name: "พฤหัสฯ",
+      color: "#FF9417",
+    },
+    /*
+    {
+      name: "ศุกร์",
+      color: "#45D2F1",
+    },
+    */
+  ];
+
   return (
     <>
       <Head>
@@ -122,7 +168,7 @@ const Design: NextPage = () => {
       <article className="wrapper">
         <header className="header">
           <div className="left">
-            <div className="bar"></div>
+            {/*<div className="bar"></div>*/}
             <div className="title-container">
               <h1 className="title">ตารางเรียน</h1>
               <p className="subtitle">ภาคเรียนที่ 2/2021</p>
@@ -156,30 +202,8 @@ const Design: NextPage = () => {
             <div className="mon-to-thurs">
               {/* 1 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
+                <div className="time">08.00-08.50</div>
+                {genSchedule(1)}
               </div>
               {/* break10 */}
               <div className="col">
@@ -195,30 +219,8 @@ const Design: NextPage = () => {
               </div>
               {/* 2 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
+                <div className="time">09.00-09.50</div>
+                {genSchedule(2)}
               </div>
               {/* break10 */}
               <div className="col">
@@ -234,30 +236,8 @@ const Design: NextPage = () => {
               </div>
               {/* 3 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
+                <div className="time">10.00-10.50</div>
+                {genSchedule(3)}
               </div>
               {/* break10 */}
               <div className="col">
@@ -273,30 +253,8 @@ const Design: NextPage = () => {
               </div>
               {/* 4 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
+                <div className="time">11.00-11.50</div>
+                {genSchedule(4)}
               </div>
               {/* lunchbreak */}
               <div className="col">
@@ -312,30 +270,8 @@ const Design: NextPage = () => {
               </div>
               {/* 5 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject">เทนนิส</strong>
-                    <p className="teacher">ครูนิซาฮ์</p>
-                  </div>
-                </div>
+                <div className="time">13.00-13.50</div>
+                {genSchedule(5)}
               </div>
               {/* break10 */}
               <div className="col">
@@ -351,40 +287,20 @@ const Design: NextPage = () => {
               </div>
               {/* 6 */}
               <div className="col">
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject"></strong>
-                    <p className="teacher"></p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject"></strong>
-                    <p className="teacher"></p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject"></strong>
-                    <p className="teacher"></p>
-                  </div>
-                </div>
-                <div className="button">
-                  <div className="text">
-                    <strong className="subject"></strong>
-                    <p className="teacher"></p>
-                  </div>
-                </div>
+                <div className="time">14.00-14.50</div>
+                {genSchedule(6)}
               </div>
             </div>
+            {/*
             <div className="fri">
               <div className="button">
                 <p className="text">เรียนวิชารักษาดินแดน</p>
               </div>
             </div>
+            */}
           </div>
         </main>
-        <Logo color="#2B56A8" />
+        <Logo color={Scheme.primary} />
       </article>
     </>
   );
