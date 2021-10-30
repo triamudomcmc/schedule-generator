@@ -193,7 +193,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="fixed w-full flex justify-center top-0">
         <motion.div initial={{y: -40}} animate={error ? {y: 0} : {y: -40}} className="flex items-center space-x-1 px-4 py-1 bg-red-500 rounded-full shadow-lg text-white border border-red-600">
-          <ExclamationIcon className="w5 h-5 animate-pulse"/>
+          <ExclamationIcon className="w-5 h-5 animate-pulse"/>
           <span className="text-sm">หมายเลขห้องไม่ถูกต้อง</span>
         </motion.div>
       </div>
@@ -221,7 +221,7 @@ const Home: NextPage = () => {
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-md pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
+                    "border border-gray-300 rounded-xl pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
