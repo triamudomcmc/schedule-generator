@@ -295,7 +295,7 @@ const Home: NextPage = () => {
                   <div className="flex items-center justify-center w-9/12 cursor-pointer">
                     <div
                       style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
-                      className="w-5 h-5 rounded-full shadow-md mr-2"
+                      className="w-5 h-5 rounded-full shadow-sm mr-2"
                     />
                     <span className="text-gray-600 mt-1">{colors.name}</span>
                   </div>
@@ -333,7 +333,7 @@ const Home: NextPage = () => {
                             >
                               <div
                                 style={{ backgroundColor: rawRgbColorToCss(cols.t1) }}
-                                className="w-5 h-5 rounded-full shadow-md mr-2"
+                                className="w-5 h-5 rounded-full shadow-sm mr-2"
                               />
                               <h1
                                 className={classnames(
