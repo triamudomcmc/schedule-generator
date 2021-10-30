@@ -1,11 +1,14 @@
-import type { NextPage } from "next";
-import { ChevronDownIcon, PencilIcon } from "@heroicons/react/outline";
-import { ColorPicker } from "@components/ColorPicker";
-import React, { useEffect, useState } from "react";
-import { hexToRgbA } from "@utils/hexToRgb";
+import type {NextPage} from "next";
+import {ChevronUpIcon} from "@heroicons/react/outline";
+import {ColorPicker} from "@components/ColorPicker";
+import React, {useEffect, useState} from "react";
+import {hexToRgbA, rawRgbColorToCss} from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
 import {Preview} from "@components";
+import {CheckIcon, XIcon} from "@heroicons/react/solid";
+import {motion} from "framer-motion";
+import {Ellipsis} from "@components/Loader/Ellipsis";
 
 const HomeIcon = () => {
   return (
@@ -27,6 +30,16 @@ const HomeIcon = () => {
 };
 
 const Theme = {
+  Pink: {
+    name: "Tooth Fairy",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#D2488B"),
+    t2: hexToRgbA("#EAA4C6"),
+    c1: hexToRgbA("#EDB7D2"),
+    c2: hexToRgbA("#EAA4C6"),
+    c3: hexToRgbA("#E387B3"),
+    c4: hexToRgbA("#DD6EA5"),
+  },
   Purple: {
     name: "The Witches’ Craft",
     bg: hexToRgbA("#FFFFFF"),
@@ -57,18 +70,8 @@ const Theme = {
     c3: hexToRgbA("#65BDEE"),
     c4: hexToRgbA("#53ABDC"),
   },
-  Pink: {
-    name: "Tooth Fairy",
-    bg: hexToRgbA("#FFFFFF"),
-    t1: hexToRgbA("#D2488B"),
-    t2: hexToRgbA("#EAA4C6"),
-    c1: hexToRgbA("#EDB7D2"),
-    c2: hexToRgbA("#EAA4C6"),
-    c3: hexToRgbA("#E387B3"),
-    c4: hexToRgbA("#DD6EA5"),
-  },
   Orange: {
-    name: "Jack-O’-Lantern",
+    name: "Jack O’Lantern",
     bg: hexToRgbA("#FFFFFF"),
     t1: hexToRgbA("#EA984D"),
     t2: hexToRgbA("#F8BA82"),
@@ -100,13 +103,13 @@ const Theme = {
 };
 
 const Home: NextPage = () => {
-  const bgColors = ["bg-yellow-50", "bg-green-50", "bg-blue-50", "bg-pink-50"];
 
   const getRandom = (arr: Array<string>) => {
     return arr[Math.floor(Math.random() * arr.length)];
   };
 
-  const [bgColor, setBgColor] = useState(getRandom(bgColors));
+  const [waiting, setWaiting] = useState(false)
+
   const [invalidRoom, setInvalidRoom] = useState(false);
   const [preset, setPreset] = useState(false);
   // const [qualityPanel, setQualityPanel] = useState(false);
@@ -127,7 +130,7 @@ const Home: NextPage = () => {
     }
   }, [room]);
 
-  const [colors, setColors] = useState(Theme.Purple);
+  const [colors, setColors] = useState(Theme.Pink);
 
   // const qualities = ["low", "standard", "high", "best"];
 
@@ -157,24 +160,34 @@ const Home: NextPage = () => {
     a.remove();
   };
 
+  const toggle = {
+    "open": {
+      rotate: 0
+    },
+    "close": {
+      rotate: 180
+    }
+  }
+
   return (
     <>
       <Head>
         <title>ระบบจัดตารางเรียน 2/2021</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
-      <div className={"flex justify-center items-center px-4 w-full min-h-screen " + bgColor}>
-        <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-9 sm:space-y-12 bg-white max-w-[500px]">
+      <div className="flex justify-center items-center px-4 w-full min-h-screen transition-colors delay-300 py-4"
+           style={{backgroundColor: rawRgbColorToCss(colors.c1)}}>
+        <div className="font-ui py-10 px-12 rounded-xl shadow-lg bg-white max-w-[500px]">
           <div>
             <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2021</h1>
             <p className="text-sm text-gray-400 leading-5 mt-3">
-              ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.
-              <br />
+              ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
+              <br className="hidden sm:block"/>
               จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
-              <br />
+              <br/>
             </p>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 mt-12">
             <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ใส่เลขห้องเรียน</h2>
             <div className="flex sm:flex-row flex-col items-start sm:items-center">
               <div className="relative w-48">
@@ -186,15 +199,13 @@ const Home: NextPage = () => {
                   value={room}
                   placeholder="เลขห้อง"
                   className={classnames(
-                    "border border-gray-300 rounded-md pl-4 py-3 w-full text-gray-500 text-xl",
+                    "border border-gray-300 rounded-md pl-4 pt-2 pb-1.5 w-full text-gray-500 text-xl",
                     invalidRoom ? "border-red-400" : " border-green-400"
                   )}
                 />
-                {
-                  <span className={`${invalidRoom ? "text-red-400" : "text-green-300"} text-xs mt-2`}>
-                    {invalidRoom ? "ไม่พบเลขห้องดังกล่าว" : "สำเร็จ"}
-                  </span>
-                }
+                <div className="flex items-center justify-end absolute top-0 h-full right-3.5">
+                  {!invalidRoom ? <CheckIcon className="w-5 h-5 text-green-500"/> : <XIcon className="w-5 h-5 text-red-400"/>}
+                </div>
               </div>
               {/*
               <div className="flex items-center">
@@ -231,11 +242,60 @@ const Home: NextPage = () => {
               */}
             </div>
           </div>
-          <div>
-            <Preview rawTheme={colors} />
-          </div>
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-4 sm:space-y-6 mt-12">
             <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
+            <div className="flex flex-row items-center">
+              <h1 className="text-gray-600 font-medium text-lg mr-2">ธีมสี: </h1>
+              <div className="flex relative w-[240px] h-[44px]">
+                <div className="flex border border-gray-300 w-full rounded-xl">
+                  <div className="flex items-center justify-center w-9/12 cursor-pointer">
+                    <div style={{backgroundColor: rawRgbColorToCss(colors.t1)}} className="w-5 h-5 rounded-full shadow-md mr-2"/>
+                    <span className="text-gray-600 mt-1">{colors.name}</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setPreset((prev) => !prev);
+                    }}
+                    className="flex items-center justify-center w-3/12 border-l border-gray-300 cursor-pointer hover:bg-gray-100 transition-colors rounded-r-xl"
+                  >
+                    <motion.div variants={toggle} animate={preset ? "close" : "open"}>
+                      <ChevronUpIcon className="w-5 h-5 text-gray-700"/>
+                    </motion.div>
+                  </button>
+                </div>
+                {preset && (
+                  <>
+                    <div
+                      style={{position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px"}}
+                      onClick={() => {
+                        setPreset(false);
+                      }}
+                    />
+                    <div className="absolute bottom-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
+                      <div className="py-2">
+                        <h1 className="mb-2">ชุดสี</h1>
+                        <hr className="border-1 rounded-lg border-gray-300 mb-3"/>
+                        <div className="space-y-2.5">
+                          {Object.values(Theme).map((cols) => (
+                            <div
+                              onClick={() => {
+                                setColors(cols);
+                              }}
+                              className="flex text-gray-400 mb-1 cursor-pointer"
+                              key={cols.name}
+                            >
+                              <div style={{backgroundColor: rawRgbColorToCss(cols.t1)}} className="w-5 h-5 rounded-full shadow-md mr-2"/>
+                              <h1
+                                className={classnames(cols.name !== colors.name ? "hover:text-gray-500 transition-colors" : "text-gray-800")}>{cols.name}</h1>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
             <div className="flex items-start sm:items-center flex-col sm:flex-row">
               <div className="flex items-center">
                 <h3 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h3>
@@ -301,54 +361,18 @@ const Home: NextPage = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-row items-center">
-              <div className="flex relative w-[200px] h-[44px]">
-                <div className="flex border border-gray-300 w-full rounded-xl">
-                  <div className="flex items-center justify-center w-8/12">
-                    <span className="text-gray-600 mt-1">{colors.name}</span>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setPreset((prev) => !prev);
-                    }}
-                    className="flex items-center justify-center w-4/12 border-l border-gray-300 cursor-pointer hover:bg-gray-100 rounded-r-xl"
-                  >
-                    <ChevronDownIcon className="w-5 h-5 text-gray-700" />
-                  </button>
-                </div>
-                {preset && (
-                  <>
-                    <div
-                      style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
-                      onClick={() => {
-                        setPreset(false);
-                      }}
-                    />
-                    <div className="absolute top-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
-                      <div className="border-b border-gray-300 py-2">
-                        <h1 className="mb-1.5">ชุดสี</h1>
-                        {Object.values(Theme).map((cols) => (
-                          <h2
-                            onClick={() => {
-                              setColors(cols);
-                            }}
-                            className="text-gray-400 mb-1 cursor-pointer"
-                            key={cols.name}
-                          >
-                            {cols.name}
-                          </h2>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
+          </div>
+          <div className="mt-6 sm:mt-10">
+            <Preview rawTheme={colors}/>
+          </div>
+          <div className="flex justify-center mt-8 sm:mt-10">
             <button
               onClick={download}
-              className="bg-blue-500 float-right text-white rounded-xl px-6 py-2.5 w-full sm:w-max"
+              className={classnames("text-white rounded-xl px-6 w-full sm:w-max transition-colors", waiting ? "pb-[10px] pt-[2px]" : "py-2.5")}
+              style={{backgroundColor: rawRgbColorToCss(colors.t1)}}
             >
-              <span>สร้างตารางเรียน</span>
+              {!waiting ? <span>สร้างตารางเรียน</span>
+                :<Ellipsis className="w-10"/>}
             </button>
           </div>
         </div>
