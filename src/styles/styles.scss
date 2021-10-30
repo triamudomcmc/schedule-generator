@@ -64,7 +64,7 @@ body {
 .header {
   display: flex;
   width: $width - 302px;
-  padding-top: 240px;
+  padding-top: 320px;
   margin: 0 auto 0 auto;
   justify-content: space-between;
   align-items: center;
@@ -93,7 +93,7 @@ body {
   /*margin-left: 48px;*/
 
   > .title {
-    font-size: 96px;
+    font-size: 88px;
     line-height: 1.15;
     font-weight: 600;
   }
@@ -147,7 +147,7 @@ body {
     font-size: 36px;
     color: #fff;
     z-index: 2;
-    width: 258.7px;
+    width: 238.7px;
     text-align: center;
   }
 
