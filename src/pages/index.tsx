@@ -1,9 +1,8 @@
-import type { NextPage } from "next";
-import { ChevronDownIcon, HomeIcon, PencilIcon } from "@heroicons/react/outline";
-import { ColorPicker } from "@components/ColorPicker";
-import Image from "next/image";
-import { useState } from "react";
-import { hexToRgbA } from "@utils/hexToRgb";
+import type {NextPage} from "next";
+import {ChevronDownIcon, PencilIcon} from "@heroicons/react/outline";
+import {ColorPicker} from "@components/ColorPicker";
+import React, {useState} from "react";
+import {hexToRgbA} from "@utils/hexToRgb";
 
 const Home: NextPage = () => {
   const [preset, setPreset] = useState(false);
@@ -76,21 +75,24 @@ const Home: NextPage = () => {
                 }}
                 className="flex relative items-center cursor-pointer"
               >
-                <PencilIcon className="w-4 h-4 text-blue-400 mb-1" />
+                <PencilIcon className="w-4 h-4 text-blue-400 mb-1"/>
                 <span className="text-blue-400">ปกติ</span>
                 {qualityPanel && (
-                  <div className="absolute top-7 bg-white w-[56px] rounded-lg shadow-lg">
-                    <h2 className="text-gray-800 cursor-pointer text-sm text-center rounded-t-lg pt-1 px-2 hover:bg-gray-100">
-                      ต่ำ
-                    </h2>
-                    <h2 className="text-gray-800 cursor-pointer text-sm text-center bg-blue-50 py-0.5 px-2">ปกติ</h2>
-                    <h2 className="text-gray-800 cursor-pointer text-sm text-center py-0.5 px-2 hover:bg-gray-100">
-                      สูง
-                    </h2>
-                    <h2 className="text-gray-800 cursor-pointer text-sm text-center pb-1 px-2 hover:bg-gray-100">
-                      สูงมาก
-                    </h2>
-                  </div>
+                  <>
+                    <div style={{position: 'fixed', top: '0px', right: '0px', bottom: '0px', left: '0px'}}/>
+                    <div className="absolute top-7 bg-white w-[56px] rounded-lg shadow-lg">
+                      <h2 className="text-gray-800 cursor-pointer text-sm text-center rounded-t-lg pt-1 px-2 hover:bg-gray-100">
+                        ต่ำ
+                      </h2>
+                      <h2 className="text-gray-800 cursor-pointer text-sm text-center bg-blue-50 py-0.5 px-2">ปกติ</h2>
+                      <h2 className="text-gray-800 cursor-pointer text-sm text-center py-0.5 px-2 hover:bg-gray-100">
+                        สูง
+                      </h2>
+                      <h2 className="text-gray-800 cursor-pointer text-sm text-center pb-1 px-2 hover:bg-gray-100">
+                        สูงมาก
+                      </h2>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
@@ -101,15 +103,15 @@ const Home: NextPage = () => {
           <div className="flex items-center">
             <h1 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h1>
             <div className="flex justify-center space-x-1 mr-4">
-              <ColorPicker defaultColor={colors.bg} />
-              <ColorPicker defaultColor={colors.c1} />
+              <ColorPicker defaultColor={colors.bg}/>
+              <ColorPicker defaultColor={colors.c1}/>
             </div>
             <div className="flex justify-center space-x-1">
-              <ColorPicker defaultColor={colors.c2} />
-              <ColorPicker defaultColor={colors.c3} />
-              <ColorPicker defaultColor={colors.c4} />
-              <ColorPicker defaultColor={colors.c5} />
-              <ColorPicker defaultColor={colors.c6} />
+              <ColorPicker defaultColor={colors.c2}/>
+              <ColorPicker defaultColor={colors.c3}/>
+              <ColorPicker defaultColor={colors.c4}/>
+              <ColorPicker defaultColor={colors.c5}/>
+              <ColorPicker defaultColor={colors.c6}/>
             </div>
           </div>
           <div className="flex items-center space-x-10">
@@ -124,28 +126,33 @@ const Home: NextPage = () => {
                   }}
                   className="flex items-center justify-center w-4/12 border-l border-gray-300 cursor-pointer hover:bg-gray-100 rounded-r-xl"
                 >
-                  <ChevronDownIcon className="w-5 h-5 text-gray-700" />
+                  <ChevronDownIcon className="w-5 h-5 text-gray-700"/>
                 </button>
               </div>
               {preset && (
-                <div className="absolute top-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
-                  <div className="border-b border-gray-300 py-2">
-                    <h1 className="mb-1.5">ชุดสี</h1>
-                    <h2 onClick={resetDefault} className="text-gray-400 mb-1 cursor-pointer">
-                      ค่าเริ่มต้น
-                    </h2>
+                <>
+                  <div style={{position: 'fixed', top: '0px', right: '0px', bottom: '0px', left: '0px'}} onClick={() => {
+                    setPreset(false)
+                  }}/>
+                  <div className="absolute top-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
+                    <div className="border-b border-gray-300 py-2">
+                      <h1 className="mb-1.5">ชุดสี</h1>
+                      <h2 onClick={resetDefault} className="text-gray-400 mb-1 cursor-pointer">
+                        ค่าเริ่มต้น
+                      </h2>
+                    </div>
+                    <div className="border-b border-gray-300 py-2">
+                      <h1 className="mb-1.5">ธีม (ยังไม่เปิดใช้งาน)</h1>
+                      <h2 className="text-gray-400 mb-1">Christmas</h2>
+                      <h2 className="text-gray-400 mb-1">Dracula</h2>
+                    </div>
+                    <div className="py-2">
+                      <h1 className="mb-1.5">คำสั่งเพิ่มเติม</h1>
+                      <h2 className="text-gray-400 mb-1">นำเข้าชุดสี</h2>
+                      <h2 className="text-gray-400 mb-1">ส่งออกชุดสีนี้</h2>
+                    </div>
                   </div>
-                  <div className="border-b border-gray-300 py-2">
-                    <h1 className="mb-1.5">ธีม (ยังไม่เปิดใช้งาน)</h1>
-                    <h2 className="text-gray-400 mb-1">Christmas</h2>
-                    <h2 className="text-gray-400 mb-1">Dracula</h2>
-                  </div>
-                  <div className="py-2">
-                    <h1 className="mb-1.5">คำสั่งเพิ่มเติม</h1>
-                    <h2 className="text-gray-400 mb-1">นำเข้าชุดสี</h2>
-                    <h2 className="text-gray-400 mb-1">ส่งออกชุดสีนี้</h2>
-                  </div>
-                </div>
+                </>
               )}
             </div>
             <button className="bg-blue-500 text-white rounded-xl px-6 py-2.5">
