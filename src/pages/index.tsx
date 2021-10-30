@@ -82,15 +82,15 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ระบบจัดตารางเรียนออนไลน์ 2/2564</title>
+        <title>ระบบจัดตารางเรียน 2/2021</title>
       </Head>
       <div className={"flex justify-center items-center px-4 w-full min-h-screen " + bgColor}>
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg space-y-9 sm:space-y-12 bg-white max-w-[500px]">
           <div>
-            <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2564</h1>
+            <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2021</h1>
             <p className="text-gray-400 sm:block hidden">ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.</p>
             <p className="text-gray-400 sm:block hidden">จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด</p>
-            <p className="sm:hidden block text-gray-400 sm:text-base text-xs">
+            <p className="sm:hidden block text-gray-400 sm:text-base text-sm">
               ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น
               ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
             </p>
