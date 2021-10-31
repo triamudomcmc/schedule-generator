@@ -14,7 +14,7 @@ const HomeIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-7 w-7 text-gray-400"
+      className="text-gray-400 h-7 w-7"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -90,16 +90,16 @@ const Theme = {
     c3: hexToRgbA("#828282"),
     c4: hexToRgbA("#7C7C7C"),
   },
-  Green: {
-    name: "Mr. Frankenstein",
-    bg: hexToRgbA("#FFFFFF"),
-    t1: hexToRgbA("#96C060"),
-    t2: hexToRgbA("#B5D889"),
-    c1: hexToRgbA("#BDDB99"),
-    c2: hexToRgbA("#B5D889"),
-    c3: hexToRgbA("#A8D174"),
-    c4: hexToRgbA("#96C060"),
-  },
+  // Green: {
+  //   name: "Mr. Frankenstein",
+  //   bg: hexToRgbA("#FFFFFF"),
+  //   t1: hexToRgbA("#96C060"),
+  //   t2: hexToRgbA("#B5D889"),
+  //   c1: hexToRgbA("#BDDB99"),
+  //   c2: hexToRgbA("#B5D889"),
+  //   c3: hexToRgbA("#A8D174"),
+  //   c4: hexToRgbA("#96C060"),
+  // },
 };
 
 const Home: NextPage = () => {
@@ -203,33 +203,33 @@ const Home: NextPage = () => {
         <title>ระบบจัดการตารางเรียน 2/2021</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="fixed w-full flex justify-center top-0">
+      <div className="fixed top-0 flex justify-center w-full">
         <motion.div
           initial={{ y: -40 }}
           animate={error ? { y: 0 } : { y: -40 }}
-          className="flex items-center space-x-1 px-4 py-1 bg-red-500 rounded-full shadow-lg text-white border border-red-600"
+          className="flex items-center px-4 py-1 space-x-1 text-white bg-red-500 border border-red-600 rounded-full shadow-lg"
         >
           <ExclamationIcon className="w-5 h-5 animate-pulse" />
           <span className="text-sm">หมายเลขห้องไม่ถูกต้อง</span>
         </motion.div>
       </div>
       <div
-        className="flex justify-center items-center px-4 w-full min-h-screen transition-colors py-4"
+        className="flex items-center justify-center w-full min-h-screen px-4 py-4 transition-colors"
         style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
       >
         <div className="font-ui py-10 px-12 rounded-xl shadow-lg bg-white max-w-[500px]">
           <div>
-            <h1 className="text-xl sm:text-2xl font-medium text-gray-800 mb-1">ระบบจัดการตารางเรียน 2/2021</h1>
-            <p className="text-sm text-gray-400 leading-5 mt-3">
+            <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">ระบบจัดการตารางเรียน 2/2021</h1>
+            <p className="mt-3 text-sm leading-5 text-gray-400">
               ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
               <br className="hidden sm:block" />
               จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
               <br />
             </p>
           </div>
-          <div className="space-y-2 mt-12">
-            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ใส่เลขห้องเรียน</h2>
-            <div className="flex sm:flex-row flex-col items-start sm:items-center">
+          <div className="mt-12 space-y-2">
+            <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ใส่เลขห้องเรียน</h2>
+            <div className="flex flex-col items-start sm:flex-row sm:items-center">
               <div className="relative w-48">
                 <input
                   onChange={(e) => {
@@ -253,20 +253,20 @@ const Home: NextPage = () => {
               </div>
               {/*
               <div className="flex items-center">
-                <h1 className="text-gray-600 font-medium text-lg mr-2">ความชัด:</h1>
+                <h1 className="mr-2 text-lg font-medium text-gray-600">ความชัด:</h1>
                 <div
                   onClick={() => {
                     setQualityPanel((prev) => !prev);
                   }}
-                  className="flex relative items-center cursor-pointer"
+                  className="relative flex items-center cursor-pointer"
                 >
-                  <PencilIcon className="w-4 h-4 text-blue-400 mb-1" />
+                  <PencilIcon className="w-4 h-4 mb-1 text-blue-400" />
                   <span className="text-blue-400">ปกติ</span>
                   {qualityPanel && (
                     <>
                       <div style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }} />
                       <div className="absolute top-7 bg-white w-[56px] rounded-lg shadow-lg">
-                        <h2 className="text-gray-800 cursor-pointer text-sm text-center rounded-t-lg pt-1 px-2 hover:bg-gray-100">
+                        <h2 className="px-2 pt-1 text-sm text-center text-gray-800 rounded-t-lg cursor-pointer hover:bg-gray-100">
                           ต่ำ
                         </h2>
                         <h2 className="text-gray-800 cursor-pointer text-sm text-center bg-blue-50 py-0.5 px-2">
@@ -275,7 +275,7 @@ const Home: NextPage = () => {
                         <h2 className="text-gray-800 cursor-pointer text-sm text-center py-0.5 px-2 hover:bg-gray-100">
                           สูง
                         </h2>
-                        <h2 className="text-gray-800 cursor-pointer text-sm text-center pb-1 px-2 hover:bg-gray-100">
+                        <h2 className="px-2 pb-1 text-sm text-center text-gray-800 cursor-pointer hover:bg-gray-100">
                           สูงมาก
                         </h2>
                       </div>
@@ -286,24 +286,24 @@ const Home: NextPage = () => {
               */}
             </div>
           </div>
-          <div className="space-y-4 sm:space-y-6 mt-12">
-            <h2 className="text-gray-600 font-medium text-xl sm:text-2xl">ปรับแต่งตารางเรียน</h2>
+          <div className="mt-12 space-y-4 sm:space-y-6">
+            <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex flex-row items-center">
-              <h1 className="text-gray-600 font-medium text-lg mr-2">ธีมสี: </h1>
+              <h1 className="mr-2 text-lg font-medium text-gray-600">ธีมสี: </h1>
               <div className="flex relative w-[240px] h-[44px]">
-                <div className="flex border border-gray-300 w-full rounded-xl">
+                <div className="flex w-full border border-gray-300 rounded-xl">
                   <div className="flex items-center justify-center w-9/12 cursor-pointer">
                     <div
                       style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
-                      className="w-5 h-5 rounded-full shadow-sm mr-2"
+                      className="w-5 h-5 mr-2 rounded-full shadow-sm"
                     />
-                    <span className="text-gray-600 mt-1">{colors.name}</span>
+                    <span className="mt-1 text-gray-600">{colors.name}</span>
                   </div>
                   <button
                     onClick={() => {
                       setPreset((prev) => !prev);
                     }}
-                    className="flex items-center justify-center w-3/12 border-l border-gray-300 cursor-pointer hover:bg-gray-100 transition-colors rounded-r-xl"
+                    className="flex items-center justify-center w-3/12 transition-colors border-l border-gray-300 cursor-pointer hover:bg-gray-100 rounded-r-xl"
                   >
                     <motion.div variants={toggle} animate={preset ? "close" : "open"}>
                       <ChevronUpIcon className="w-5 h-5 text-gray-700" />
@@ -318,22 +318,22 @@ const Home: NextPage = () => {
                         setPreset(false);
                       }}
                     />
-                    <div className="absolute bottom-12 bg-white w-full rounded-lg shadow-lg px-6 py-4 space-y-2">
+                    <div className="absolute w-full px-6 py-4 space-y-2 bg-white rounded-lg shadow-lg bottom-12">
                       <div className="py-2">
                         <h1 className="mb-2">ชุดสี</h1>
-                        <hr className="border-1 rounded-lg border-gray-300 mb-3" />
+                        <hr className="mb-3 border-gray-300 rounded-lg border-1" />
                         <div className="space-y-2.5">
                           {Object.values(Theme).map((cols) => (
                             <div
                               onClick={() => {
                                 setColors(cols);
                               }}
-                              className="flex text-gray-400 mb-1 cursor-pointer"
+                              className="flex mb-1 text-gray-400 cursor-pointer"
                               key={cols.name}
                             >
                               <div
                                 style={{ backgroundColor: rawRgbColorToCss(cols.t1) }}
-                                className="w-5 h-5 rounded-full shadow-sm mr-2"
+                                className="w-5 h-5 mr-2 rounded-full shadow-sm"
                               />
                               <h1
                                 className={classnames(
@@ -351,10 +351,10 @@ const Home: NextPage = () => {
                 )}
               </div>
             </div>
-            <div className="flex items-start sm:items-center flex-col sm:flex-row">
+            <div className="flex flex-col items-start sm:items-center sm:flex-row">
               <div className="flex items-center">
-                <h3 className="text-gray-600 font-medium text-lg mr-2">ชุดสี: </h3>
-                <div className="flex justify-center space-x-1 mr-4">
+                <h3 className="mr-2 text-lg font-medium text-gray-600">ชุดสี: </h3>
+                <div className="flex justify-center mr-4 space-x-1">
                   <ColorPicker
                     onChange={(c) => {
                       setColors((prev) => {
