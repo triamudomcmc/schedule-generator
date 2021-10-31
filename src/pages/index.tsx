@@ -182,7 +182,12 @@ const Home: NextPage = () => {
     if (res.ok) {
       const inapp = new InApp(navigator.userAgent || navigator.vendor);
       if (inapp.browser === "line") {
-        window.location.href = window.URL.createObjectURL(await res.blob())
+        const a = document.createElement("a");
+        a.href = imgUrl
+        a.download = `${room}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
       }else{
         const a = document.createElement("a");
         a.href = window.URL.createObjectURL(await res.blob());
