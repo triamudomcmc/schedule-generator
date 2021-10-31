@@ -6,7 +6,7 @@ import path from "path";
 import { rawRgbColorToCss } from "@utils/hexToRgb";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {isDarkOrLightHEX, isDarkOrLightRGBAString} from "@utils/isDarkOrLight";
+import {isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD} from "@utils/isDarkOrLight";
 
 const defaultColors = {
   bg: "#FFFFFF",
@@ -106,8 +106,8 @@ const Room = ({ scheduleData }: RoomProps) => {
             return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
                 <div className="text">
-                  <strong className="subject">{name}</strong>
-                  <p className="teacher">{teacher?.replace(/\+/g, " ")}</p>
+                  <strong className="subject" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#fff" }}>{name}</strong>
+                  <p className="teacher" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#a6a8ab" : "#e8e8e8" }}>{teacher?.replace(/\+/g, " ")}</p>
                 </div>
               </div>
             );
@@ -174,7 +174,7 @@ const Room = ({ scheduleData }: RoomProps) => {
             <div className="days">
               {Days.map((day) => (
                 <div className="day" key={day.name}>
-                  <div className="button" style={{ backgroundColor: day.color }}>
+                  <div className="button" style={{ backgroundColor: day.color,  color: isDarkOrLightRGBAStringD(day.color) === "light" ? "#444" : "#fff"  }}>
                     {day.name}
                   </div>
                   <div className="line" style={{ backgroundColor: day.color }}></div>

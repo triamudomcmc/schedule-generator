@@ -90,16 +90,16 @@ const Theme = {
     c3: hexToRgbA("#828282"),
     c4: hexToRgbA("#7C7C7C"),
   },
-  // Green: {
-  //   name: "Mr. Frankenstein",
-  //   bg: hexToRgbA("#FFFFFF"),
-  //   t1: hexToRgbA("#96C060"),
-  //   t2: hexToRgbA("#B5D889"),
-  //   c1: hexToRgbA("#BDDB99"),
-  //   c2: hexToRgbA("#B5D889"),
-  //   c3: hexToRgbA("#A8D174"),
-  //   c4: hexToRgbA("#96C060"),
-  // },
+  Green: {
+    name: "Mr. Frankenstein",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#96C060"),
+    t2: hexToRgbA("#B5D889"),
+    c1: hexToRgbA("#BDDB99"),
+    c2: hexToRgbA("#B5D889"),
+    c3: hexToRgbA("#A8D174"),
+    c4: hexToRgbA("#96C060"),
+  },
 };
 
 const Home: NextPage = () => {
@@ -165,7 +165,8 @@ const Home: NextPage = () => {
       c4: colors.c4,
     };
 
-    const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(requestColors)}`;
+    let r = (Math.random() + 1).toString(36).substring(10);
+    const imgUrl = `/api/hello?room=${room}&colorScheme=${JSON.stringify(requestColors)}&r=${r}`;
 
     setWaiting(true);
 

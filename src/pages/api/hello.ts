@@ -7,12 +7,12 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const {
-    query: { room, colorScheme }
+    query: { room, colorScheme, r }
   } = req
 
 
   const file = await screenshot(
-    `http://${req.headers.host}/renderer/${room}?colorScheme=${colorScheme}`
+    `http://${req.headers.host}/renderer/${room}?colorScheme=${colorScheme}&r=${r}`
   )
 
   res.setHeader('Content-Type', `image/jpeg`)
