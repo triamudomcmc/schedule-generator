@@ -42,6 +42,19 @@ export default class Document extends NextDocument {
             content="ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด"
           />
           <meta property="twitter:image" content="/preview.jpg" />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFN0JZ8EVW"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CFN0JZ8EVW', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
         </Head>
         <body>
           <Main />
