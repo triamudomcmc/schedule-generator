@@ -9,6 +9,7 @@ import { Preview } from "@components";
 import { CheckIcon, ExclamationIcon, XIcon } from "@heroicons/react/solid";
 import { motion } from "framer-motion";
 import { Ellipsis } from "@components/Loader/Ellipsis";
+const InApp = require('detect-inapp')
 
 const HomeIcon = () => {
   return (
@@ -179,13 +180,19 @@ const Home: NextPage = () => {
     });
 
     if (res.ok) {
-      const a = document.createElement("a");
-      a.href = window.URL.createObjectURL(await res.blob());
-      a.download = `${room}.jpg`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      const inapp = new InApp(navigator.userAgent || navigator.vendor);
+      if (inapp.browser === "line") {
+        window.open(window.URL.createObjectURL(await res.blob()))
+      }else{
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(await res.blob());
+        a.download = `${room}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
     }
+
     setWaiting(false);
   };
 
