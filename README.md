@@ -1,4 +1,4 @@
-# Next.js App
+# Schedule Generator
 
 This is project was bootstrapped with [betich's](https://github.com/betich/next-boilerplate) Next.js boilerplate template.
 
