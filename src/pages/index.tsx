@@ -181,7 +181,7 @@ const Home: NextPage = () => {
 
     if (res.ok) {
       const inapp = new InApp(navigator.userAgent || navigator.vendor);
-      if (inapp.browser === "line") {
+      if (inapp.browser === "line" || inapp.browser === "messenger" || inapp.browser === "facebook") {
         const a = document.createElement("a");
         a.href = imgUrl
         a.download = `${room}.jpg`;
