@@ -182,7 +182,7 @@ const Home: NextPage = () => {
     if (res.ok) {
       const inapp = new InApp(navigator.userAgent || navigator.vendor);
       if (inapp.browser === "line") {
-        window.open(window.URL.createObjectURL(await res.blob()))
+        window.location.href = window.URL.createObjectURL(await res.blob())
       }else{
         const a = document.createElement("a");
         a.href = window.URL.createObjectURL(await res.blob());
