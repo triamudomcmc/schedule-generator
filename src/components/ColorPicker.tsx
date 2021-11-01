@@ -55,6 +55,7 @@ export const ColorPicker = ({
           style={{
             position: "absolute",
             zIndex: 2,
+            touchAction: "none"
           }}
         >
           <div
@@ -64,6 +65,7 @@ export const ColorPicker = ({
               right: "0px",
               bottom: "0px",
               left: "0px",
+              touchAction: "none"
             }}
             onClick={handleClose}
           />
