@@ -3,19 +3,20 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
-import { rawRgbColorToCss } from "@utils/hexToRgb";
+import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD} from "@utils/isDarkOrLight";
+import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
 
 const defaultColors = {
-  bg: "#FFFFFF",
-  t1: "#599BA4",
-  t2: "#DEA54B",
-  c1: "#F4CD00",
-  c2: "#FF92A6",
-  c3: "#ADE374",
-  c4: "#FF9417",
+  bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
+  t1: rawRgbColorToCss(hexToRgbA("#D17474")),
+  t2: rawRgbColorToCss(hexToRgbA("#E28B8B")),
+  c1: rawRgbColorToCss(hexToRgbA("#EBB8B8")),
+  c2: rawRgbColorToCss(hexToRgbA("#E49E9E")),
+  c3: rawRgbColorToCss(hexToRgbA("#E08484")),
+  c4: rawRgbColorToCss(hexToRgbA("#D17474")),
+  c5: rawRgbColorToCss(hexToRgbA("#BA5757")),
 };
 
 interface Data {
@@ -106,8 +107,18 @@ const Room = ({ scheduleData }: RoomProps) => {
             return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
                 <div className="text">
-                  <strong className="subject" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#fff" }}>{name}</strong>
-                  <p className="teacher" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#a6a8ab" : "#e8e8e8" }}>{teacher?.replace(/\+/g, " ")}</p>
+                  <strong
+                    className="subject"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#fff" }}
+                  >
+                    {name}
+                  </strong>
+                  <p
+                    className="teacher"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#a6a8ab" : "#e8e8e8" }}
+                  >
+                    {teacher?.replace(/\+/g, " ")}
+                  </p>
                 </div>
               </div>
             );
@@ -174,7 +185,13 @@ const Room = ({ scheduleData }: RoomProps) => {
             <div className="days">
               {Days.map((day) => (
                 <div className="day" key={day.name}>
-                  <div className="button" style={{ backgroundColor: day.color,  color: isDarkOrLightRGBAStringD(day.color) === "light" ? "#444" : "#fff"  }}>
+                  <div
+                    className="button"
+                    style={{
+                      backgroundColor: day.color,
+                      color: isDarkOrLightRGBAStringD(day.color) === "light" ? "#444" : "#fff",
+                    }}
+                  >
                     {day.name}
                   </div>
                   <div className="line" style={{ backgroundColor: day.color }}></div>
@@ -185,7 +202,10 @@ const Room = ({ scheduleData }: RoomProps) => {
               <div className="mon-to-thurs">
                 {/* 1 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     08.00-08.50
                   </div>
                   {genSchedule(1)}
@@ -204,7 +224,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 2 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     09.00-09.50
                   </div>
                   {genSchedule(2)}
@@ -223,7 +246,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 3 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     10.00-10.50
                   </div>
                   {genSchedule(3)}
@@ -242,7 +268,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 4 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     11.00-11.50
                   </div>
                   {genSchedule(4)}
@@ -261,7 +290,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 5 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     13.00-13.50
                   </div>
                   {genSchedule(5)}
@@ -280,7 +312,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* 6 */}
                 <div className="col">
-                  <div className="time" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}>
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
                     14.00-14.50
                   </div>
                   {genSchedule(6)}
