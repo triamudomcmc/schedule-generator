@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
 import Image from "next/image";
+import classNames from "classnames";
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -186,7 +187,7 @@ const Room = ({ scheduleData }: RoomProps) => {
           <div className="main">
             <div className="days">
               {Days.map((day) => (
-                <div className="day" key={day.name}>
+                <div className={classNames("day", day.name === "ศุกร์" && "friday")} key={day.name}>
                   <div
                     className="button"
                     style={{
@@ -225,13 +226,9 @@ const Room = ({ scheduleData }: RoomProps) => {
                 {/* break10 */}
                 <div className="col">
                   <div style={{ backgroundColor: color.bg }} className="break10-button">
-                    <p className="text">
-                      พัก
-                      <br />
-                      10
-                      <br />
-                      นาที
-                    </p>
+                    <p className="text">พัก</p>
+                    <p className="text">10</p>
+                    <p className="text">นาที</p>
                   </div>
                 </div>
                 {/* 3 */}
@@ -256,14 +253,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* lunchbreak */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="lunch-button">
-                    <p className="text">
-                      พัก
-                      <br />
-                      กลาง
-                      <br />
-                      วัน
-                    </p>
+                  <div style={{ backgroundColor: color.bg }} className="lunch-button no-afternoon">
+                    <p className="text">พัก</p>
+                    <p className="text">กลาง</p>
+                    <p className="text">วัน</p>
                   </div>
                 </div>
                 {/* 5 */}
@@ -288,14 +281,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="break10-button">
-                    <p className="text">
-                      พัก
-                      <br />
-                      10
-                      <br />
-                      นาที
-                    </p>
+                  <div style={{ backgroundColor: color.bg }} className="break10-button no-afternoon">
+                    <p className="text">พัก</p>
+                    <p className="text">10</p>
+                    <p className="text">นาที</p>
                   </div>
                 </div>
                 {/* 7 */}

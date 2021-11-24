@@ -18,7 +18,7 @@ body {
   */
   background-color: #fff;
   position: relative;
-  border: 1px solid gray;
+  // border: 1px solid gray;
 }
 
 .logo {
@@ -33,7 +33,7 @@ body {
 .wrapper > .header {
   display: flex;
   width: $width - 302px;
-  padding-top: 320px;
+  padding-top: 240px;
   margin: 0 auto 0 auto;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +90,6 @@ body {
 }
 
 .wrapper > .main {
-  width: $width - 302px;
   margin: 125px auto 0 auto;
   position: relative;
 }
@@ -99,13 +98,18 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: 90%;
+  margin-left: 30px;
 }
 
 .wrapper > .main > .days > .day {
   width: 100%;
   position: relative;
   margin-bottom: 116px;
+
+  &.friday {
+    width: 39%;
+  }
 
   > .button {
     position: relative;
@@ -133,7 +137,7 @@ body {
 .schedules {
   position: absolute;
   top: -16px;
-  left: 292px;
+  left: 300px;
   z-index: 3;
 }
 
@@ -188,15 +192,19 @@ body {
     height: 100%;
     background-color: #fff;
     margin-bottom: 0;
+    padding-top: 250px;
+
+    &.no-afternoon {
+      height: 79%;
+    }
 
     > .text {
       text-align: center;
       color: #a6a8ab;
       font-size: 24px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      width: 100%;
+      margin-top: 48px;
+      margin-bottom: 64px;
     }
   }
 
@@ -209,15 +217,19 @@ body {
     height: 100%;
     background-color: #fff;
     margin-bottom: 0;
+    padding-top: 245px;
+
+    &.no-afternoon {
+      height: 79%;
+    }
 
     > .text {
       text-align: center;
       color: #a6a8ab;
-      font-size: 32px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      font-size: 24px;
+      width: 100%;
+      margin-top: 48px;
+      margin-bottom: 64px;
     }
   }
 }
