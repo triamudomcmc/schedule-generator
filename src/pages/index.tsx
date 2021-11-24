@@ -5,30 +5,11 @@ import React, { useEffect, useState } from "react";
 import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
 import classnames from "classnames";
 import Head from "next/head";
-import { Preview } from "@components";
+import { _Preview as Preview } from "@components";
 import { CheckIcon, ExclamationIcon, XIcon } from "@heroicons/react/solid";
 import { motion } from "framer-motion";
 import { Ellipsis } from "@components/Loader/Ellipsis";
-const InApp = require('detect-inapp')
-
-const HomeIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="text-gray-400 h-7 w-7"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.4}
-        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-      />
-    </svg>
-  );
-};
+const InApp = require("detect-inapp");
 
 const Theme = {
   Pink: {
@@ -40,6 +21,7 @@ const Theme = {
     c2: hexToRgbA("#EAA4C6"),
     c3: hexToRgbA("#E387B3"),
     c4: hexToRgbA("#DD6EA5"),
+    c5: hexToRgbA("#DD6EA5"),
   },
   Purple: {
     name: "The Witches’ Craft",
@@ -50,6 +32,7 @@ const Theme = {
     c2: hexToRgbA("#A787EC"),
     c3: hexToRgbA("#916CDF"),
     c4: hexToRgbA("#8860DC"),
+    c5: hexToRgbA("#8860DC"),
   },
   Red: {
     name: "Bloody Mary",
@@ -60,6 +43,7 @@ const Theme = {
     c2: hexToRgbA("#E49E9E"),
     c3: hexToRgbA("#E08484"),
     c4: hexToRgbA("#D17474"),
+    c5: hexToRgbA("#D17474"),
   },
   Blue: {
     name: "Fairy Godmother",
@@ -70,6 +54,7 @@ const Theme = {
     c2: hexToRgbA("#88CBF1"),
     c3: hexToRgbA("#65BDEE"),
     c4: hexToRgbA("#53ABDC"),
+    c5: hexToRgbA("#53ABDC"),
   },
   Orange: {
     name: "Jack O’Lantern",
@@ -80,6 +65,7 @@ const Theme = {
     c2: hexToRgbA("#F1AB6A"),
     c3: hexToRgbA("#EA984D"),
     c4: hexToRgbA("#DD8E44"),
+    c5: hexToRgbA("#DD8E44"),
   },
   Black: {
     name: "Dracula Untold",
@@ -90,6 +76,7 @@ const Theme = {
     c2: hexToRgbA("#989898"),
     c3: hexToRgbA("#828282"),
     c4: hexToRgbA("#7C7C7C"),
+    c5: hexToRgbA("#7C7C7C"),
   },
   Green: {
     name: "Mr. Frankenstein",
@@ -100,13 +87,14 @@ const Theme = {
     c2: hexToRgbA("#B5D889"),
     c3: hexToRgbA("#A8D174"),
     c4: hexToRgbA("#96C060"),
+    c5: hexToRgbA("#96C060"),
   },
 };
 
 const Home: NextPage = () => {
-  const getRandom = (arr: Array<string>) => {
-    return arr[Math.floor(Math.random() * arr.length)];
-  };
+  // const getRandom = (arr: Array<string>) => {
+  //   return arr[Math.floor(Math.random() * arr.length)];
+  // };
 
   const [waiting, setWaiting] = useState(false);
   const [error, setError] = useState(false);
@@ -135,7 +123,6 @@ const Home: NextPage = () => {
   const [colors, setColors] = useState(Theme.Pink);
 
   // const qualities = ["low", "standard", "high", "best"];
-
   // const [quality, setQuality] = useState(0);
 
   const toggleError = () => {
@@ -164,6 +151,7 @@ const Home: NextPage = () => {
       c2: colors.c2,
       c3: colors.c3,
       c4: colors.c4,
+      c5: colors.c5,
     };
 
     let r = (Math.random() + 1).toString(36).substring(10);
@@ -183,12 +171,12 @@ const Home: NextPage = () => {
       const inapp = new InApp(navigator.userAgent || navigator.vendor);
       if (inapp.browser === "line" || inapp.browser === "messenger" || inapp.browser === "facebook") {
         const a = document.createElement("a");
-        a.href = imgUrl
+        a.href = imgUrl;
         a.download = `${room}.jpg`;
         document.body.appendChild(a);
         a.click();
         a.remove();
-      }else{
+      } else {
         const a = document.createElement("a");
         a.href = window.URL.createObjectURL(await res.blob());
         a.download = `${room}.jpg`;
@@ -301,8 +289,8 @@ const Home: NextPage = () => {
           </div>
           <div className="mt-12 space-y-4 sm:space-y-6">
             <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ปรับแต่งตารางเรียน</h2>
-            <div className="flex flex-row items-center">
-              <h1 className="mr-2 text-lg font-medium text-gray-600">ธีมสี: </h1>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-lg font-medium text-gray-600 mb-2">ธีมสี: </h1>
               <div className="flex relative w-[240px] h-[44px]">
                 <div className="flex w-full border border-gray-300 rounded-xl">
                   <div className="flex items-center justify-center w-9/12 cursor-pointer">
@@ -365,68 +353,78 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="flex flex-col items-start sm:items-center sm:flex-row">
-              <div className="flex items-center">
-                <h3 className="mr-2 text-lg font-medium text-gray-600">ชุดสี: </h3>
-                <div className="flex justify-center mr-4 space-x-1">
-                  <ColorPicker
-                    onChange={(c) => {
-                      setColors((prev) => {
-                        return { ...prev, bg: c };
-                      });
-                    }}
-                    defaultColor={colors.bg}
-                  />
-                  <ColorPicker
-                    onChange={(c) => {
-                      setColors((prev) => {
-                        return { ...prev, t1: c };
-                      });
-                    }}
-                    defaultColor={colors.t1}
-                  />
-                  <ColorPicker
-                    onChange={(c) => {
-                      setColors((prev) => {
-                        return { ...prev, t2: c };
-                      });
-                    }}
-                    defaultColor={colors.t2}
-                  />
+              <div className="flex flex-col justify-center">
+                <h3 className="text-lg font-medium text-gray-600 mb-2">ชุดสี: </h3>
+                <div className="flex space-x-2">
+                  <div className="flex items-center space-x-1">
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, bg: c };
+                        });
+                      }}
+                      defaultColor={colors.bg}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, t1: c };
+                        });
+                      }}
+                      defaultColor={colors.t1}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, t2: c };
+                        });
+                      }}
+                      defaultColor={colors.t2}
+                    />
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, c1: c };
+                        });
+                      }}
+                      defaultColor={colors.c1}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, c2: c };
+                        });
+                      }}
+                      defaultColor={colors.c2}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, c3: c };
+                        });
+                      }}
+                      defaultColor={colors.c3}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, c4: c };
+                        });
+                      }}
+                      defaultColor={colors.c4}
+                    />
+                    <ColorPicker
+                      onChange={(c) => {
+                        setColors((prev) => {
+                          return { ...prev, c5: c };
+                        });
+                      }}
+                      defaultColor={colors.c5}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-center space-x-1 ml-[46px] mt-2 sm:ml-0 sm:mt-0">
-                <ColorPicker
-                  onChange={(c) => {
-                    setColors((prev) => {
-                      return { ...prev, c1: c };
-                    });
-                  }}
-                  defaultColor={colors.c1}
-                />
-                <ColorPicker
-                  onChange={(c) => {
-                    setColors((prev) => {
-                      return { ...prev, c2: c };
-                    });
-                  }}
-                  defaultColor={colors.c2}
-                />
-                <ColorPicker
-                  onChange={(c) => {
-                    setColors((prev) => {
-                      return { ...prev, c3: c };
-                    });
-                  }}
-                  defaultColor={colors.c3}
-                />
-                <ColorPicker
-                  onChange={(c) => {
-                    setColors((prev) => {
-                      return { ...prev, c4: c };
-                    });
-                  }}
-                  defaultColor={colors.c4}
-                />
               </div>
             </div>
           </div>

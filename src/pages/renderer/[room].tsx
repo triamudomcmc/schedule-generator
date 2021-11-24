@@ -153,9 +153,9 @@ const Room = ({ scheduleData }: RoomProps) => {
 
   return (
     <>
-      <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
+      {/* <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
         <Image src="/ref.png" width={2388} height={1668} />
-      </div>
+      </div> */}
       <div style={{ backgroundColor: color.bg }}>
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           <div className="header">
