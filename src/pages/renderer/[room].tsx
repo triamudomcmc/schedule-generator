@@ -7,6 +7,7 @@ import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
+import Image from "next/image";
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -94,7 +95,7 @@ const Room = ({ scheduleData }: RoomProps) => {
   const genSchedule = (period: number) => {
     return (
       <>
-        {Array(4)
+        {Array(period <= 3 ? 5 : 4)
           .fill("")
           .map((_, i) => {
             const name = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
@@ -144,16 +145,17 @@ const Room = ({ scheduleData }: RoomProps) => {
       name: "พฤหัสฯ",
       color: color.c4,
     },
-    /*
     {
       name: "ศุกร์",
-      color: "#45D2F1",
+      color: color.c5,
     },
-    */
   ];
 
   return (
     <>
+      <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
+        <Image src="/ref.png" width={2388} height={1668} />
+      </div>
       <div style={{ backgroundColor: color.bg }}>
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           <div className="header">
