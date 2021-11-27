@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
 import Image from "next/image";
 import classNames from "classnames";
+import { Mistletoe, Ordaments } from "@components/Background";
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -69,6 +70,8 @@ interface RoomProps {
   query: any;
 }
 
+type BGType = "none" | "mistletoe" | "ordaments";
+
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter();
 
@@ -76,6 +79,8 @@ const Room = ({ scheduleData }: RoomProps) => {
     if (!router.query.colorScheme) {
       return;
     }
+
+    if (router.query?.bg) setBackground(router.query.bg as BGType);
 
     const colorScheme: string = router.query.colorScheme?.toString();
     const parsed = JSON.parse(colorScheme);
@@ -92,6 +97,7 @@ const Room = ({ scheduleData }: RoomProps) => {
   }, [router.query.colorScheme]);
 
   const [color, setColor] = useState(defaultColors);
+  const [background, setBackground] = useState<BGType>("none");
 
   const genSchedule = (period: number) => {
     return (
@@ -159,6 +165,8 @@ const Room = ({ scheduleData }: RoomProps) => {
       </div> */}
       <div style={{ backgroundColor: color.bg }}>
         <div style={{ backgroundColor: color.bg }} className="wrapper">
+          {background === "mistletoe" && <Mistletoe />}
+          {background === "ordaments" && <Ordaments color={color.c1} />}
           <div className="header">
             <div className="left">
               {/*<div className="bar"></div>*/}
@@ -172,7 +180,7 @@ const Room = ({ scheduleData }: RoomProps) => {
               </div>
             </div>
             <div className="right">
-              <h2 className="room" style={{ color: color.t1 }}>
+              <h2 className="room" style={{ color: color.t2 }}>
                 ห้อง {scheduleData.room} | {scheduleData.branch}
               </h2>
               <div className="teacher" style={{ color: color.t2 }}>

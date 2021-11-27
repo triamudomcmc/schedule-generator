@@ -1,8 +1,8 @@
-import { NextPage } from "next";
+import type { FC } from "react";
 import { rawRgbColorToCss } from "@utils/hexToRgb";
 import { ColorType } from "@components/ColorPicker";
 import { useEffect, useState } from "react";
-import {isDarkOrLightRGBA, isDarkOrLightRGBAStringD} from "@utils/isDarkOrLight";
+import { isDarkOrLightRGBA, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
 
 interface Scheme {
   bg: ColorType;
@@ -28,7 +28,7 @@ const defaultColors = {
   c4: "#FF9417",
 };
 
-const Preview: NextPage<PreviewProps> = ({ rawTheme }) => {
+const Preview: FC<PreviewProps> = ({ rawTheme }) => {
   const [theme, setTheme] = useState(defaultColors);
 
   useEffect(() => {
@@ -123,7 +123,7 @@ const Preview: NextPage<PreviewProps> = ({ rawTheme }) => {
           />
         </g>
         <g filter="url(#filter18_d_268:51429)">
-          <rect x="408" y="876" width="199" height="152" rx="19.8454" fill={theme.bg}/>
+          <rect x="408" y="876" width="199" height="152" rx="19.8454" fill={theme.bg} />
         </g>
         <g filter="url(#filter19_d_268:51429)">
           <rect x="408" y="1063" width="199" height="152" rx="19.8454" fill={theme.bg} />
