@@ -138,7 +138,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const cachedRoom = window.localStorage.getItem("room");
     setRoom(cachedRoom ?? "");
-  });
+  }, []);
 
   // const qualities = ["low", "standard", "high", "best"];
   // const [quality, setQuality] = useState(0);
