@@ -55,9 +55,9 @@ const Generate: NextPage = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     for (const r of rooms) {
-      download(r);
+      await download(r);
     }
   }, []);
 
