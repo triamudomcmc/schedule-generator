@@ -2,7 +2,8 @@ import type { NextPage } from "next";
 import { ChevronUpIcon } from "@heroicons/react/outline";
 import { ColorPicker } from "@components/ColorPicker";
 import React, { useEffect, useState } from "react";
-import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
+import { hexToRgbA, rawRgbColorToCss, RgbAToHex } from "@utils/hexToRgb";
+import { isDarkOrLightRGBA } from "@utils/isDarkOrLight";
 import classnames from "classnames";
 import Head from "next/head";
 import { _Preview as Preview } from "@components";
@@ -103,6 +104,8 @@ const Theme = {
   },
 };
 
+type BGType = "none" | "mistletoe" | "ordaments";
+
 const Home: NextPage = () => {
   // const getRandom = (arr: Array<string>) => {
   //   return arr[Math.floor(Math.random() * arr.length)];
@@ -112,7 +115,8 @@ const Home: NextPage = () => {
   const [error, setError] = useState(false);
   const [recentError, setRecentError] = useState(setTimeout(() => {}));
 
-  const [background, setBackground] = useState<"none" | "mistletoe" | "ordaments">("mistletoe");
+  const [background, setBackground] = useState<BGType>("mistletoe");
+
   const [invalidRoom, setInvalidRoom] = useState(false);
   const [preset, setPreset] = useState(false);
   // const [qualityPanel, setQualityPanel] = useState(false);
@@ -217,6 +221,11 @@ const Home: NextPage = () => {
     close: {
       rotate: 180,
     },
+  };
+
+  const genBGButton = (inputBG: BGType) => {
+    if (inputBG === background) return `text-${isDarkOrLightRGBA(colors.t1) === "light" ? "gray-900" : "white"}`;
+    else return "text-gray-900";
   };
 
   return (
@@ -453,37 +462,31 @@ const Home: NextPage = () => {
               <div className="flex space-x-1">
                 <button
                   onClick={() => setBackground("none")}
-                  className={classNames(
-                    background === "none" ? "bg-gray-900 text-white" : "bg-white text-gray-900",
-                    "px-4 py-2 border border-gray-300 rounded-xl"
-                  )}
+                  className={classNames(genBGButton("none"), "px-4 py-2 border border-gray-300 rounded-xl")}
+                  style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
                 >
                   ไม่มี
                 </button>
                 <button
                   onClick={() => setBackground("mistletoe")}
-                  className={classNames(
-                    background === "mistletoe" ? "bg-gray-900 text-white" : "bg-white text-gray-900",
-                    "px-4 py-2 border border-gray-300 rounded-xl"
-                  )}
+                  className={classNames(genBGButton("mistletoe"), "px-4 py-2 border border-gray-300 rounded-xl")}
+                  style={{ backgroundColor: background === "mistletoe" ? rawRgbColorToCss(colors.t1) : "#fff" }}
                 >
                   Mistletoe
                 </button>
                 <button
                   onClick={() => setBackground("ordaments")}
-                  className={classNames(
-                    background === "ordaments" ? "bg-gray-900 text-white" : "bg-white text-gray-900",
-                    "px-4 py-2 border border-gray-300 rounded-xl"
-                  )}
+                  className={classNames(genBGButton("ordaments"), "px-4 py-2 border border-gray-300 rounded-xl")}
+                  style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
                 >
                   Ordaments
                 </button>
               </div>
             </div>
           </div>
-          <div className="mt-6 sm:mt-10">
-            <Preview rawTheme={colors} />
-          </div>
+          <>
+            <Preview rawTheme={colors} background={background} />
+          </>
           <div className="flex justify-center mt-8 sm:mt-10">
             <motion.button
               whileHover={{ scale: !waiting ? 1.05 : 1 }}
