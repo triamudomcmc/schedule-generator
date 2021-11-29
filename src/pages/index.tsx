@@ -3,7 +3,7 @@ import { ChevronUpIcon } from "@heroicons/react/outline";
 import { ColorPicker } from "@components/ColorPicker";
 import React, { useEffect, useState } from "react";
 import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
-import { isDarkOrLightRGBA } from "@utils/isDarkOrLight";
+import { isDarkOrLightRGBA, isDarkOrLightRGBACustom } from "@utils/isDarkOrLight";
 import classnames from "classnames";
 import Head from "next/head";
 import { _Preview as Preview } from "@components";
@@ -224,7 +224,8 @@ const Home: NextPage = () => {
   };
 
   const genBGButton = (inputBG: BGType) => {
-    if (inputBG === background) return `text-${isDarkOrLightRGBA(colors.t1) === "light" ? "gray-900" : "white"}`;
+    if (inputBG === background)
+      return `text-${isDarkOrLightRGBACustom(colors.t1, 256) === "light" ? "gray-900" : "white"}`;
     else return "text-gray-900";
   };
 
@@ -386,7 +387,7 @@ const Home: NextPage = () => {
               <div className="flex flex-col justify-center">
                 <h3 className="text-lg font-medium text-gray-600 mb-2">ชุดสี: </h3>
                 <div className="flex space-x-2">
-                  <div className="flex items-center space-x-1">
+                  <div className="flex items-center space-x-1 mr-2">
                     <ColorPicker
                       onChange={(c) => {
                         setColors((prev) => {

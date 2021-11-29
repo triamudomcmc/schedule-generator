@@ -54,7 +54,7 @@ export const ColorPicker = ({
         <div
           style={{
             position: "absolute",
-            zIndex: 2,
+            zIndex: 99,
             touchAction: "none",
           }}
         >

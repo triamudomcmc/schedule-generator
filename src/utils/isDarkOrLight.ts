@@ -60,3 +60,12 @@ export const isDarkOrLightRGBA = (color: ColorType): "dark" | "light" => {
     return "dark"; // dark
   }
 };
+
+export const isDarkOrLightRGBACustom = (color: ColorType, threshold: number = 196): "dark" | "light" => {
+  const { r, g, b } = color;
+  if (0.299 * parseInt(r, 16) + 0.587 * parseInt(g, 16) + 0.114 * parseInt(b, 16) > threshold) {
+    return "light"; // light
+  } else {
+    return "dark"; // dark
+  }
+};
