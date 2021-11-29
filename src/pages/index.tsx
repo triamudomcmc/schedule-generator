@@ -480,7 +480,7 @@ const Home: NextPage = () => {
                   className={classNames(genBGButton("ordaments"), "px-4 py-2 border border-gray-300 rounded-xl")}
                   style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
                 >
-                  Ordaments
+                  Christmas Town
                 </button>
               </div>
             </div>
