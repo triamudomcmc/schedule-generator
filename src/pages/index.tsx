@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { ChevronUpIcon } from "@heroicons/react/outline";
 import { ColorPicker } from "@components/ColorPicker";
 import React, { useEffect, useState } from "react";
-import { hexToRgbA, rawRgbColorToCss, RgbAToHex } from "@utils/hexToRgb";
+import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
 import { isDarkOrLightRGBA } from "@utils/isDarkOrLight";
 import classnames from "classnames";
 import Head from "next/head";
