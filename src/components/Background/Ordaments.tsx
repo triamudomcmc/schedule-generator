@@ -19,7 +19,7 @@ export const OrdamentsPreview: FC<{ color: string }> = ({ color }) => {
 
 const ChristmasDeco: FC<{ color: string }> = ({ color }) => {
   return (
-    <div className="w-[2388px] h-[1668px] absolute top-0 left-0 z-[99]">
+    <div className="w-[2388px] h-[1668px] absolute top-[50px] left-0 z-[99]">
       <div className="absolute left-[126px] top-[-8px]">
         <TopLeftDeco color={color} />
       </div>
