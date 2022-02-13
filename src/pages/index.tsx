@@ -193,6 +193,13 @@ const Home: NextPage = () => {
     });
 
     if (res.ok) {
+      // @ts-ignore
+      window.gtag("event", "generate_schedule", {
+        event_category: "generate_schedule",
+        event_label: `$room_{room}`,
+        room: room,
+        colors: colors,
+      });
       const inapp = new InApp(navigator.userAgent || navigator.vendor);
       if (inapp.browser === "line" || inapp.browser === "messenger" || inapp.browser === "facebook") {
         const a = document.createElement("a");
