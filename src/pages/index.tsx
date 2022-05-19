@@ -233,7 +233,7 @@ const Home: NextPage = () => {
 
   const genBGButton = (inputBG: BGType) => {
     if (inputBG === background)
-      return `text-${isDarkOrLightRGBACustom(colors.t1, 256) === "light" ? "gray-900" : "white"}`
+      return `text-${isDarkOrLightRGBACustom(colors.t1, 300) === "light" ? "gray-900" : "white"}`
     else return "text-gray-900"
   }
 
@@ -304,6 +304,7 @@ const Home: NextPage = () => {
             <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex flex-col justify-center">
               <h3 className="mb-2 text-lg font-medium text-gray-600">ธีมสี: </h3>
+
               <div className="relative flex h-[44px] w-[240px]">
                 <div className="flex w-full rounded-xl border border-gray-300">
                   <div className="flex w-9/12 cursor-pointer items-center justify-center">
@@ -324,6 +325,7 @@ const Home: NextPage = () => {
                     </motion.div>
                   </button>
                 </div>
+
                 {preset && (
                   <>
                     <div
@@ -334,7 +336,7 @@ const Home: NextPage = () => {
                     />
                     <div className="absolute bottom-12 w-full space-y-2 rounded-lg bg-white px-6 py-4 shadow-lg">
                       <div className="py-2">
-                        <h1 className="mb-2">ชุดสี</h1>
+                        <h3 className="mb-2">ชุดสี</h3>
                         <hr className="border-1 mb-3 rounded-lg border-gray-300" />
                         <div className="space-y-2.5">
                           {Object.values(Theme).map((cols) => (
@@ -349,13 +351,13 @@ const Home: NextPage = () => {
                                 style={{ backgroundColor: rawRgbColorToCss(cols.t1) }}
                                 className="mr-2 h-5 w-5 rounded-full shadow-sm"
                               />
-                              <h1
+                              <span
                                 className={classnames(
                                   cols.name !== colors.name ? "transition-colors hover:text-gray-500" : "text-gray-800"
                                 )}
                               >
                                 {cols.name}
-                              </h1>
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -443,8 +445,10 @@ const Home: NextPage = () => {
                 </div>
               </div>
             </section>
-            <div className="flex flex-col justify-center space-y-2">
-              <h1 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง: </h1>
+
+            {/* background */}
+            <section className="flex flex-col justify-center space-y-2">
+              <h3 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง: </h3>
               <div className="flex space-x-1">
                 <button
                   onClick={() => setBackground("none")}
@@ -468,7 +472,7 @@ const Home: NextPage = () => {
                   Christmas Town
                 </button>
               </div>
-            </div>
+            </section>
           </section>
 
           {/* preview */}
@@ -483,9 +487,12 @@ const Home: NextPage = () => {
               onClick={download}
               className={classnames(
                 "w-full rounded-xl text-white transition-colors sm:w-max",
-                waiting ? "px-[60px] pb-[10px] pt-[2px]" : "py-2.5 px-6"
+                waiting ? "cursor-not-allowed px-[60px] pb-[10px] pt-[2px]" : "py-2.5 px-6"
               )}
-              style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
+              style={{
+                backgroundColor: rawRgbColorToCss(colors.t1),
+                color: isDarkOrLightRGBACustom(colors.t1, 300) === "light" ? "#111827" : "#fff",
+              }}
             >
               {!waiting ? <span>สร้างตารางเรียน</span> : <Ellipsis className="w-10" />}
             </motion.button>
