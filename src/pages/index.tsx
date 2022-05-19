@@ -11,6 +11,7 @@ import { CheckIcon, ExclamationIcon, XIcon } from "@heroicons/react/solid"
 import { motion } from "framer-motion"
 import { Ellipsis } from "@components/Loader/Ellipsis"
 import classNames from "classnames"
+import { DescribeRoute } from "@components/Meta/DescribeRoute"
 const InApp = require("detect-inapp")
 
 const Theme = {
@@ -237,12 +238,12 @@ const Home: NextPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>ระบบจัดการตารางเรียน ภาคเรียนที่ 1 ปีการศึกษา 2565</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <div className="fixed top-0 flex w-full justify-center">
+    <DescribeRoute
+      title="TUCMC Schedule Generator"
+      description="ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช. จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด"
+      imgURL="/preview.png"
+    >
+      <div className="fixed top-0 z-50 flex w-full justify-center">
         <motion.div
           initial={{ y: -40 }}
           animate={error ? { y: 0 } : { y: -40 }}
@@ -252,21 +253,26 @@ const Home: NextPage = () => {
           <span className="text-sm">หมายเลขห้องไม่ถูกต้อง</span>
         </motion.div>
       </div>
+
       <div
         className="flex min-h-screen w-full items-center justify-center px-4 py-4 transition-colors"
         style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
       >
-        <div className="max-w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
-          <div>
-            <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">ระบบจัดการตารางเรียน 2/2021</h1>
+        <main className="max-w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
+          <header>
+            <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
+              ระบบจัดการตารางเรียน ภาคเรียนที่ 1 ปีการศึกษา 2565
+            </h1>
             <p className="mt-3 text-sm leading-5 text-gray-400">
               ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
               <br className="hidden sm:block" />
               จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
               <br />
             </p>
-          </div>
-          <div className="mt-12 space-y-2">
+          </header>
+
+          {/* classroom */}
+          <section className="mt-12 space-y-2">
             <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ใส่เลขห้องเรียน</h2>
             <div className="flex flex-col items-start sm:flex-row sm:items-center">
               <div className="relative w-48">
@@ -290,45 +296,14 @@ const Home: NextPage = () => {
                   )}
                 </div>
               </div>
-              {/*
-              <div className="flex items-center">
-                <h1 className="mr-2 text-lg font-medium text-gray-600">ความชัด:</h1>
-                <div
-                  onClick={() => {
-                    setQualityPanel((prev) => !prev);
-                  }}
-                  className="relative flex items-center cursor-pointer"
-                >
-                  <PencilIcon className="w-4 h-4 mb-1 text-blue-400" />
-                  <span className="text-blue-400">ปกติ</span>
-                  {qualityPanel && (
-                    <>
-                      <div style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }} />
-                      <div className="absolute top-7 bg-white w-[56px] rounded-lg shadow-lg">
-                        <h2 className="px-2 pt-1 text-sm text-center text-gray-800 rounded-t-lg cursor-pointer hover:bg-gray-100">
-                          ต่ำ
-                        </h2>
-                        <h2 className="text-gray-800 cursor-pointer text-sm text-center bg-blue-50 py-0.5 px-2">
-                          ปกติ
-                        </h2>
-                        <h2 className="text-gray-800 cursor-pointer text-sm text-center py-0.5 px-2 hover:bg-gray-100">
-                          สูง
-                        </h2>
-                        <h2 className="px-2 pb-1 text-sm text-center text-gray-800 cursor-pointer hover:bg-gray-100">
-                          สูงมาก
-                        </h2>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-              */}
             </div>
-          </div>
-          <div className="mt-12 space-y-4 sm:space-y-6">
+          </section>
+
+          {/* themes */}
+          <section className="mt-12 space-y-4 sm:space-y-6">
             <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ปรับแต่งตารางเรียน</h2>
             <div className="flex flex-col justify-center">
-              <h1 className="mb-2 text-lg font-medium text-gray-600">ธีมสี: </h1>
+              <h3 className="mb-2 text-lg font-medium text-gray-600">ธีมสี: </h3>
               <div className="relative flex h-[44px] w-[240px]">
                 <div className="flex w-full rounded-xl border border-gray-300">
                   <div className="flex w-9/12 cursor-pointer items-center justify-center">
@@ -390,7 +365,9 @@ const Home: NextPage = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col items-start sm:flex-row sm:items-center">
+
+            {/* color swatches */}
+            <section className="flex flex-col items-start sm:flex-row sm:items-center">
               <div className="flex flex-col justify-center">
                 <h3 className="mb-2 text-lg font-medium text-gray-600">ชุดสี: </h3>
 
@@ -465,7 +442,7 @@ const Home: NextPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
             <div className="flex flex-col justify-center space-y-2">
               <h1 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง: </h1>
               <div className="flex space-x-1">
@@ -492,10 +469,14 @@ const Home: NextPage = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </section>
+
+          {/* preview */}
           <>
             <Preview rawTheme={colors} background={background} />
           </>
+
+          {/* download */}
           <div className="mt-8 flex justify-center sm:mt-10">
             <motion.button
               whileHover={{ scale: !waiting ? 1.05 : 1 }}
@@ -509,9 +490,9 @@ const Home: NextPage = () => {
               {!waiting ? <span>สร้างตารางเรียน</span> : <Ellipsis className="w-10" />}
             </motion.button>
           </div>
-        </div>
+        </main>
       </div>
-    </>
+    </DescribeRoute>
   )
 }
 
