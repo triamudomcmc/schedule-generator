@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
+import type { NextPage } from "next"
 
 interface LogoProps {
-  color: string;
+  color: string
 }
 
 const Logo: NextPage<LogoProps> = ({ color }) => {
@@ -22,7 +22,7 @@ const Logo: NextPage<LogoProps> = ({ color }) => {
         />
       </svg>
     </>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

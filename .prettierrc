@@ -1,6 +1,6 @@
 {
   "tabWidth": 2,
-  "semi": true,
+  "semi": false,
   "useTabs": false,
   "printWidth": 120,
   "disableLanguages": ["json"]

@@ -1,15 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import screenshot from "@utils/screenshot";
-import fs from "fs";
+import type { NextApiRequest, NextApiResponse } from "next"
+import screenshot from "@utils/screenshot"
+import fs from "fs"
 
 type Data = {
-  name: string;
-};
+  name: string
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const {
     query: { room, colorScheme },
-  } = req;
+  } = req
 
   let rooms = [
     276, 277, 278, 341, 342, 343, 344, 345, 437, 438, 446, 447, 448, 65, 66, 661, 662, 664, 665, 666, 667, 70, 71, 72,
@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     642, 651, 652, 654, 655, 656, 657, 812, 813, 814, 815, 822, 823, 824, 825, 832, 833, 931, 932, 933, 934, 935, 936,
     937, 941, 125, 126, 143, 144, 145, 146, 153, 154, 155, 156, 222, 223, 224, 225, 226, 227, 228, 229, 28, 29, 32, 38,
     39, 48, 49, 58, 59, 73, 74, 75, 76, 77, 78, 79, 80, 81,
-  ];
+  ]
 
   const ren = [
     "125",
@@ -117,21 +117,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     "945",
     "946",
     "947",
-  ];
+  ]
 
   for (let i of rooms) {
     if (!ren.includes(i.toString())) {
-      const file = await screenshot(`http://${req.headers.host}/renderer/${i.toString()}`);
+      const file = await screenshot(`http://${req.headers.host}/renderer/${i.toString()}`)
 
-      console.log("workingon" + i);
+      console.log("workingon" + i)
 
       if (file) {
-        fs.writeFileSync("outpu/" + i.toString() + ".jpg", file);
+        fs.writeFileSync("outpu/" + i.toString() + ".jpg", file)
       }
     }
   }
 
-  res.setHeader("Content-Type", `image/png`);
-  res.setHeader("Cache-Control", `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`);
-  res.statusCode = 200;
+  res.setHeader("Content-Type", `image/png`)
+  res.setHeader("Cache-Control", `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`)
+  res.statusCode = 200
 }

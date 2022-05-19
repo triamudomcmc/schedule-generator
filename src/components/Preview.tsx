@@ -1,21 +1,21 @@
-import type { FC } from "react";
-import { rawRgbColorToCss } from "@utils/hexToRgb";
-import { ColorType } from "@components/ColorPicker";
-import { useEffect, useState } from "react";
-import { isDarkOrLightRGBA, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
+import type { FC } from "react"
+import { rawRgbColorToCss } from "@utils/hexToRgb"
+import { ColorType } from "@components/ColorPicker"
+import { useEffect, useState } from "react"
+import { isDarkOrLightRGBA, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 
 interface Scheme {
-  bg: ColorType;
-  t1: ColorType;
-  t2: ColorType;
-  c1: ColorType;
-  c2: ColorType;
-  c3: ColorType;
-  c4: ColorType;
+  bg: ColorType
+  t1: ColorType
+  t2: ColorType
+  c1: ColorType
+  c2: ColorType
+  c3: ColorType
+  c4: ColorType
 }
 
 interface PreviewProps {
-  rawTheme: Scheme;
+  rawTheme: Scheme
 }
 
 const defaultColors = {
@@ -26,22 +26,22 @@ const defaultColors = {
   c2: "#FF92A6",
   c3: "#ADE374",
   c4: "#FF9417",
-};
+}
 
 const Preview: FC<PreviewProps> = ({ rawTheme }) => {
-  const [theme, setTheme] = useState(defaultColors);
+  const [theme, setTheme] = useState(defaultColors)
 
   useEffect(() => {
-    const cssColor: { [k: string]: string } = {};
+    const cssColor: { [k: string]: string } = {}
 
     Object.keys(rawTheme).forEach((k) => {
       // @ts-ignore
-      cssColor[k] = rawRgbColorToCss(rawTheme[k]);
-    });
+      cssColor[k] = rawRgbColorToCss(rawTheme[k])
+    })
 
     // @ts-ignore
-    setTheme(cssColor);
-  }, [rawTheme]);
+    setTheme(cssColor)
+  }, [rawTheme])
 
   return (
     <svg viewBox="0 0 2388 1668" fill="none" xmlns="http://www.w3.org/2000/svg" className="preview">
@@ -1287,7 +1287,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme }) => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
-export default Preview;
+export default Preview

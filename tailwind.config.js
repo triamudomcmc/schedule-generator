@@ -1,6 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: ['./src/**/*.{js,jsx,ts,tsx,vue}'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx,vue}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
@@ -13,4 +13,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+}

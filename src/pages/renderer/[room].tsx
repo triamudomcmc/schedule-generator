@@ -1,15 +1,15 @@
-import { Logo } from "@components";
-import type { GetStaticPaths, GetStaticProps } from "next";
-import Head from "next/head";
-import fs from "fs";
-import path from "path";
-import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
-import Image from "next/image";
-import classNames from "classnames";
-import { Mistletoe, Ordaments } from "@components/Background";
+import { Logo } from "@components"
+import type { GetStaticPaths, GetStaticProps } from "next"
+import Head from "next/head"
+import fs from "fs"
+import path from "path"
+import { hexToRgbA, rawRgbColorToCss } from "@utils/hexToRgb"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
+import Image from "next/image"
+import classNames from "classnames"
+import { Mistletoe, Ordaments } from "@components/Background"
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -20,84 +20,84 @@ const defaultColors = {
   c3: rawRgbColorToCss(hexToRgbA("#E08484")),
   c4: rawRgbColorToCss(hexToRgbA("#D17474")),
   c5: rawRgbColorToCss(hexToRgbA("#BA5757")),
-};
+}
 
 interface Data {
-  name: string;
-  teacher: string;
+  name: string
+  teacher: string
 }
 
 interface ScheduleData {
-  room: string;
-  branch: string;
-  teachers: string[];
-  data: Record<string, Data>;
+  room: string
+  branch: string
+  teachers: string[]
+  data: Record<string, Data>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2564"));
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2564"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
     .map((s) => ({
       params: { room: s.replace(".json", "") },
-    }));
+    }))
 
   return {
     paths,
     fallback: false,
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const room = params?.room;
-  let scheduleData: ScheduleData | null = null;
+  const room = params?.room
+  let scheduleData: ScheduleData | null = null
 
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2564/${room}.json`)).toString();
-    scheduleData = JSON.parse(raw);
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2564/${room}.json`)).toString()
+    scheduleData = JSON.parse(raw)
   }
 
   return {
     props: {
       scheduleData: { ...scheduleData, room: room },
     },
-  };
-};
-
-interface RoomProps {
-  scheduleData: ScheduleData;
-  query: any;
+  }
 }
 
-type BGType = "none" | "mistletoe" | "ordaments";
+interface RoomProps {
+  scheduleData: ScheduleData
+  query: any
+}
+
+type BGType = "none" | "mistletoe" | "ordaments"
 
 const Room = ({ scheduleData }: RoomProps) => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (!router.query.colorScheme) {
-      return;
+      return
     }
 
-    if (router.query?.bg) setBackground(router.query.bg as BGType);
+    if (router.query?.bg) setBackground(router.query.bg as BGType)
 
-    const colorScheme: string = router.query.colorScheme?.toString();
-    const parsed = JSON.parse(colorScheme);
+    const colorScheme: string = router.query.colorScheme?.toString()
+    const parsed = JSON.parse(colorScheme)
 
-    const cssColor: { [k: string]: string } = {};
+    const cssColor: { [k: string]: string } = {}
 
     Object.keys(parsed).forEach((k) => {
       // @ts-ignore
-      cssColor[k] = rawRgbColorToCss(parsed[k]);
-    });
+      cssColor[k] = rawRgbColorToCss(parsed[k])
+    })
 
     // @ts-ignore
-    setColor(cssColor);
-  }, [router.query.colorScheme]);
+    setColor(cssColor)
+  }, [router.query.colorScheme])
 
-  const [color, setColor] = useState(defaultColors);
-  const [background, setBackground] = useState<BGType>("none");
+  const [color, setColor] = useState(defaultColors)
+  const [background, setBackground] = useState<BGType>("none")
 
   const genSchedule = (period: number) => {
     return (
@@ -107,10 +107,10 @@ const Room = ({ scheduleData }: RoomProps) => {
           .map((_, i) => {
             const name = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
               ? scheduleData?.data[`${i + 1}:${period}`].name
-              : "" ?? "";
+              : "" ?? ""
             const teacher = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
               ? scheduleData?.data[`${i + 1}:${period}`].teacher
-              : "" ?? "";
+              : "" ?? ""
 
             return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
@@ -129,11 +129,11 @@ const Room = ({ scheduleData }: RoomProps) => {
                   </p>
                 </div>
               </div>
-            );
+            )
           })}
       </>
-    );
-  };
+    )
+  }
 
   const Days = [
     {
@@ -156,7 +156,7 @@ const Room = ({ scheduleData }: RoomProps) => {
       name: "ศุกร์",
       color: color.c5,
     },
-  ];
+  ]
 
   return (
     <>
@@ -329,7 +329,7 @@ const Room = ({ scheduleData }: RoomProps) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Room;
+export default Room

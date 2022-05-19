@@ -1,23 +1,23 @@
-import { rawRgbColorToCss } from "@utils/hexToRgb";
-import { ColorType } from "@components/ColorPicker";
-import { useEffect, useState, FC } from "react";
-import { isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight";
-import { MistletoePreview, OrdamentsPreview } from "@components/Background";
+import { rawRgbColorToCss } from "@utils/hexToRgb"
+import { ColorType } from "@components/ColorPicker"
+import { useEffect, useState, FC } from "react"
+import { isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
+import { MistletoePreview, OrdamentsPreview } from "@components/Background"
 
 interface Scheme {
-  bg: ColorType;
-  t1: ColorType;
-  t2: ColorType;
-  c1: ColorType;
-  c2: ColorType;
-  c3: ColorType;
-  c4: ColorType;
-  c5: ColorType;
+  bg: ColorType
+  t1: ColorType
+  t2: ColorType
+  c1: ColorType
+  c2: ColorType
+  c3: ColorType
+  c4: ColorType
+  c5: ColorType
 }
 
 interface PreviewProps {
-  rawTheme: Scheme;
-  background: "none" | "mistletoe" | "ordaments";
+  rawTheme: Scheme
+  background: "none" | "mistletoe" | "ordaments"
 }
 
 const defaultColors = {
@@ -29,25 +29,25 @@ const defaultColors = {
   c3: "#E08484",
   c4: "#D17474",
   c5: "#BA5757",
-};
+}
 
 const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
-  const [theme, setTheme] = useState(defaultColors);
+  const [theme, setTheme] = useState(defaultColors)
 
   useEffect(() => {
-    const cssColor: { [k: string]: string } = {};
+    const cssColor: { [k: string]: string } = {}
 
     Object.keys(rawTheme).forEach((k) => {
       // @ts-ignore
-      cssColor[k] = rawRgbColorToCss(rawTheme[k]);
-    });
+      cssColor[k] = rawRgbColorToCss(rawTheme[k])
+    })
 
     // @ts-ignore
-    setTheme(cssColor);
-  }, [rawTheme]);
+    setTheme(cssColor)
+  }, [rawTheme])
 
   return (
-    <div className="mt-6 sm:mt-10 relative overflow-hidden">
+    <div className="relative mt-6 overflow-hidden sm:mt-10">
       <div>{background === "mistletoe" && <MistletoePreview />}</div>
       <div>{background === "ordaments" && <OrdamentsPreview color={theme.c1} />}</div>
       <div>
@@ -1594,7 +1594,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
         </svg>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Preview;
+export default Preview

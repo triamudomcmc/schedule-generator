@@ -1,5 +1,5 @@
-import chrome from "chrome-aws-lambda";
-import puppeteer from "puppeteer-core";
+import chrome from "chrome-aws-lambda"
+import puppeteer from "puppeteer-core"
 
 export default async function screenshot(url: string, width: number = 2388, height: number = 1768) {
   const options = process.env.AWS_REGION
@@ -16,10 +16,10 @@ export default async function screenshot(url: string, width: number = 2388, heig
             : process.platform === "linux"
             ? "/usr/bin/google-chrome"
             : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      };
-  const browser = await puppeteer.launch(options);
-  const page = await browser.newPage();
-  await page.setViewport({ width, height });
-  await page.goto(url, { waitUntil: "networkidle2" });
-  return await page.screenshot({ type: "jpeg" });
+      }
+  const browser = await puppeteer.launch(options)
+  const page = await browser.newPage()
+  await page.setViewport({ width, height })
+  await page.goto(url, { waitUntil: "networkidle2" })
+  return await page.screenshot({ type: "jpeg" })
 }
