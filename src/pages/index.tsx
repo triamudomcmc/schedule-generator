@@ -115,7 +115,7 @@ const Home: NextPage = () => {
   const [error, setError] = useState(false)
   const [recentError, setRecentError] = useState(setTimeout(() => {}))
 
-  const [background, setBackground] = useState<BGType>("mistletoe")
+  const [background, setBackground] = useState<BGType>("none")
 
   const [invalidRoom, setInvalidRoom] = useState(false)
   const [preset, setPreset] = useState(false)
@@ -137,7 +137,7 @@ const Home: NextPage = () => {
     }
   }, [room])
 
-  const [colors, setColors] = useState(Theme.Christmas)
+  const [colors, setColors] = useState(Theme.Pink)
 
   useEffect(() => {
     const cachedRoom = window.localStorage.getItem("room")
@@ -239,7 +239,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ระบบจัดการตารางเรียน 2/2021</title>
+        <title>ระบบจัดการตารางเรียน ภาคเรียนที่ 1 ปีการศึกษา 2565</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="fixed top-0 flex w-full justify-center">
