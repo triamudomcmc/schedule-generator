@@ -43,7 +43,7 @@ export const ColorPicker = ({
     <div>
       <motion.div whileHover={{ scale: 1.1 }} onClick={handleClick}>
         <div
-          className="h-[32px] w-[42px] cursor-pointer rounded-[10px]"
+          className="h-[30px] w-[30px] cursor-pointer rounded-[10px] sm:h-[32px] sm:w-[42px]"
           style={{
             background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
             border: "1px solid rgba(0, 0, 0, 0.2)",
