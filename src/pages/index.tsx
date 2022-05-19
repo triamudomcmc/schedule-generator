@@ -256,7 +256,7 @@ const Home: NextPage = () => {
         className="flex min-h-screen w-full items-center justify-center px-4 py-4 transition-colors"
         style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
       >
-        <div className="max-w-[430px] rounded-xl bg-white py-10 px-12 font-ui shadow-lg">
+        <div className="max-w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
           <div>
             <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">ระบบจัดการตารางเรียน 2/2021</h1>
             <p className="mt-3 text-sm leading-5 text-gray-400">
@@ -393,7 +393,8 @@ const Home: NextPage = () => {
             <div className="flex flex-col items-start sm:flex-row sm:items-center">
               <div className="flex flex-col justify-center">
                 <h3 className="mb-2 text-lg font-medium text-gray-600">ชุดสี: </h3>
-                <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
+
+                <div className="flex flex-row flex-wrap gap-2">
                   <div className="mr-2 flex items-center space-x-1">
                     <ColorPicker
                       onChange={(c) => {
