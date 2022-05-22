@@ -30,13 +30,6 @@ type BGType = "none" | "mistletoe" | "ordaments"
 
 const Home: NextPage = () => {
   const { userData, SignInWithTUCMC, signOut } = useAuth()
-  // const userData = {
-  //   studentID: "59476",
-  //   title: "นาย",
-  //   firstname: "ปณิธิ",
-  //   lastname: "มักเที่ยงตรง",
-  //   email: "lmao@hi.com",
-  // }
 
   const [waiting, setWaiting] = useState(false)
   const [error, setError] = useState(false)
@@ -77,21 +70,14 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (userData) {
-      // // set preferences, custom themes
-      // const res = checkUserInDB(db, userData, { background: background, theme: colors }, customThemes)
-      // res.then((data) => {
-      //   const customThemesWithoutName = Object.keys(data.customThemes).reduce(
-      //     (prev: Record<string, ColorTheme>, theme: string) => {
-      //       const next: Record<string, ColorTheme> = { ...prev }
-      //       next[theme] = removeKey(customThemes[theme], "name") as ColorTheme
-      //       return next
-      //     },
-      //     {}
-      //   )
-      //   setBackground(data.background)
-      //   setColors(removeKey(data.theme, "name") as ColorTheme)
-      //   setCustomThemes(customThemesWithoutName)
-      // })
+      // set preferences, custom themes
+      checkUserInDB(db, userData, { background: background, theme: theme }, customThemes).then((data) => {
+        if (!data) return
+
+        setBackground(data.background)
+        setCustomThemes(data.customThemes)
+        setTheme(data.theme)
+      })
     }
   }, [userData])
 
@@ -228,13 +214,16 @@ const Home: NextPage = () => {
             />
             <button
               onClick={() => {
-                if (themeName === "") return
+                if (themeName === "" || !userData) return
 
                 // save stuff
                 const generatedID = uuidv4()
-                setCustomThemes({ ...customThemes, [generatedID]: { ...colors, name: themeName } })
+
+                const newCustomThemes = { ...customThemes, [generatedID]: { ...colors, name: themeName } }
+                setCustomThemes(newCustomThemes)
                 setTheme(`c-${generatedID}`)
                 // save to db
+                updateCustomThemes(db, userData, newCustomThemes, theme)
                 toggleSuccess()
                 setCloseState(true)
                 setThemeName("")
@@ -283,7 +272,10 @@ const Home: NextPage = () => {
                   </div>
                 </>
               ) : (
-                <button className="w-36 rounded-full border border-gray-400 bg-white px-6 py-2 text-center transition-colors hover:border-gray-600 hover:bg-gray-100">
+                <button
+                  onClick={() => signOut()}
+                  className="w-36 rounded-full border border-gray-400 bg-white px-6 py-2 text-center transition-colors hover:border-gray-600 hover:bg-gray-100"
+                >
                   ออกจากระบบ
                 </button>
               )}
@@ -421,7 +413,9 @@ const Home: NextPage = () => {
 
                                       const newCustomThemes = removeKey(customThemes, cTheme)
                                       setCustomThemes(newCustomThemes)
-                                      // updateCustomThemes(db, userData, newCustomThemes)
+                                      // save to db
+                                      updateCustomThemes(db, userData, newCustomThemes, theme)
+                                      toggleSuccess()
                                     }}
                                   >
                                     <TrashIcon className="mr-2 h-5 w-5 text-gray-400 transition-colors hover:text-red-400" />
@@ -465,8 +459,10 @@ const Home: NextPage = () => {
                         }
                         // if editing custom theme, override it
                         else if (theme.startsWith("c-")) {
-                          setCustomThemes({ ...customThemes, [theme.replace("c-", "")]: { ...colors } })
+                          const newCustomThemes = { ...customThemes, [theme.replace("c-", "")]: { ...colors } }
+                          setCustomThemes(newCustomThemes)
                           // save to db
+                          updateCustomThemes(db, userData, newCustomThemes, theme)
                           toggleSuccess()
                         }
                       }}

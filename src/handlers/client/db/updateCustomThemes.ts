@@ -6,7 +6,8 @@ import { UserData } from "tucmc-auth"
 export const updateCustomThemes = async (
   db: Firestore,
   userData: UserData,
-  customThemes: Record<string, ColorTheme>
+  customThemes: Record<string, ColorTheme>,
+  theme: string
 ) => {
   if (!userData) return false
 
@@ -16,17 +17,8 @@ export const updateCustomThemes = async (
   if (!userSnapshot.exists) {
     return false
   } else {
-    const customThemesWithoutName = Object.keys(customThemes).reduce(
-      (prev: Record<string, ColorTheme>, theme: string) => {
-        const next: Record<string, ColorTheme> = { ...prev }
-        next[theme] = customThemes[theme]
-        return next
-      },
-      {}
-    )
-
     try {
-      await updateDoc(userRef, { customThemes: customThemesWithoutName })
+      await updateDoc(userRef, { customThemes: customThemes, theme: theme })
       return true
     } catch (e) {
       console.error(e)
