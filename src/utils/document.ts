@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react"
+import { MutableRefObject, useEffect, useState, RefObject } from "react"
 
-// @ts-ignore
-export const detectOuside = (ref, dep, callback) => {
+export const detectOuside = (ref: RefObject<HTMLElement>, dep: boolean, callback: () => void) => {
   useEffect(() => {
-    function handleClickOutside(event: Event) {
-      if (ref.current && !ref.current.contains(event.target) && dep) {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node | null) && dep) {
         callback()
       }
     }
