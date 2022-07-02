@@ -246,19 +246,6 @@ const Home: NextPage = () => {
       </Modal>
 
       <div
-        className="flex w-full flex-col items-center justify-center bg-pink-400 px-4 py-4 text-white transition-colors"
-        style={{ background: "linear-gradient(114.66deg, #FF2782 3.68%, #CE67FF 95.86%)" }}
-      >
-        <h1 className="text-2xl font-semibold">รับสมัคร กช.65</h1>
-        <p>
-          กช.65 เปิดรับสมัครแล้ว ! สมัครได้ที่{" "}
-          <a className="underline hover:no-underline" href="https://tucm.cc/admission">
-            tucm.cc/admission
-          </a>
-        </p>
-      </div>
-
-      <div
         className="flex min-h-screen w-full flex-col items-center justify-center px-4 py-4 transition-colors"
         style={{ backgroundColor: rawRgbColorToCss(colors.c1) }}
       >
