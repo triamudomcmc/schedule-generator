@@ -222,7 +222,7 @@ const Home: NextPage = () => {
                 setCustomThemes(newCustomThemes)
                 setTheme(`c-${generatedID}`)
                 // save to db
-                updateCustomThemes(db, userData, newCustomThemes, theme)
+                updateCustomThemes(db, userData as any, newCustomThemes, theme)
                 toggleSuccess()
                 setCloseState(true)
                 setThemeName("")
@@ -413,7 +413,7 @@ const Home: NextPage = () => {
                                       const newCustomThemes = removeKey(customThemes, cTheme)
                                       setCustomThemes(newCustomThemes)
                                       // save to db
-                                      updateCustomThemes(db, userData, newCustomThemes, theme)
+                                      updateCustomThemes(db, userData as any, newCustomThemes, theme)
                                       toggleSuccess()
                                     }}
                                   >
@@ -461,7 +461,7 @@ const Home: NextPage = () => {
                           const newCustomThemes = { ...customThemes, [theme.replace("c-", "")]: { ...colors } }
                           setCustomThemes(newCustomThemes)
                           // save to db
-                          updateCustomThemes(db, userData, newCustomThemes, theme)
+                          updateCustomThemes(db, userData as any, newCustomThemes, theme)
                           toggleSuccess()
                         }
                       }}

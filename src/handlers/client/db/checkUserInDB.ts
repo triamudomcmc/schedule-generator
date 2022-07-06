@@ -17,7 +17,9 @@ export const checkUserInDB = async (
   background: string
   customThemes: Record<string, ColorTheme>
 }> => {
-  const userRef = doc(db, "users", userData.uuid.replaceAll("/", "-"))
+  const buffer = Buffer.from(userData.uuid, "base64")
+
+  const userRef = doc(db, "users", buffer.toString("hex"))
   const userSnapshot = await getDoc(userRef)
 
   if (!userSnapshot.exists()) {

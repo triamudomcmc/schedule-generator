@@ -5,13 +5,15 @@ import { UserData } from "tucmc-auth"
 
 export const updateCustomThemes = async (
   db: Firestore,
-  userData: UserData,
+  userData: { sessionId: string; uuid: string },
   customThemes: Record<string, ColorTheme>,
   theme: string
 ) => {
   if (!userData) return false
 
-  const userRef = doc(db, "users", userData.studentID)
+  const buffer = Buffer.from(userData.uuid, "base64")
+
+  const userRef = doc(db, "users", buffer.toString("hex"))
   const userSnapshot = await getDoc(userRef)
 
   if (!userSnapshot.exists) {
