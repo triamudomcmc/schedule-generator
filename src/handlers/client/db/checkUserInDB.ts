@@ -9,7 +9,7 @@ type PreferencesType = {
 
 export const checkUserInDB = async (
   db: Firestore,
-  userData: UserData,
+  userData: { sessionId: string; uuid: string },
   preference: PreferencesType,
   customThemes: Record<string, ColorTheme>
 ): Promise<{
@@ -17,7 +17,7 @@ export const checkUserInDB = async (
   background: string
   customThemes: Record<string, ColorTheme>
 }> => {
-  const userRef = doc(db, "users", userData.studentID)
+  const userRef = doc(db, "users", userData.uuid.replaceAll("/", "-"))
   const userSnapshot = await getDoc(userRef)
 
   if (!userSnapshot.exists()) {

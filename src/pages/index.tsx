@@ -71,9 +71,8 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (userData) {
       // set preferences, custom themes
-      checkUserInDB(db, userData, { background: background, theme: theme }, customThemes).then((data) => {
+      checkUserInDB(db, userData as any, { background: background, theme: theme }, customThemes).then((data) => {
         if (!data) return
-
         setBackground(data.background)
         setCustomThemes(data.customThemes)
         setTheme(data.theme)
