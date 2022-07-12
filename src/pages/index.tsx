@@ -62,7 +62,7 @@ export const Home: NextPage = () => {
   const [bgColor, seBGcolor] = useState(rawRgbColorToCss(DefaultTheme.Pink.c1))
   const [primaryColor, setPrimaryColor] = useState(rawRgbColorToCss(DefaultTheme.Pink.t1))
 
-  const [tab, setTab] = useState<TabType>("learn")
+  const [tab, setTab] = useState<TabType>("exam")
 
   const { query } = useRouter()
 
