@@ -10,6 +10,7 @@ import { DefaultTheme } from "@config/defaultTheme"
 import { ExamSchedulePage } from "@components/ExamSchedule/Page"
 import classNames from "classnames"
 import { useRouter } from "next/router"
+import { SocialFacebook, SocialGitHub, SocialInstagram } from "src/vectors/Socials"
 
 type TabType = "learn" | "exam"
 
@@ -55,6 +56,58 @@ const PageTab: FC<{ tab: TabType; setTab: Dispatch<SetStateAction<TabType>> }> =
         </div>
       </div>
     </div>
+  )
+}
+
+const SocialsComponent: FC<{ primaryColor: string }> = ({ primaryColor }) => {
+  return (
+    <section style={{ color: primaryColor }} className="mt-6 flex items-center justify-center gap-3">
+      <a
+        onClick={(e) => {
+          // @ts-ignore
+          window.gtag("event", "social_click", {
+            event_category: "social_click",
+            event_label: "Facebook",
+            type: "Facebook",
+          })
+        }}
+        rel="noreferrer"
+        target="_blank"
+        href="https://www.facebook.com/triamudomclubs"
+      >
+        <SocialFacebook className="h-8 w-8 transition-transform hover:scale-105" />
+      </a>
+      <a
+        onClick={(e) => {
+          // @ts-ignore
+          window.gtag("event", "social_click", {
+            event_category: "social_click",
+            event_label: "Instagram",
+            type: "Instagram",
+          })
+        }}
+        rel="noreferrer"
+        target="_blank"
+        href="https://instagram.com/tucmc_official"
+      >
+        <SocialInstagram className="h-8 w-8 transition-transform hover:scale-105" />
+      </a>
+      <a
+        onClick={(e) => {
+          // @ts-ignore
+          window.gtag("event", "social_click", {
+            event_category: "social_click",
+            event_label: "GitHub",
+            type: "GitHub",
+          })
+        }}
+        rel="noreferrer"
+        target="_blank"
+        href="https://github.com/triamudomcmc/schedule-generator"
+      >
+        <SocialGitHub className="h-8 w-8 transition-transform hover:scale-105" />
+      </a>
+    </section>
   )
 }
 
@@ -106,6 +159,8 @@ export const Home: NextPage = () => {
               {tab === "exam" && <ExamSchedulePage primaryColor={primaryColor} />}
             </motion.div>
           </AnimatePresence>
+
+          <SocialsComponent primaryColor={primaryColor} />
         </main>
       </div>
     </DescribeRoute>
