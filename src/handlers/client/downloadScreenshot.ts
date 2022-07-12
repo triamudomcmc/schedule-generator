@@ -28,7 +28,7 @@ export const downloadScreenshot = async (
     // @ts-ignore
     window.gtag("event", "generate_schedule", {
       event_category: "generate_schedule",
-      event_label: `$room_{room}`,
+      event_label: `room_${room}`,
       room: room,
       colors: requestColors,
     })
