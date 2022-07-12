@@ -82,7 +82,7 @@ export const Home: NextPage = () => {
         className="flex min-h-screen w-full flex-col items-center justify-center px-4 py-4 transition-colors"
         style={{ backgroundColor: bgColor }}
       >
-        <main className="w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
+        <main className="max-w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
           <PageTab tab={tab} setTab={setTab} />
 
           <AnimatePresence>
