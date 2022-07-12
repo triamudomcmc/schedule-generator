@@ -11,7 +11,7 @@ function hexToRgb(hex: string) {
     : null
 }
 
-export const isDarkOrLightHEX = (color: string): "dark" | "light" => {
+export const isDarkOrLightHEX = (color: string, threshold = 196): "dark" | "light" => {
   const rgb = hexToRgb(color)
 
   if (rgb !== null) {
@@ -19,7 +19,7 @@ export const isDarkOrLightHEX = (color: string): "dark" | "light" => {
 
     if (
       0.299 * parseInt(r.toString(), 16) + 0.587 * parseInt(g.toString(), 16) + 0.114 * parseInt(b.toString(), 16) >
-      196
+      threshold
     ) {
       return "light" // light
     } else {
@@ -30,11 +30,11 @@ export const isDarkOrLightHEX = (color: string): "dark" | "light" => {
   }
 }
 
-export const isDarkOrLightRGBAString = (color: string): "dark" | "light" => {
+export const isDarkOrLightRGBAString = (color: string, threshold = 196): "dark" | "light" => {
   const st = color.replace("rgba(", "").replace(")", "").split(", ")
   const [r, g, b] = st
 
-  if (0.299 * parseInt(r, 16) + 0.587 * parseInt(g, 16) + 0.114 * parseInt(b, 16) > 196) {
+  if (0.299 * parseInt(r, 16) + 0.587 * parseInt(g, 16) + 0.114 * parseInt(b, 16) > threshold) {
     return "light" // light
   } else {
     return "dark" // dark
