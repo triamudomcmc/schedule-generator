@@ -154,21 +154,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="grid grid-cols-2 gap-4">
           <ThemeButton
             themeID="blue"
-            title="ธีมสีน้ำเงิน"
+            title="Blue Moon"
             imgSrc="/assets/images/placeholder/blue.jpg"
             setTheme={setTheme}
             style={genBGButtonTheme("blue")}
           />
           <ThemeButton
             themeID="pink"
-            title="ธีมสีชมพู"
+            title="Raspberry Ripple"
             imgSrc="/assets/images/placeholder/pink.jpg"
             setTheme={setTheme}
             style={genBGButtonTheme("pink")}
           />
           <ThemeButton
             themeID="purple"
-            title="ธีมสีม่วง"
+            title="Lavender Mousse"
             imgSrc="/assets/images/placeholder/purple.jpg"
             setTheme={setTheme}
             style={genBGButtonTheme("purple")}
