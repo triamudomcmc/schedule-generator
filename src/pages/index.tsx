@@ -3,7 +3,7 @@ import { DescribeRoute } from "@components/Meta/DescribeRoute"
 import { AnimateSharedLayout } from "framer-motion"
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
+import { CSSProperties, Dispatch, FC, SetStateAction, useEffect, useState } from "react"
 import { CheckIcon, ExclamationIcon, StarIcon, XIcon } from "@heroicons/react/solid"
 import { rawRgbColorToCss } from "@utils/hexToRgb"
 import { DefaultTheme } from "@config/defaultTheme"
@@ -11,14 +11,27 @@ import { ExamSchedulePage } from "@components/ExamSchedule/Page"
 import classNames from "classnames"
 import { useRouter } from "next/router"
 import { SocialFacebook, SocialGitHub, SocialInstagram } from "src/vectors/Socials"
+import { isDarkOrLightRGBAString } from "@utils/isDarkOrLight"
 
 type TabType = "learn" | "exam"
 
-const PageTab: FC<{ tab: TabType; setTab: Dispatch<SetStateAction<TabType>> }> = ({ tab, setTab }) => {
+const PageTab: FC<{ tab: TabType; setTab: Dispatch<SetStateAction<TabType>>; primaryColor: string }> = ({
+  tab,
+  setTab,
+  primaryColor,
+}) => {
   const { replace, query } = useRouter()
 
-  const getTab = (tabName: TabType) => {
-    return tab === tabName ? "bg-pink-500 text-white hover:bg-pink-600" : "bg-white text-pink-500 hover:bg-gray-100"
+  const getTab = (tabName: TabType): CSSProperties => {
+    return tab === tabName
+      ? {
+          backgroundColor: primaryColor,
+          color: isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff",
+        }
+      : {
+          backgroundColor: "#fff",
+          color: primaryColor,
+        }
   }
 
   return (
@@ -31,10 +44,8 @@ const PageTab: FC<{ tab: TabType; setTab: Dispatch<SetStateAction<TabType>> }> =
               setTab("learn")
               replace({ query: { type: "learn" } }, undefined, { shallow: true })
             }}
-            className={classNames(
-              getTab("learn"),
-              "flex h-full flex-col items-center justify-center space-x-2 rounded-l-lg px-2 py-4 text-center transition-all sm:px-12"
-            )}
+            style={getTab("learn")}
+            className="flex h-full flex-col items-center justify-center space-x-2 rounded-l-lg px-2 py-4 text-center transition-all hover:brightness-95 sm:px-12"
           >
             {/* {tab === "learn" && <StarIcon className="h-5 w-5" />} */}
             <span>ตารางเรียน</span>
@@ -45,10 +56,8 @@ const PageTab: FC<{ tab: TabType; setTab: Dispatch<SetStateAction<TabType>> }> =
               setTab("exam")
               replace({ query: { type: "exam" } }, undefined, { shallow: true })
             }}
-            className={classNames(
-              getTab("exam"),
-              "flex h-full flex-col items-center justify-center space-x-2 rounded-r-lg px-2 py-4 text-center transition-all sm:px-12"
-            )}
+            style={getTab("exam")}
+            className="flex h-full flex-col items-center justify-center space-x-2 rounded-r-lg px-2 py-4 text-center transition-all hover:brightness-95 sm:px-12"
           >
             {/* {tab === "exam" && <StarIcon className="h-5 w-5" />} */}
             <span>ตารางสอบ</span>
@@ -112,7 +121,7 @@ const SocialsComponent: FC<{ primaryColor: string }> = ({ primaryColor }) => {
 }
 
 export const Home: NextPage = () => {
-  const [bgColor, seBGcolor] = useState(rawRgbColorToCss(DefaultTheme.Pink.c1))
+  const [bgColor, setBGcolor] = useState(rawRgbColorToCss(DefaultTheme.Pink.c1))
   const [primaryColor, setPrimaryColor] = useState(rawRgbColorToCss(DefaultTheme.Pink.t1))
 
   const [tab, setTab] = useState<TabType>("exam")
@@ -136,7 +145,7 @@ export const Home: NextPage = () => {
         style={{ backgroundColor: bgColor }}
       >
         <main className="max-w-[470px] rounded-xl bg-white py-10 px-8 font-ui shadow-lg">
-          <PageTab tab={tab} setTab={setTab} />
+          <PageTab primaryColor={primaryColor} tab={tab} setTab={setTab} />
 
           <AnimatePresence>
             <motion.div
@@ -155,7 +164,7 @@ export const Home: NextPage = () => {
               }}
               key={tab}
             >
-              {tab === "learn" && <LearnSchedulePage seBGcolor={seBGcolor} setPrimaryColor={setPrimaryColor} />}
+              {tab === "learn" && <LearnSchedulePage setBGcolor={setBGcolor} setPrimaryColor={setPrimaryColor} />}
               {tab === "exam" && <ExamSchedulePage primaryColor={primaryColor} />}
             </motion.div>
           </AnimatePresence>
