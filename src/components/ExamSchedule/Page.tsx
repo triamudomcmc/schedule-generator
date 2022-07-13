@@ -8,7 +8,7 @@ import { ScreenSizeButton } from "./Components/ScreenSize"
 import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
-export type ProgramType = "sci-math" | "arts-math" | "arts-lang"
+export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
 export type ScreenSizeType = "ipad" | "iphonex" | "iphone" | "huawei"
 export type ThemeType = "blue" | "pink" | "purple"
 
@@ -109,6 +109,13 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             style={genBGButtonProgram("arts-lang")}
           >
             ศิลป์ภาษา
+          </button>
+          <button
+            onClick={() => setProgram("arts-math-sci")}
+            className="rounded-xl border border-gray-300 px-4 py-2"
+            style={genBGButtonProgram("arts-math-sci")}
+          >
+            ภาษาคณิต(วิทย์)
           </button>
         </div>
       </section>
