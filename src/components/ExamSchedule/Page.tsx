@@ -50,7 +50,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     <div>
       <header>
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
-          ตารางปลายกลางภาค &#40;FIANL&#41;
+          ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 1 ปีการศึกษา 2565
         </h1>
@@ -189,7 +189,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
         <ExamPreview
-          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/M${level}/${screenSize}/${program}.png`}
+          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.png`}
         />
       </section>
 
