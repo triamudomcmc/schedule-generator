@@ -22,28 +22,28 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff"
   }
 
-  const genBGButtonLevel = (inputLevel: LevelType) => {
-    const bgColor = inputLevel === level ? primaryColor : getPrimaryTextColor()
-    const textColor = inputLevel === level ? "#fff" : "rgb(17 24 39)"
+  const isTheSame = <T,>(a: T, b: T) => {
+    const bgColor = a === b ? primaryColor : getPrimaryTextColor()
+    const textColor = a === b ? "#fff" : "rgb(17 24 39)"
     return { backgroundColor: bgColor, color: textColor }
   }
 
-  const genBGButtonProgram = (inputProgram: ProgramType) => {
-    const bgColor = inputProgram === program ? primaryColor : getPrimaryTextColor()
-    const textColor = inputProgram === program ? "#fff" : "rgb(17 24 39)"
-    return { backgroundColor: bgColor, color: textColor }
-  }
-
-  const genBGButtonScreenSize = (inputScreenSize: ScreenSizeType) => {
-    const bgColor = inputScreenSize === screenSize ? primaryColor : getPrimaryTextColor()
-    const textColor = inputScreenSize === screenSize ? "#fff" : "rgb(17 24 39)"
-    return { backgroundColor: bgColor, color: textColor }
-  }
-
-  const genBGButtonTheme = (inputTheme: ThemeType) => {
-    const bgColor = inputTheme === theme ? primaryColor : getPrimaryTextColor()
-    const textColor = inputTheme === theme ? "#fff" : "rgb(17 24 39)"
-    return { backgroundColor: bgColor, color: textColor }
+  const genBGButton = (
+    type: "level" | "program" | "screenSize" | "theme",
+    input: LevelType | ProgramType | ScreenSizeType | ThemeType
+  ) => {
+    switch (type) {
+      case "level":
+        return isTheSame(input, level)
+      case "program":
+        return isTheSame(input, program)
+      case "screenSize":
+        return isTheSame(input, screenSize)
+      case "theme":
+        return isTheSame(input, theme)
+      default:
+        return { backgroundColor: "", color: "" }
+    }
   }
 
   return (
@@ -64,21 +64,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
           <button
             onClick={() => setLevel("4")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonLevel("4")}
+            style={genBGButton("level", "4")}
           >
             ม.4
           </button>
           <button
             onClick={() => setLevel("5")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonLevel("5")}
+            style={genBGButton("level", "5")}
           >
             ม.5
           </button>
           <button
             onClick={() => setLevel("6")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonLevel("6")}
+            style={genBGButton("level", "6")}
           >
             ม.6
           </button>
@@ -92,21 +92,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
           <button
             onClick={() => setProgram("sci-math")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonProgram("sci-math")}
+            style={genBGButton("program", "sci-math")}
           >
             วิทย์-คณิต
           </button>
           <button
             onClick={() => setProgram("arts-math")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonProgram("arts-math")}
+            style={genBGButton("program", "arts-math")}
           >
             ศิลป์คำนวณ
           </button>
           <button
             onClick={() => setProgram("arts-lang")}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonProgram("arts-lang")}
+            style={genBGButton("program", "arts-lang")}
           >
             ศิลป์ภาษา
           </button>
@@ -116,7 +116,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
               setProgram("arts-math-sci")
             }}
             className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButtonProgram("arts-math-sci")}
+            style={genBGButton("program", "arts-math-sci")}
           >
             ภาษาคณิต(วิทย์)
           </button>
@@ -132,28 +132,28 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             title="iPad (3:4)"
             imgSrc="/assets/images/placeholder/ipad.png"
             setScreenSize={setScreenSize}
-            style={genBGButtonScreenSize("ipad")}
+            style={genBGButton("screenSize", "ipad")}
           />
           <ScreenSizeButton
             screenSizeID="iphonex"
             title="iPhone X (19.5:9)"
             imgSrc="/assets/images/placeholder/iphonex.png"
             setScreenSize={setScreenSize}
-            style={genBGButtonScreenSize("iphonex")}
+            style={genBGButton("screenSize", "iphonex")}
           />
           <ScreenSizeButton
             screenSizeID="iphone"
             title="iPhone 8 (16:9)"
             imgSrc="/assets/images/placeholder/iphone.png"
             setScreenSize={setScreenSize}
-            style={genBGButtonScreenSize("iphone")}
+            style={genBGButton("screenSize", "iphone")}
           />
           <ScreenSizeButton
             screenSizeID="huawei"
             title="Huawei (19.5:9, centered)"
             imgSrc="/assets/images/placeholder/huawei.png"
             setScreenSize={setScreenSize}
-            style={genBGButtonScreenSize("huawei")}
+            style={genBGButton("screenSize", "huawei")}
           />
         </div>
       </section>
@@ -167,21 +167,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             title="Whale of a time"
             imgSrc="/assets/images/placeholder/blue.png"
             setTheme={setTheme}
-            style={genBGButtonTheme("blue")}
+            style={genBGButton("theme", "blue")}
           />
           <ThemeButton
             themeID="red"
             title="Paint the town red"
             imgSrc="/assets/images/placeholder/red.png"
             setTheme={setTheme}
-            style={genBGButtonTheme("red")}
+            style={genBGButton("theme", "red")}
           />
           <ThemeButton
             themeID="yellow"
             title="That‘s the cheese !"
             imgSrc="/assets/images/placeholder/yellow.png"
             setTheme={setTheme}
-            style={genBGButtonTheme("yellow")}
+            style={genBGButton("theme", "yellow")}
           />
         </div>
       </section>
@@ -189,7 +189,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
         <ExamPreview
-          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.png`}
+          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
         />
       </section>
 

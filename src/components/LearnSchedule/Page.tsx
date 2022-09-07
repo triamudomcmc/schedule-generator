@@ -30,9 +30,9 @@ import { useToast } from "@components/Toast/Context"
 type BGType = "none" | "mistletoe" | "ordaments"
 
 export const LearnSchedulePage: FC<{
-  seBGcolor: Dispatch<SetStateAction<string>>
+  setBGcolor: Dispatch<SetStateAction<string>>
   setPrimaryColor: Dispatch<SetStateAction<string>>
-}> = ({ seBGcolor, setPrimaryColor }) => {
+}> = ({ setBGcolor, setPrimaryColor }) => {
   const { userData, SignInWithTUCMC, signOut } = useAuth()
   const toast = useToast()
 
@@ -81,7 +81,7 @@ export const LearnSchedulePage: FC<{
   }, [userData])
 
   useEffect(() => {
-    seBGcolor(rawRgbColorToCss(colors.c1))
+    setBGcolor(rawRgbColorToCss(colors.c1))
     setPrimaryColor(rawRgbColorToCss(colors.t1))
   }, [colors])
 
