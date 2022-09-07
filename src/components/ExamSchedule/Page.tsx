@@ -164,21 +164,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="grid grid-cols-2 gap-4">
           <ThemeButton
             themeID="blue"
-            title="Whale of a time"
+            title="Whale of a Time"
             imgSrc="/assets/images/placeholder/blue.png"
             setTheme={setTheme}
             style={genBGButton("theme", "blue")}
           />
           <ThemeButton
             themeID="red"
-            title="Paint the town red"
+            title="Paint the Town Red"
             imgSrc="/assets/images/placeholder/red.png"
             setTheme={setTheme}
             style={genBGButton("theme", "red")}
           />
           <ThemeButton
             themeID="yellow"
-            title="That‘s the cheese !"
+            title="That‘s the Cheese !"
             imgSrc="/assets/images/placeholder/yellow.png"
             setTheme={setTheme}
             style={genBGButton("theme", "yellow")}
