@@ -13,7 +13,7 @@ export const Downloadbutton: FC<{
 }> = ({ level, program, screenSize, theme, style }) => {
   const [waiting, setWaiting] = useState(false)
 
-  const imgUrl = `/assets/images/exam/sum-1-2565/src/${theme}/M${level}/${screenSize}/${program}.jpg`
+  const imgUrl = `/assets/images/exam/final-1-2565/src/${theme}/M${level}/${screenSize}/${program}.png`
 
   const download = async () => {
     if (waiting) return
