@@ -9,7 +9,7 @@ import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
-export type ScreenSizeType = "ipad" | "iphonex" | "iphone" | "huawei"
+export type ScreenSizeType = "ipad" | "iphonex" | "iphone8" | "huawei"
 export type ThemeType = "blue" | "red" | "yellow"
 
 export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
@@ -142,11 +142,11 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             style={genBGButton("screenSize", "iphonex")}
           />
           <ScreenSizeButton
-            screenSizeID="iphone"
+            screenSizeID="iphone8"
             title="iPhone 8 (16:9)"
-            imgSrc="/assets/images/placeholder/iphone.png"
+            imgSrc="/assets/images/placeholder/iphone8.png"
             setScreenSize={setScreenSize}
-            style={genBGButton("screenSize", "iphone")}
+            style={genBGButton("screenSize", "iphone8")}
           />
           <ScreenSizeButton
             screenSizeID="huawei"
