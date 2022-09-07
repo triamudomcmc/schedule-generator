@@ -10,7 +10,7 @@ import { ThemeButton } from "./Components/ThemeButton"
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
 export type ScreenSizeType = "ipad" | "iphonex" | "iphone" | "huawei"
-export type ThemeType = "blue" | "pink" | "purple"
+export type ThemeType = "blue" | "red" | "yellow"
 
 export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
   const [level, setLevel] = useState<LevelType>("4")
@@ -50,7 +50,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     <div>
       <header>
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
-          ตารางสอบกลางภาค &#40;SUM&#41;
+          ตารางปลายกลางภาค &#40;FIANL&#41;
           <br />
           ภาคเรียนที่ 1 ปีการศึกษา 2565
         </h1>
@@ -161,24 +161,24 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="grid grid-cols-2 gap-4">
           <ThemeButton
             themeID="blue"
-            title="Blue Moon"
-            imgSrc="/assets/images/placeholder/blue.jpg"
+            title="Whale of a time"
+            imgSrc="/assets/images/placeholder/blue.png"
             setTheme={setTheme}
             style={genBGButton("theme", "blue")}
           />
           <ThemeButton
-            themeID="pink"
-            title="Raspberry Ripple"
-            imgSrc="/assets/images/placeholder/pink.jpg"
+            themeID="red"
+            title="Paint the town red"
+            imgSrc="/assets/images/placeholder/red.png"
             setTheme={setTheme}
-            style={genBGButton("theme", "pink")}
+            style={genBGButton("theme", "red")}
           />
           <ThemeButton
-            themeID="purple"
-            title="Lavender Mousse"
-            imgSrc="/assets/images/placeholder/purple.jpg"
+            themeID="yellow"
+            title="That‘s the cheese !"
+            imgSrc="/assets/images/placeholder/yellow.png"
             setTheme={setTheme}
-            style={genBGButton("theme", "purple")}
+            style={genBGButton("theme", "yellow")}
           />
         </div>
       </section>
@@ -186,7 +186,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
         <ExamPreview
-          imgSrc={`/assets/images/exam/sum-1-2565/preview/${theme}/M${level}/${screenSize}/${program}.jpg`}
+          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/M${level}/${screenSize}/${program}.png`}
         />
       </section>
 
