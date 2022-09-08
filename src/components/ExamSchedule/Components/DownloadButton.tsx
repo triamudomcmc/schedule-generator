@@ -30,7 +30,7 @@ export const Downloadbutton: FC<{
 
     const a = document.createElement("a")
     a.href = imgUrl
-    a.download = `schedule.jpg`
+    a.download = `schedule.png`
     document.body.appendChild(a)
     a.click()
     a.remove()
