@@ -10,6 +10,7 @@ import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } f
 import Image from "next/image"
 import classNames from "classnames"
 import { Mistletoe, Ordaments } from "@components/Background"
+import { selOpt } from '@handlers/server/optHandler'
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -35,7 +36,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2565"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2565"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -54,8 +55,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let scheduleData: ScheduleData | null = null
 
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2565/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2565/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
+    scheduleData = selOpt(scheduleData)
   }
 
   return {
@@ -102,17 +104,17 @@ const Room = ({ scheduleData }: RoomProps) => {
   const genSchedule = (period: number) => {
     return (
       <>
-        {Array(period <= 3 ? 5 : 4)
-          .fill("")
-          .map((_, i) => {
-            const name = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
-              ? scheduleData?.data[`${i + 1}:${period}`].name
-              : "" ?? ""
-            const teacher = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
-              ? scheduleData?.data[`${i + 1}:${period}`].teacher
-              : "" ?? ""
+        {Array(4)
+         .fill("")
+         .map((_, i) => {
+             const name = period in scheduleData?.body[i+1]
+             ? scheduleData?.body[i+1][period][0]
+             : "" ?? ""
+             const teacher = period in scheduleData?.body[i+1]
+             ? scheduleData?.body[i+1][period][1]
+             : "" ?? ""
 
-            return (
+            if (name || teacher) return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
                 <div className="text">
                   <strong
@@ -175,16 +177,16 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 1/2565
+                  ภาคเรียนที่ 2/2565
                 </p>
               </div>
             </div>
             <div className="right">
               <h2 className="room" style={{ color: color.t2 }}>
-                ห้อง {scheduleData.room} | {scheduleData.branch}
+                ห้อง {scheduleData.room} | {scheduleData.meta.branch}
               </h2>
               <div className="teacher" style={{ color: color.t2 }}>
-                {scheduleData.teachers.map((teacher) => (
+                {scheduleData.meta.teacher.map((teacher) => (
                   <p className="text" key={teacher}>
                     {teacher}
                   </p>
@@ -217,7 +219,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    07.50-08.40
+                    07.50-08.30
                   </div>
                   {genSchedule(1)}
                 </div>
@@ -227,7 +229,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    08.40-09.30
+                    08.30-09.10
                   </div>
                   {genSchedule(2)}
                 </div>
@@ -245,7 +247,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    09.40-10.30
+                    09.20-10.00
                   </div>
                   {genSchedule(3)}
                 </div>
@@ -255,13 +257,13 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    10.30-11.20
+                    10.00-10.40
                   </div>
                   {genSchedule(4)}
                 </div>
                 {/* lunchbreak */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="lunch-button no-afternoon">
+                  <div style={{ backgroundColor: color.bg }} className="lunch-button">
                     <p className="text">พัก</p>
                     <p className="text">กลาง</p>
                     <p className="text">วัน</p>
@@ -273,7 +275,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    12.20-13.10
+                    12.20-13.00
                   </div>
                   {genSchedule(5)}
                 </div>
@@ -283,13 +285,13 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    13.10-14.00
+                    13.00-13.40
                   </div>
                   {genSchedule(6)}
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="break10-button no-afternoon">
+                  <div style={{ backgroundColor: color.bg }} className="break10-button">
                     <p className="text">พัก</p>
                     <p className="text">10</p>
                     <p className="text">นาที</p>
@@ -301,7 +303,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    14.10-15.00
+                    13.50-14.30
                   </div>
                   {genSchedule(7)}
                 </div>
@@ -311,9 +313,19 @@ const Room = ({ scheduleData }: RoomProps) => {
                     className="time"
                     style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
                   >
-                    15.00-15.50
+                    14.30-15.10
                   </div>
                   {genSchedule(8)}
+                </div>
+                {/* 9 */}
+                <div className="col">
+                  <div
+                    className="time"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                  >
+                    15.10-15.50
+                  </div>
+                  {genSchedule(9)}
                 </div>
               </div>
               {/*
