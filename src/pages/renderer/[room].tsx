@@ -23,16 +23,21 @@ const defaultColors = {
   c5: rawRgbColorToCss(hexToRgbA("#BA5757")),
 }
 
-interface Data {
-  name: string
-  teacher: string
+interface ScheduleMeta {
+  branch: string
+  teacher: string[]
+  room: string
+  opt: number
+}
+
+interface ScheduleBody {
+  [key: string]: string[]
 }
 
 interface ScheduleData {
+  meta: ScheduleMeta
+  body: ScheduleBody
   room: string
-  branch: string
-  teachers: string[]
-  data: Record<string, Data>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
