@@ -1,7 +1,8 @@
 import chrome from "chrome-aws-lambda"
 import puppeteer from "puppeteer-core"
 
-export default async function screenshot(url: string, width: number = 2388, height: number = 1768) {
+// export default async function screenshot(url: string, width: number = 2388, height: number = 1768) {
+export default async function screenshot(url: string, width: number = 2610, height: number = 1957) {
   const options = process.env.AWS_REGION
     ? {
         args: chrome.args,

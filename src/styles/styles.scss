@@ -1,5 +1,9 @@
-$width: 2388px;
+// $width: 2388px;
+// $height: 1768px;
+
+$width: 2600px;
 $height: 1768px;
+
 
 body {
   margin: 0;
@@ -107,9 +111,9 @@ body {
   position: relative;
   margin-bottom: 106px;
 
-  &.friday {
-    width: 39%;
-  }
+  // &.friday {
+  //   width: 39%;
+  // }
 
   > .button {
     position: relative;
@@ -124,14 +128,15 @@ body {
     text-align: center;
   }
 
-  > .line {
-    height: 28px;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.15);
-  }
+  // > .line {
+  //   height: 28px;
+  //   width: 250px;
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.15);
+  //   z-index: -1;
+  // }
 }
 
 .schedules {
@@ -151,6 +156,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-right: 15px;
+  
 
   &:last-child {
     margin-right: 0;
@@ -176,6 +182,39 @@ body {
     width: 197.5px;
     height: 162px;
     background-color: #fff;
+    margin-bottom: 42px;
+    z-index: 2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  >.line{
+    height: 28px;
+    width: 370px;
+    position: absolute;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.15);
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: -1;
+    // display: flex;
+    // margin-right: 0;
+    // margin-left: auto;
+    // justify-content: flex-end;
+    right: 0;
+  }
+
+  > .blank{
+    position: relative;
+    display: inline-block;
+    // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    font-size: 36px;
+    width: 197.5px;
+    height: 162px;
+    background-color: transparent;
     margin-bottom: 42px;
 
     &:last-child {
@@ -263,29 +302,29 @@ body {
   }
 }
 
-/*
-.schedules > .fri {
-  > .button {
-    position: relative;
-    display: inline-block;
-    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    width: 100%;
-    height: 152px;
-    background-color: #fff;
 
-    > .text {
-      font-size: 36px;
-      text-align: center;
-      color: #a6a8ab;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-}
-*/
+// .schedules > .fri {
+//   > .button {
+//     position: relative;
+//     display: inline-block;
+//     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
+//     border-radius: 20px;
+//     width: 100%;
+//     height: 152px;
+//     background-color: #fff;
+
+//     > .text {
+//       font-size: 36px;
+//       text-align: center;
+//       color: #a6a8ab;
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//     }
+//   }
+// }
+
 
 .popup {
   background-color: #ffffff;
