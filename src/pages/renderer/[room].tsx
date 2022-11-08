@@ -123,7 +123,7 @@ const Room = ({ scheduleData }: RoomProps) => {
 
             if (name || teacher) return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
-                <div className="line" style={{ backgroundColor: Days[i].color }}></div>
+                {/* <div className="line" style={{ backgroundColor: Days[i].color }}></div> */}
                 <div className="text">
                   <strong
                     className="subject"
@@ -141,7 +141,7 @@ const Room = ({ scheduleData }: RoomProps) => {
               </div>
             )
             else return(
-              <div className="blank"></div>
+              <div className="blank" style={{ backgroundColor: defaultColors.bg }}></div>
             )
           })}
       </>
@@ -218,7 +218,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   >
                     {day.name}
                   </div>
-                  {/* <div className="line" style={{ backgroundColor: day.color }}></div> */}
+                  <div className="line" style={{ backgroundColor: day.color }}></div>
                 </div>
               ))}
             </div>
