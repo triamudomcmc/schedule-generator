@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
     console.log(scheduleData?.meta.room)
-    console.log(scheduleData?.body)
+    console.log(scheduleData?.body[1][1])
   }
 
   return {
@@ -141,7 +141,8 @@ const Room = ({ scheduleData }: RoomProps) => {
               </div>
             )
             else return(
-              <div className="blank" style={{ backgroundColor: defaultColors.bg }}></div>
+              <div className="blank" ></div>
+              // style={{ backgroundColor: defaultColors.bg }}
             )
           })}
       </>
@@ -152,25 +153,42 @@ const Room = ({ scheduleData }: RoomProps) => {
     {
       name: "จันทร์",
       color: color.c1,
+      order: 1
     },
     {
       name: "อังคาร",
       color: color.c2,
+      order: 2
     },
     {
       name: "พุธ",
       color: color.c3,
+      order: 3
     },
     {
       name: "พฤหัสฯ",
       color: color.c4,
+      order: 4
     },
-    // {
-    //   name: "ศุกร์",
-    //   color: color.c5,
-    // },
+    {
+      name: "ศุกร์",
+      color: color.c5,
+      order: 5
+    },
   ]
 
+  const getClassNumber = (day: number) => {
+    let classNumber = 0
+
+    for(let i in scheduleData.body[day]){
+      if(scheduleData.body[day][i] != ""){
+        classNumber++
+      }
+    }
+
+      return classNumber
+    }
+ 
   return (
     <>
       {/* <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
@@ -218,7 +236,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   >
                     {day.name}
                   </div>
-                  <div className="line" style={{ backgroundColor: day.color }}></div>
+                  <div className="line" style={{ backgroundColor: day.color , width: 300 + (230 * getClassNumber(day.order))}}></div>
                 </div>
               ))}
             </div>
@@ -338,11 +356,11 @@ const Room = ({ scheduleData }: RoomProps) => {
                   {genSchedule(9)}
                 </div>
               </div>
-              {/* <div className="fri">
+              <div className="fri">
                 <div className="button">
                   <p className="text">เรียนวิชารักษาดินแดน</p>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <Logo color={color.t1} />
