@@ -215,7 +215,7 @@ export const LearnSchedulePage: FC<{
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 1 ปีการศึกษา 2565
+          ภาคเรียนที่ 2 ปีการศึกษา 2565
         </h1>
         <p className="mt-3 text-sm leading-5 text-gray-400">
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;

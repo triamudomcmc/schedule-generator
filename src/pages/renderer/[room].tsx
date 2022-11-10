@@ -356,7 +356,7 @@ const Room = ({ scheduleData }: RoomProps) => {
               </div>
               <div className="fri">
                 <div className="button">
-                  <p className="text">เรียนวิชารักษาดินแดน</p>
+                  <p className="text">วิชารักษาดินแดน</p>
                 </div>
               </div>
             </div>
