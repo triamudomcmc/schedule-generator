@@ -63,8 +63,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2565/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
-    console.log(scheduleData?.meta.room)
-    console.log(scheduleData?.body[1][1])
   }
 
   return {

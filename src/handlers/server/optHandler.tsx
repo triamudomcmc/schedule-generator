@@ -18,7 +18,7 @@ export const selOpt = (og: any) => {
         }
         case 2:
         case 4: {
-            // M.4 Sci-Math/Lang-Lang except GM,GS | M.5 Sci-Math
+            // M.4 Sci-Math/Lang-Lang GM,GS | M.5 Sci-Math
             // Mon per8 use per3 from Fri, then per9 = club
             // Tue per9 use per1 from Fri
             // Thu per9 use per2 from Fri
