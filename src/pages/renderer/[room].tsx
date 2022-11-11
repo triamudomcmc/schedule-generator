@@ -140,7 +140,6 @@ const Room = ({ scheduleData }: RoomProps) => {
             )
             else return(
               <div className="blank" ></div>
-              // style={{ backgroundColor: defaultColors.bg }}
             )
           })}
       </>
@@ -177,13 +176,10 @@ const Room = ({ scheduleData }: RoomProps) => {
 
   const getClassNumber = (day: number) => {
     let classNumber = 0
-
     for(let i in scheduleData.body[day]){
       if(scheduleData.body[day][i] != ""){
         classNumber++
-      }
-    }
-
+      }}
       return classNumber
     }
  
