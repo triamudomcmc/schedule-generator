@@ -37,7 +37,7 @@ body {
 .wrapper > .header {
   display: flex;
   width: $width - 302px;
-  padding-top: 390px;
+  padding-top: 340px;
   // padding-top: 290px;
   margin: 0 auto 0 auto;
   justify-content: space-between;
@@ -97,7 +97,7 @@ body {
 .wrapper > .main {
   margin: 115px auto 0 auto;
   position: relative;
-  padding-top: 50px;
+  padding-top: 25px;
 }
 
 .wrapper > .main > .days {
