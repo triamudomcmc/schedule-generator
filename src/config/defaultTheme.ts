@@ -111,8 +111,8 @@ export const DefaultTheme: Record<string, ColorTheme> = {
   Day: {
     name: "Festive Frolies",
     bg: hexToRgbA("#FFFFFF"),
-    t1: hexToRgbA("#6473FF"),
-    t2: hexToRgbA("#6473FF"),
+    t1: hexToRgbA("#FBA2DD"),
+    t2: hexToRgbA("#FBA2DD"),
     c1: hexToRgbA("#FFD53F"),
     c2: hexToRgbA("#FBA2DD"),
     c3: hexToRgbA("#47C597"),
@@ -120,7 +120,7 @@ export const DefaultTheme: Record<string, ColorTheme> = {
     c5: hexToRgbA("#6473FF"),
   },
   Pastel: {
-    name: "Winter wonderland",
+    name: "Winter Wonderland",
     bg: hexToRgbA("#FFFFFF"),
     t1: hexToRgbA("#8590FB"),
     t2: hexToRgbA("#8590FB"),
