@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments } from "@components/Background"
+import { Mistletoe, Ordaments, Sticker, Flower } from "@components/Background"
 import { selOpt } from '@handlers/server/optHandler'
 
 const defaultColors = {
@@ -77,7 +77,7 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
 
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
@@ -192,6 +192,8 @@ const Room = ({ scheduleData }: RoomProps) => {
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           {background === "mistletoe" && <Mistletoe />}
           {background === "ordaments" && <Ordaments color={color.c1} />}
+          {background === "sticker" && <Sticker />}
+          {background === "flower" && <Flower />}
           <div className="header">
             <div className="left">
               {/*<div className="bar"></div>*/}

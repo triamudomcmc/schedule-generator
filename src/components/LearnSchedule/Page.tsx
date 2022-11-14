@@ -27,7 +27,7 @@ import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
 
-type BGType = "none" | "mistletoe" | "ordaments"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
 
 export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
@@ -510,7 +510,8 @@ export const LearnSchedulePage: FC<{
         {/* background */}
         <section className="flex flex-col justify-center space-y-2">
           <h3 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง </h3>
-          <div className="flex space-x-1">
+          <div className="flex">
+            <div className="space-x-1 space-y-1">
             <button
               onClick={() => setBackground("none")}
               className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
@@ -518,7 +519,7 @@ export const LearnSchedulePage: FC<{
             >
               ไม่มี
             </button>
-            <button
+            {/* <button
               onClick={() => setBackground("ordaments")}
               className={classNames(genBGButton("ordaments"), "rounded-xl border border-gray-300 px-4 py-2")}
               style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
@@ -531,7 +532,22 @@ export const LearnSchedulePage: FC<{
               style={{ backgroundColor: background === "mistletoe" ? rawRgbColorToCss(colors.t1) : "#fff" }}
             >
               Mistletoe
+            </button> */}
+            <button
+              onClick={() => setBackground("sticker")}
+              className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
+              style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+            >
+              COOL KIDS starter pack
             </button>
+            <button
+              onClick={() => setBackground("flower")}
+              className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
+              style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+            >
+               Dans un Jardin
+            </button>
+            </div>
           </div>
         </section>
       </section>

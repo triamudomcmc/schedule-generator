@@ -2,7 +2,7 @@
 // $height: 1768px;
 
 $width: 2600px;
-$height: 1768px;
+$height: 1816;
 
 
 body {
@@ -23,6 +23,10 @@ body {
   background-color: #fff;
   position: relative;
   // border: 1px solid gray;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .logo {
@@ -106,6 +110,7 @@ body {
   justify-content: center;
   width: 90%;
   margin-left: 30px;
+  margin-top: 30px;
 }
 
 .wrapper > .main > .days > .day {
