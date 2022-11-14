@@ -188,7 +188,7 @@ const Room = ({ scheduleData }: RoomProps) => {
       {/* <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
         <Image src="/ref.png" width={2388} height={1668} />
       </div> */}
-      <div style={{ backgroundColor: color.bg }}>
+      <div style={{ backgroundColor: color.bg }} className="w-[2700px] h-[1886px]">
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           {background === "mistletoe" && <Mistletoe />}
           {background === "ordaments" && <Ordaments color={color.c1} />}
@@ -353,8 +353,11 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
               </div>
               <div className="fri">
-                <div className="button">
-                  <p className="text">วิชารักษาดินแดน</p>
+                <div className="button" style={{ backgroundColor: color.bg }}>
+                  <div className="text"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
+                    >
+                      วิชารักษาดินแดน</div>
                 </div>
               </div>
             </div>
