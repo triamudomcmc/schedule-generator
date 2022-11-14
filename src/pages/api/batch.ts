@@ -47,5 +47,5 @@ import JSZip from "jszip"
 // }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({ name: "John Doe" })
+  res.status(200).json({ word: "1053 over 2-99" })
 }
