@@ -109,7 +109,7 @@ export const DefaultTheme: Record<string, ColorTheme> = {
     c5: hexToRgbA("#7FAE42"),
   },
   Day: {
-    name: "Festive Frolies",
+    name: "Festive Frolics",
     bg: hexToRgbA("#FFFFFF"),
     t1: hexToRgbA("#FBA2DD"),
     t2: hexToRgbA("#FBA2DD"),
