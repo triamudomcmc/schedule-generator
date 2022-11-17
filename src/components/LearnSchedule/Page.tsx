@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import { Ellipsis } from "@components/Loader/Ellipsis"
 import classNames from "classnames"
 import { DescribeRoute } from "@components/Meta/DescribeRoute"
-import { useAuth } from "tucmc-auth"
+import {TUCMCLogin, useAuth} from "tucmc-auth"
 import { ColorTheme, DefaultTheme } from "@config/defaultTheme"
 import { LongLogo } from "@components/Logo/LongLogo"
 import { downloadScreenshot } from "@handlers/client/downloadScreenshot"
@@ -26,6 +26,7 @@ import Image from "next/image"
 import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
+import {log} from "util";
 
 type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
 
@@ -33,7 +34,7 @@ export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
   setPrimaryColor: Dispatch<SetStateAction<string>>
 }> = ({ setBGcolor, setPrimaryColor }) => {
-  const { userData, SignInWithTUCMC, signOut } = useAuth()
+  const { loggedUser, signOut } = useAuth()
   const toast = useToast()
 
   const [waiting, setWaiting] = useState(false)
@@ -69,16 +70,16 @@ export const LearnSchedulePage: FC<{
   }, [theme])
 
   useEffect(() => {
-    if (userData) {
+    if (loggedUser) {
       // set preferences, custom themes
-      checkUserInDB(db, userData as any, { background: background, theme: theme }, customThemes).then((data) => {
+      checkUserInDB(db, loggedUser.user as any, { background: background, theme: theme }, customThemes).then((data) => {
         if (!data) return
         setBackground(data.background)
         setCustomThemes(data.customThemes)
         setTheme(data.theme)
       })
     }
-  }, [userData])
+  }, [loggedUser])
 
   useEffect(() => {
     setBGcolor(rawRgbColorToCss(colors.c1))
@@ -180,7 +181,7 @@ export const LearnSchedulePage: FC<{
             />
             <button
               onClick={() => {
-                if (themeName === "" || !userData) return
+                if (themeName === "" || !loggedUser) return
 
                 // save stuff
                 const generatedID = uuidv4()
@@ -189,7 +190,7 @@ export const LearnSchedulePage: FC<{
                 setCustomThemes(newCustomThemes)
                 setTheme(`c-${generatedID}`)
                 // save to db
-                updateCustomThemes(db, userData as any, newCustomThemes, theme)
+                updateCustomThemes(db, loggedUser.user as any, newCustomThemes, theme)
                 toggleSuccess()
                 setCloseState(true)
                 setThemeName("")
@@ -225,11 +226,11 @@ export const LearnSchedulePage: FC<{
         </p>
 
         <div className="flex flex-col mt-4 space-y-2">
-          {!userData ? (
+          {!loggedUser ? (
             <>
               <p>เข้าสู่ระบบเพื่อบันทึกธีมสีของคุณ</p>
               <div className="w-48 transition-transform hover:scale-105">
-                <SignInWithTUCMC />
+                <TUCMCLogin/>
               </div>
             </>
           ) : (
@@ -341,7 +342,7 @@ export const LearnSchedulePage: FC<{
                   <div className="py-2">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="">ธีมสีที่สร้าง</h3>
-                      {!userData ? (
+                      {!loggedUser ? (
                         <div></div>
                       ) : (
                         <button
@@ -355,7 +356,7 @@ export const LearnSchedulePage: FC<{
                     </div>
                     <hr className="mb-3 border-gray-300 rounded-lg border-1" />
                     <div className="space-y-2.5">
-                      {!userData ? (
+                      {!loggedUser ? (
                         <p className="text-sm text-gray-400">เข้าสู่ระบบเพื่อบันทึกธีมสีที่สร้าง</p>
                       ) : (
                         Object.keys(customThemes).map((cTheme) => {
@@ -375,7 +376,7 @@ export const LearnSchedulePage: FC<{
                                   const newCustomThemes = removeKey(customThemes, cTheme)
                                   setCustomThemes(newCustomThemes)
                                   // save to db
-                                  updateCustomThemes(db, userData as any, newCustomThemes, theme)
+                                  updateCustomThemes(db, loggedUser.user as any, newCustomThemes, theme)
                                   toggleSuccess()
                                 }}
                               >
@@ -409,7 +410,7 @@ export const LearnSchedulePage: FC<{
           <div className="flex flex-col justify-center">
             <div className="flex items-center justify-between mb-4 space-x-4">
               <h3 className="text-lg font-medium text-gray-600">ชุดสี </h3>
-              {userData ? (
+              {loggedUser ? (
                 <button
                   onClick={() => {
                     // if editing default theme, create new customTheme
@@ -421,7 +422,7 @@ export const LearnSchedulePage: FC<{
                       const newCustomThemes = { ...customThemes, [theme.replace("c-", "")]: { ...colors } }
                       setCustomThemes(newCustomThemes)
                       // save to db
-                      updateCustomThemes(db, userData as any, newCustomThemes, theme)
+                      updateCustomThemes(db, loggedUser.user as any, newCustomThemes, theme)
                       toggleSuccess()
                     }
                   }}
