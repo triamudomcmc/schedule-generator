@@ -2,7 +2,9 @@ import { CSSProperties, FC, useState } from "react"
 import { motion } from "framer-motion"
 import classNames from "classnames"
 import { Ellipsis } from "@components/Loader/Ellipsis"
-import { LevelType, ProgramType, ScreenSizeType, ThemeType } from "../Page"
+// import { LevelType, ProgramType, ScreenSizeType, ThemeType } from "../Page"
+import { LevelType, ProgramType, ScreenSizeType } from "../Page"
+
 
 export const Downloadbutton: FC<{
   level: LevelType

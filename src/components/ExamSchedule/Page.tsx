@@ -5,7 +5,7 @@ import { FC, useState } from "react"
 import { Downloadbutton } from "./Components/DownloadButton"
 import { ExamPreview } from "./Components/Preview"
 import { ScreenSizeButton } from "./Components/ScreenSize"
-import { ThemeButton } from "./Components/ThemeButton"
+// import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
