@@ -8,12 +8,15 @@ export const Downloadbutton: FC<{
   level: LevelType
   program: ProgramType
   screenSize: ScreenSizeType
-  theme: ThemeType
+  // theme: ThemeType
   style: CSSProperties
-}> = ({ level, program, screenSize, theme, style }) => {
+// }> = ({ level, program, screenSize, theme, style }) => {
+}> = ({ level, program, screenSize, style }) => {
+
   const [waiting, setWaiting] = useState(false)
 
-  const imgUrl = `/assets/images/exam/final-1-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
+  // const imgUrl = `/assets/images/exam/final-1-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
+  const imgUrl = `/assets/images/exam/sum-2-2565/src/m${level}/${screenSize}/${program}.png`
 
   const download = async () => {
     if (waiting) return
@@ -25,7 +28,7 @@ export const Downloadbutton: FC<{
       level,
       program,
       screenSize,
-      theme,
+      // theme,
     })
 
     const a = document.createElement("a")
@@ -39,7 +42,7 @@ export const Downloadbutton: FC<{
   }
 
   return (
-    <div className="mt-2 flex justify-center sm:mt-10">
+    <div className="flex justify-center mt-2 sm:mt-10">
       <motion.button
         whileHover={{ scale: !waiting ? 1.05 : 1 }}
         onClick={download}
