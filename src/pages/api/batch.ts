@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import screenshot from "@utils/screenshot"
-import fs from "fs"
-import { rooms } from "@utils/constants"
-import path from "path"
-import JSZip from "jszip"
+// import screenshot from "@utils/screenshot"
+// import fs from "fs"
+// import { rooms } from "@utils/constants"
+// import path from "path"
+// import JSZip from "jszip"
 
 // type Data = {
 //   name: string
@@ -47,5 +47,5 @@ import JSZip from "jszip"
 // }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({ name: "John Doe" })
+  res.status(200).json({ word: "1053 over 2-99" })
 }

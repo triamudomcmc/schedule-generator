@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments } from "@components/Background"
+import { Mistletoe, Ordaments, Sticker, Flower } from "@components/Background"
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -22,20 +22,25 @@ const defaultColors = {
   c5: rawRgbColorToCss(hexToRgbA("#BA5757")),
 }
 
-interface Data {
-  name: string
-  teacher: string
+interface ScheduleMeta {
+  branch: string
+  teacher: string[]
+  room: string
+  opt: number
+}
+
+interface ScheduleBody {
+  [key: string]: string[]
 }
 
 interface ScheduleData {
+  meta: ScheduleMeta
+  body: ScheduleBody
   room: string
-  branch: string
-  teachers: string[]
-  data: Record<string, Data>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2565"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2565"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -54,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let scheduleData: ScheduleData | null = null
 
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2565/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2565/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
   }
 
@@ -70,7 +75,7 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
 
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
@@ -105,12 +110,12 @@ const Room = ({ scheduleData }: RoomProps) => {
         {Array(period <= 3 ? 5 : 4)
           .fill("")
           .map((_, i) => {
-            const name = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
-              ? scheduleData?.data[`${i + 1}:${period}`].name
-              : "" ?? ""
-            const teacher = scheduleData?.data?.hasOwnProperty(`${i + 1}:${period}`)
-              ? scheduleData?.data[`${i + 1}:${period}`].teacher
-              : "" ?? ""
+            const name = period in scheduleData?.body[i+1]
+            ? scheduleData?.body[i+1][period][0]
+            : "" ?? ""
+            const teacher = period in scheduleData?.body[i+1]
+            ? scheduleData?.body[i+1][period][1]
+            : "" ?? ""
 
             return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>
@@ -167,6 +172,8 @@ const Room = ({ scheduleData }: RoomProps) => {
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           {background === "mistletoe" && <Mistletoe />}
           {background === "ordaments" && <Ordaments color={color.c1} />}
+          {background === "sticker" && <Sticker />}
+          {background === "flower" && <Flower />}
           <div className="header">
             <div className="left">
               {/*<div className="bar"></div>*/}
@@ -175,16 +182,16 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 1/2565
+                  ภาคเรียนที่ 2/2565
                 </p>
               </div>
             </div>
             <div className="right">
               <h2 className="room" style={{ color: color.t2 }}>
-                ห้อง {scheduleData.room} | {scheduleData.branch}
+                ห้อง {scheduleData.room} | {scheduleData.meta.branch}
               </h2>
               <div className="teacher" style={{ color: color.t2 }}>
-                {scheduleData.teachers.map((teacher) => (
+                {scheduleData.meta.teacher.map((teacher) => (
                   <p className="text" key={teacher}>
                     {teacher}
                   </p>

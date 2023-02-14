@@ -31,6 +31,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ExamSchedule/Components/ThemeButton.tsx.tmp"],
   "exclude": ["node_modules"]
 }

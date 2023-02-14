@@ -5,18 +5,19 @@ import { FC, useState } from "react"
 import { Downloadbutton } from "./Components/DownloadButton"
 import { ExamPreview } from "./Components/Preview"
 import { ScreenSizeButton } from "./Components/ScreenSize"
-import { ThemeButton } from "./Components/ThemeButton"
+// import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
 export type ScreenSizeType = "ipad" | "iphonex" | "iphone8" | "huawei"
-export type ThemeType = "blue" | "red" | "yellow"
+// export type ThemeType = "blue" | "red" | "yellow"
+
 
 export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
   const [level, setLevel] = useState<LevelType>("4")
   const [program, setProgram] = useState<ProgramType>("sci-math")
   const [screenSize, setScreenSize] = useState<ScreenSizeType>("ipad")
-  const [theme, setTheme] = useState<ThemeType>("blue")
+  // const [theme, setTheme] = useState<ThemeType>("blue")
 
   const getPrimaryTextColor = () => {
     return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff"
@@ -30,7 +31,8 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
 
   const genBGButton = (
     type: "level" | "program" | "screenSize" | "theme",
-    input: LevelType | ProgramType | ScreenSizeType | ThemeType
+    // input: LevelType | ProgramType | ScreenSizeType | ThemeType
+    input: LevelType | ProgramType | ScreenSizeType 
   ) => {
     switch (type) {
       case "level":
@@ -40,7 +42,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       case "screenSize":
         return isTheSame(input, screenSize)
       case "theme":
-        return isTheSame(input, theme)
+        // return isTheSame(input, theme)
       default:
         return { backgroundColor: "", color: "" }
     }
@@ -50,9 +52,9 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     <div>
       <header>
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
-          ตารางสอบปลายภาค &#40;FINAL&#41;
+          ตารางสอบกลางภาค &#40;SUM&#41;
           <br />
-          ภาคเรียนที่ 1 ปีการศึกษา 2565
+          ภาคเรียนที่ 2 ปีการศึกษา 2565
         </h1>
         <p className="mt-3 text-sm leading-5 text-gray-400">เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
@@ -63,21 +65,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="flex space-x-1">
           <button
             onClick={() => setLevel("4")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("level", "4")}
           >
             ม.4
           </button>
           <button
             onClick={() => setLevel("5")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("level", "5")}
           >
             ม.5
           </button>
           <button
             onClick={() => setLevel("6")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("level", "6")}
           >
             ม.6
@@ -91,21 +93,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="flex space-x-1">
           <button
             onClick={() => setProgram("sci-math")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("program", "sci-math")}
           >
             วิทย์-คณิต
           </button>
           <button
             onClick={() => setProgram("arts-math")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("program", "arts-math")}
           >
             ศิลป์คำนวณ
           </button>
           <button
             onClick={() => setProgram("arts-lang")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("program", "arts-lang")}
           >
             ศิลป์ภาษา
@@ -115,7 +117,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
               setLevel("6")
               setProgram("arts-math-sci")
             }}
-            className="rounded-xl border border-gray-300 px-4 py-2"
+            className="px-4 py-2 border border-gray-300 rounded-xl"
             style={genBGButton("program", "arts-math-sci")}
           >
             ภาษาคณิต(วิทย์)
@@ -158,7 +160,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      <section className="mt-10 space-y-2">
+      {/* <section className="mt-10 space-y-2">
         <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีมสี</h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -184,12 +186,13 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             style={genBGButton("theme", "yellow")}
           />
         </div>
-      </section>
+      </section> */}
 
       <section className="mt-10 space-y-2">
-        <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
+        <h2 className="text-xl font-medium text-center text-gray-600 sm:text-2xl">Preview</h2>
         <ExamPreview
-          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
+          // imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
+          imgSrc={`/assets/images/exam/sum-2-2565/preview/m${level}/${screenSize}/${program}.JPG`}
         />
       </section>
 
@@ -197,7 +200,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         level={level}
         program={program}
         screenSize={screenSize}
-        theme={theme}
+        // theme={theme}
         style={{ backgroundColor: primaryColor, color: getPrimaryTextColor() }}
       />
 

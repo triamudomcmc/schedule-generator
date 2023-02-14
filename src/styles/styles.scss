@@ -33,7 +33,8 @@ body {
 .wrapper > .header {
   display: flex;
   width: $width - 302px;
-  padding-top: 390px;
+  // padding-top: 390px;
+  padding-top: 340px;
   margin: 0 auto 0 auto;
   justify-content: space-between;
   align-items: center;
