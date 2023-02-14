@@ -5,19 +5,18 @@ import { FC, useState } from "react"
 import { Downloadbutton } from "./Components/DownloadButton"
 import { ExamPreview } from "./Components/Preview"
 import { ScreenSizeButton } from "./Components/ScreenSize"
-// import { ThemeButton } from "./Components/ThemeButton"
+import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
 export type ScreenSizeType = "ipad" | "iphonex" | "iphone8" | "huawei"
-// export type ThemeType = "blue" | "red" | "yellow"
-
+export type ThemeType = "single" | "left" | "right"
 
 export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
   const [level, setLevel] = useState<LevelType>("4")
   const [program, setProgram] = useState<ProgramType>("sci-math")
   const [screenSize, setScreenSize] = useState<ScreenSizeType>("ipad")
-  // const [theme, setTheme] = useState<ThemeType>("blue")
+  const [theme, setTheme] = useState<ThemeType>("single")
 
   const getPrimaryTextColor = () => {
     return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff"
@@ -31,8 +30,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
 
   const genBGButton = (
     type: "level" | "program" | "screenSize" | "theme",
-    // input: LevelType | ProgramType | ScreenSizeType | ThemeType
-    input: LevelType | ProgramType | ScreenSizeType 
+    input: LevelType | ProgramType | ScreenSizeType | ThemeType
   ) => {
     switch (type) {
       case "level":
@@ -42,7 +40,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       case "screenSize":
         return isTheSame(input, screenSize)
       case "theme":
-        // return isTheSame(input, theme)
+        return isTheSame(input, theme)
       default:
         return { backgroundColor: "", color: "" }
     }
@@ -52,7 +50,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     <div>
       <header>
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
-          ตารางสอบกลางภาค &#40;SUM&#41;
+          ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 2 ปีการศึกษา 2565
         </h1>
@@ -160,47 +158,55 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      {/* <section className="mt-10 space-y-2">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีมสี</h2>
+      {screenSize != "ipad" &&
+        <section className="mt-10 space-y-2">
+          <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีม</h2>
 
-        <div className="grid grid-cols-2 gap-4">
-          <ThemeButton
-            themeID="blue"
-            title="Whale of a Time"
-            imgSrc="/assets/images/placeholder/blue.png"
-            setTheme={setTheme}
-            style={genBGButton("theme", "blue")}
-          />
-          <ThemeButton
-            themeID="red"
-            title="Paint the Town Red"
-            imgSrc="/assets/images/placeholder/red.png"
-            setTheme={setTheme}
-            style={genBGButton("theme", "red")}
-          />
-          <ThemeButton
-            themeID="yellow"
-            title="That‘s the Cheese !"
-            imgSrc="/assets/images/placeholder/yellow.png"
-            setTheme={setTheme}
-            style={genBGButton("theme", "yellow")}
-          />
-        </div>
-      </section> */}
+          <div className="grid grid-cols-2 gap-4">
+              <ThemeButton
+                themeID="left"
+                title="Ver. Couple (Left)"
+                imgSrc="/assets/images/placeholder/left.png"
+                setTheme={setTheme}
+                style={genBGButton("theme", "left")}
+              />
+              <ThemeButton
+                themeID="right"
+                title="Ver. Couple (Right)"
+                imgSrc="/assets/images/placeholder/right.png"
+                setTheme={setTheme}
+                style={genBGButton("theme", "right")}
+              />
+              <ThemeButton
+              themeID="single"
+              title="Ver. Single"
+              imgSrc="/assets/images/placeholder/single.png"
+              setTheme={setTheme}
+              style={genBGButton("theme", "single")}
+            />
+          </div>
+        </section>
+      }
 
       <section className="mt-10 space-y-2">
         <h2 className="text-xl font-medium text-center text-gray-600 sm:text-2xl">Preview</h2>
-        <ExamPreview
-          // imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
-          imgSrc={`/assets/images/exam/sum-2-2565/preview/m${level}/${screenSize}/${program}.JPG`}
+        {screenSize != "ipad" &&
+          <ExamPreview
+            imgSrc={`/assets/images/exam/final-2-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
+          />
+        }
+        {screenSize == "ipad" &&
+          <ExamPreview
+          imgSrc={`/assets/images/exam/final-2-2565/preview/m${level}/${screenSize}/${program}.JPG`}
         />
+        }
       </section>
 
       <Downloadbutton
         level={level}
         program={program}
         screenSize={screenSize}
-        // theme={theme}
+        theme={theme}
         style={{ backgroundColor: primaryColor, color: getPrimaryTextColor() }}
       />
 
