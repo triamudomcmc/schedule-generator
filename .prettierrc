@@ -3,5 +3,5 @@
   "semi": false,
   "useTabs": false,
   "printWidth": 120,
-  "disableLanguages": ["json"]
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

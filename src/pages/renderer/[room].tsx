@@ -110,12 +110,8 @@ const Room = ({ scheduleData }: RoomProps) => {
         {Array(period <= 3 ? 5 : 4)
           .fill("")
           .map((_, i) => {
-            const name = period in scheduleData?.body[i+1]
-            ? scheduleData?.body[i+1][period][0]
-            : "" ?? ""
-            const teacher = period in scheduleData?.body[i+1]
-            ? scheduleData?.body[i+1][period][1]
-            : "" ?? ""
+            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : "" ?? ""
+            const teacher = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][1] : "" ?? ""
 
             return (
               <div style={{ backgroundColor: color.bg }} className="button" key={i}>

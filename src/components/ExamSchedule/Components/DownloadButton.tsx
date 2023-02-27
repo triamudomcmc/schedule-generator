@@ -15,8 +15,8 @@ export const Downloadbutton: FC<{
 
   // const imgUrl = `/assets/images/exam/final-1-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
   let imgUrl = `/assets/images/exam/final-2-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
-  
-  if(screenSize == "ipad"){
+
+  if (screenSize == "ipad") {
     imgUrl = `/assets/images/exam/final-2-2565/src/m${level}/${screenSize}/${program}.png`
   }
 
@@ -44,7 +44,7 @@ export const Downloadbutton: FC<{
   }
 
   return (
-    <div className="flex justify-center mt-2 sm:mt-10">
+    <div className="mt-2 flex justify-center sm:mt-10">
       <motion.button
         whileHover={{ scale: !waiting ? 1.05 : 1 }}
         onClick={download}

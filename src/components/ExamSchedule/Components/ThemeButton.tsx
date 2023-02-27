@@ -11,7 +11,7 @@ export const ThemeButton: FC<{
 }> = ({ title, imgSrc, themeID, setTheme, style }) => {
   return (
     <button onClick={() => setTheme(themeID)} className="flex flex-col gap-2">
-      <div style={style} className="p-6 transition-colors border border-gray-300 rounded-md">
+      <div style={style} className="rounded-md border border-gray-300 p-6 transition-colors">
         <Image width={270} height={480} className="rounded-md" src={imgSrc} />
       </div>
       <p>{title}</p>

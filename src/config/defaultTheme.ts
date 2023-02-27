@@ -129,5 +129,5 @@ export const DefaultTheme: Record<string, ColorTheme> = {
     c3: hexToRgbA("#C49DF7"),
     c4: hexToRgbA("#A385F9"),
     c5: hexToRgbA("#8590FB"),
-  }
+  },
 }
