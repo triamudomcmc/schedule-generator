@@ -40,7 +40,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2565"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2566"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let scheduleData: ScheduleData | null = null
 
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2565/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2566/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
   }
 
@@ -178,7 +178,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 2/2565
+                  ภาคเรียนที่ 1/2566
                 </p>
               </div>
             </div>
