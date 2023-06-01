@@ -3,7 +3,7 @@ import { BottomRightDeco, TopLeftDeco, TopRightDeco } from "./Decorations"
 
 export const OrdamentsPreview: FC<{ color: string }> = ({ color }) => {
   return (
-    <div className="absolute top-0 left-0 w-full h-full">
+    <div className="absolute top-0 left-0 h-full w-full">
       <div className="absolute left-[20px] top-[1px] w-[94px]">
         <TopLeftDeco color={color} />
       </div>

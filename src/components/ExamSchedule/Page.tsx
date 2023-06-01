@@ -63,21 +63,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="flex space-x-1">
           <button
             onClick={() => setLevel("4")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("level", "4")}
           >
             ม.4
           </button>
           <button
             onClick={() => setLevel("5")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("level", "5")}
           >
             ม.5
           </button>
           <button
             onClick={() => setLevel("6")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("level", "6")}
           >
             ม.6
@@ -91,21 +91,21 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <div className="flex space-x-1">
           <button
             onClick={() => setProgram("sci-math")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("program", "sci-math")}
           >
             วิทย์-คณิต
           </button>
           <button
             onClick={() => setProgram("arts-math")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("program", "arts-math")}
           >
             ศิลป์คำนวณ
           </button>
           <button
             onClick={() => setProgram("arts-lang")}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("program", "arts-lang")}
           >
             ศิลป์ภาษา
@@ -115,7 +115,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
               setLevel("6")
               setProgram("arts-math-sci")
             }}
-            className="px-4 py-2 border border-gray-300 rounded-xl"
+            className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("program", "arts-math-sci")}
           >
             ภาษาคณิต(วิทย์)
@@ -158,26 +158,26 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      {screenSize != "ipad" &&
+      {screenSize != "ipad" && (
         <section className="mt-10 space-y-2">
           <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีม</h2>
 
           <div className="grid grid-cols-2 gap-4">
-              <ThemeButton
-                themeID="left"
-                title="Ver. Couple (Left)"
-                imgSrc="/assets/images/placeholder/left.png"
-                setTheme={setTheme}
-                style={genBGButton("theme", "left")}
-              />
-              <ThemeButton
-                themeID="right"
-                title="Ver. Couple (Right)"
-                imgSrc="/assets/images/placeholder/right.png"
-                setTheme={setTheme}
-                style={genBGButton("theme", "right")}
-              />
-              <ThemeButton
+            <ThemeButton
+              themeID="left"
+              title="Ver. Couple (Left)"
+              imgSrc="/assets/images/placeholder/left.png"
+              setTheme={setTheme}
+              style={genBGButton("theme", "left")}
+            />
+            <ThemeButton
+              themeID="right"
+              title="Ver. Couple (Right)"
+              imgSrc="/assets/images/placeholder/right.png"
+              setTheme={setTheme}
+              style={genBGButton("theme", "right")}
+            />
+            <ThemeButton
               themeID="single"
               title="Ver. Single"
               imgSrc="/assets/images/placeholder/single.png"
@@ -186,20 +186,18 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             />
           </div>
         </section>
-      }
+      )}
 
       <section className="mt-10 space-y-2">
-        <h2 className="text-xl font-medium text-center text-gray-600 sm:text-2xl">Preview</h2>
-        {screenSize != "ipad" &&
+        <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
+        {screenSize != "ipad" && (
           <ExamPreview
             imgSrc={`/assets/images/exam/final-2-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
           />
-        }
-        {screenSize == "ipad" &&
-          <ExamPreview
-          imgSrc={`/assets/images/exam/final-2-2565/preview/m${level}/${screenSize}/${program}.JPG`}
-        />
-        }
+        )}
+        {screenSize == "ipad" && (
+          <ExamPreview imgSrc={`/assets/images/exam/final-2-2565/preview/m${level}/${screenSize}/${program}.JPG`} />
+        )}
       </section>
 
       <Downloadbutton

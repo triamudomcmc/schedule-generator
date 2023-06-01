@@ -18,3 +18,4 @@ packages/next-env/**/*.d.ts
 test-timings.json
 out
 public/sw.js.map
+*.json

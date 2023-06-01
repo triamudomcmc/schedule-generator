@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import { Ellipsis } from "@components/Loader/Ellipsis"
 import classNames from "classnames"
 import { DescribeRoute } from "@components/Meta/DescribeRoute"
-import {TUCMCLogin, useAuth} from "tucmc-auth"
+import { TUCMCLogin, useAuth } from "tucmc-auth"
 import { ColorTheme, DefaultTheme } from "@config/defaultTheme"
 import { LongLogo } from "@components/Logo/LongLogo"
 import { downloadScreenshot } from "@handlers/client/downloadScreenshot"
@@ -26,7 +26,7 @@ import Image from "next/image"
 import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
-import {log} from "util";
+import { log } from "util"
 
 type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
 
@@ -216,7 +216,7 @@ export const LearnSchedulePage: FC<{
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2565
+          ภาคเรียนที่ 1 ปีการศึกษา 2566
         </h1>
         <p className="mt-3 text-sm leading-5 text-gray-400">
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
@@ -230,7 +230,7 @@ export const LearnSchedulePage: FC<{
             <>
               <p>เข้าสู่ระบบเพื่อบันทึกธีมสีของคุณ</p>
               <div className="w-48 transition-transform hover:scale-105">
-                <TUCMCLogin/>
+                <TUCMCLogin />
               </div>
             </>
           ) : (
@@ -513,14 +513,14 @@ export const LearnSchedulePage: FC<{
           <h3 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง </h3>
           <div className="flex">
             <div className="space-x-1 space-y-1">
-            <button
-              onClick={() => setBackground("none")}
-              className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              ไม่มี
-            </button>
-            {/* <button
+              <button
+                onClick={() => setBackground("none")}
+                className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                ไม่มี
+              </button>
+              {/* <button
               onClick={() => setBackground("ordaments")}
               className={classNames(genBGButton("ordaments"), "rounded-xl border border-gray-300 px-4 py-2")}
               style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
@@ -534,20 +534,20 @@ export const LearnSchedulePage: FC<{
             >
               Mistletoe
             </button> */}
-            <button
-              onClick={() => setBackground("sticker")}
-              className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              COOL KIDS starter pack
-            </button>
-            <button
-              onClick={() => setBackground("flower")}
-              className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-               Dans le Jardin
-            </button>
+              <button
+                onClick={() => setBackground("sticker")}
+                className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                COOL KIDS starter pack
+              </button>
+              <button
+                onClick={() => setBackground("flower")}
+                className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                Dans le Jardin
+              </button>
             </div>
           </div>
         </section>
