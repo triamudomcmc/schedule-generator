@@ -157,46 +157,8 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      {/* {screenSize != "ipad" && (
-        <section className="mt-10 space-y-2">
-          <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีม</h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <ThemeButton
-              themeID="left"
-              title="Ver. Couple (Left)"
-              imgSrc="/assets/images/placeholder/left.png"
-              setTheme={setTheme}
-              style={genBGButton("theme", "left")}
-            />
-            <ThemeButton
-              themeID="right"
-              title="Ver. Couple (Right)"
-              imgSrc="/assets/images/placeholder/right.png"
-              setTheme={setTheme}
-              style={genBGButton("theme", "right")}
-            />
-            <ThemeButton
-              themeID="single"
-              title="Ver. Single"
-              imgSrc="/assets/images/placeholder/single.png"
-              setTheme={setTheme}
-              style={genBGButton("theme", "single")}
-            />
-          </div>
-        </section>
-      )} */}
-
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
-        {/* {screenSize != "ipad" && (
-          <ExamPreview
-            imgSrc={`/assets/images/exam/sum-1-2566/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
-          />
-        )} */}
-        {/* {screenSize == "ipad" && (
-          <ExamPreview imgSrc={`/assets/images/exam/sum-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
-        )} */}
         <ExamPreview imgSrc={`/assets/images/exam/sum-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
       </section>
 
