@@ -14,14 +14,16 @@ export const Downloadbutton: FC<{
   const [waiting, setWaiting] = useState(false)
 
   // const imgUrl = `/assets/images/exam/final-1-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
-  let imgUrl = `/assets/images/exam/final-2-2565/src/${theme}/m${level}/${screenSize}/${program}.png`
+  let imgUrl = `/assets/images/exam/sum-1-2566/src/${theme}/m${level}/${screenSize}/${program}.png`
 
   if (screenSize == "ipad") {
-    imgUrl = `/assets/images/exam/final-2-2565/src/m${level}/${screenSize}/${program}.png`
+    imgUrl = `/assets/images/exam/sum-1-2566/src/m${level}/${screenSize}/${program}.png`
   }
 
   const download = async () => {
-    if (waiting) return
+    if (waiting) {
+      return
+    }
 
     setWaiting(true)
 

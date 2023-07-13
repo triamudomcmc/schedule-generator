@@ -50,11 +50,10 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
     <div>
       <header>
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
-          ตารางสอบปลายภาค &#40;FINAL&#41;
+          ตารางสอบกลางภาค &#40;SUM&#41;
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2565
+          ภาคเรียนที่ 1 ปีการศึกษา 2566
         </h1>
-        <p className="mt-3 text-sm leading-5 text-gray-400">เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
 
       <section className="mt-6 space-y-2">
@@ -158,7 +157,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      {screenSize != "ipad" && (
+      {/* {screenSize != "ipad" && (
         <section className="mt-10 space-y-2">
           <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีม</h2>
 
@@ -186,18 +185,19 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             />
           </div>
         </section>
-      )}
+      )} */}
 
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
-        {screenSize != "ipad" && (
+        {/* {screenSize != "ipad" && (
           <ExamPreview
-            imgSrc={`/assets/images/exam/final-2-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
+            imgSrc={`/assets/images/exam/sum-1-2566/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
           />
-        )}
-        {screenSize == "ipad" && (
-          <ExamPreview imgSrc={`/assets/images/exam/final-2-2565/preview/m${level}/${screenSize}/${program}.JPG`} />
-        )}
+        )} */}
+        {/* {screenSize == "ipad" && (
+          <ExamPreview imgSrc={`/assets/images/exam/sum-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
+        )} */}
+        <ExamPreview imgSrc={`/assets/images/exam/sum-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
       </section>
 
       <Downloadbutton
