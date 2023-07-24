@@ -1,10 +1,11 @@
 import type { NextPage } from "next"
+import {FC} from "react"
 
 interface LogoProps {
   color: string
 }
 
-const Logo: NextPage<LogoProps> = ({ color }) => {
+const Logo: FC<LogoProps> = ({ color }) => {
   return (
     <>
       <svg width="67" height="44" viewBox="0 0 67 44" fill="none" className="logo" xmlns="http://www.w3.org/2000/svg">

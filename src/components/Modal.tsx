@@ -86,10 +86,9 @@ const Modal = ({
     }
   }, [TriggerDep])
 
-  closeClickOutside &&
-    useDetectOuside(panel, !prevent, () => {
-      close()
-    })
+  useDetectOuside(panel, !prevent, () => {
+    close()
+  })
 
   return (
     <div className={classnames(overlayClassName, modalState.hide && "hidden")}>
