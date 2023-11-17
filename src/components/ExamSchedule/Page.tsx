@@ -19,12 +19,12 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
   const [theme, setTheme] = useState<ThemeType>("blue")
 
   const getPrimaryTextColor = () => {
-    return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff"
+    return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#252525" : "#fff"
   }
 
   const isTheSame = <T,>(a: T, b: T) => {
     const bgColor = a === b ? primaryColor : getPrimaryTextColor()
-    const textColor = a === b ? "#fff" : "rgb(17 24 39)"
+    const textColor = "#FF69B4"
     return { backgroundColor: bgColor, color: textColor }
   }
 
@@ -52,7 +52,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
           ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
-          ภาคเรียนที่ 1 ปีการศึกษา 2565
+          ภาคเรียนที่ 1 ปีการศึกษา 2566
         </h1>
         <p className="mt-3 text-sm leading-5 text-gray-400">เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
@@ -158,7 +158,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
-      <section className="mt-10 space-y-2">
+      {/* <section className="mt-10 space-y-2">
         <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีมสี</h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -184,12 +184,12 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             style={genBGButton("theme", "yellow")}
           />
         </div>
-      </section>
+      </section> */}
 
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
         <ExamPreview
-          imgSrc={`/assets/images/exam/final-1-2565/preview/${theme}/m${level}/${screenSize}/${program}.JPG`}
+          imgSrc={`/assets/images/exam/final-1-2566/preview/m${level}/${screenSize}/${program}.JPG`}
         />
       </section>
 
@@ -197,7 +197,6 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         level={level}
         program={program}
         screenSize={screenSize}
-        theme={theme}
         style={{ backgroundColor: primaryColor, color: getPrimaryTextColor() }}
       />
 

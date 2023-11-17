@@ -2,7 +2,15 @@ import { rawRgbColorToCss } from "@utils/hexToRgb"
 import { ColorType } from "@components/ColorPicker"
 import { useEffect, useState, FC } from "react"
 import { isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
-import { MistletoePreview, OrdamentsPreview, StickerPreview, FlowerPreview } from "@components/Background"
+import {
+  MistletoePreview,
+  OrdamentsPreview,
+  StickerPreview,
+  FlowerPreview,
+  ColorfulPreview,
+  HalloweenPreview,
+  SweetInTheRainPreview,
+} from "@components/Background"
 
 interface Scheme {
   bg: ColorType
@@ -31,6 +39,8 @@ const defaultColors = {
   c5: "#BA5757",
 }
 
+const bgtext = "#FFFFFF"
+
 const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
   const [theme, setTheme] = useState(defaultColors)
 
@@ -52,7 +62,9 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
       <div>{background === "ordaments" && <OrdamentsPreview color={theme.c1} />}</div>
       <div>{background === "sticker" && <StickerPreview />}</div>
       <div>{background === "flower" && <FlowerPreview />}</div>
-      <div>
+      <div>{background === "colorful" && <ColorfulPreview />}</div>
+      <div>{background === "halloween" && <HalloweenPreview />}</div>
+      <div>{background === "sweetintherain" && <SweetInTheRainPreview />}</div>
         <svg
           // width="2388"
           // height="1668"
@@ -135,12 +147,29 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
           /> */}
           {/* === */}
           <text x="164" y="483" fontSize="36px" fill={theme.t2}>
-            ภาคเรียนที่ 2/2565
+            ภาคเรียนที่ 2/2566
           </text>
-          <svg width="67" height="44" viewBox="0 0 67 44" fill="none" xmlns="http://www.w3.org/2000/svg" x="1305" y="1672">
-            <path d="M0.513478 42.6534V33.8261C0.513478 31.6061 0.941376 29.897 1.79717 28.6989C2.65297 27.5008 3.8682 26.655 5.44286 26.1617L5.49421 25.9503L0 23.8888V22.5145C0 20.7878 0.496362 19.202 1.48909 17.7572C2.48181 16.3124 3.93666 15.1672 5.85365 14.3215C7.80486 13.4405 10.1669 13 12.9396 13C16.8078 13 19.8887 13.9338 22.1822 15.8015C24.4758 17.6339 25.6225 20.4178 25.6225 24.1531V42.6534H17.9204V24.6288C17.9204 22.8669 17.4582 21.5454 16.534 20.6644C15.644 19.7835 14.3774 19.343 12.7342 19.343C11.1596 19.343 9.97858 19.6954 9.19125 20.4001C8.40392 21.0697 7.97602 21.8978 7.90756 22.8845L12.4775 25.0517L11.9127 28.4875C10.6803 28.5579 9.75608 29.016 9.1399 29.8618C8.52373 30.7075 8.21564 31.8528 8.21564 33.2975V42.6534H0.513478Z" fill={theme.t2}/>
-            <path d="M41.1821 43.3406C37.2797 43.3406 34.3186 42.4596 32.2989 40.6977C30.3135 38.9005 29.3208 36.3281 29.3208 32.9804V30.9189C29.3208 29.4741 29.4748 28.276 29.7829 27.3246C30.1252 26.3731 30.5702 25.5098 31.1179 24.7345C31.6657 23.9593 32.1107 23.2721 32.453 22.673C32.8295 22.0387 33.0178 21.3868 33.0178 20.7173C33.0178 20.083 32.8638 19.6425 32.5557 19.3958C32.2818 19.1139 31.9053 18.973 31.426 18.973C30.8099 18.973 30.0568 19.1844 29.1667 19.6073L27.9344 14.6386C28.8929 14.11 29.9198 13.7576 31.0153 13.5814C32.1449 13.37 33.1376 13.2643 33.9934 13.2643C36.2527 13.2643 37.8445 13.8281 38.7688 14.9558C39.7273 16.0482 40.2065 17.5282 40.2065 19.3958C40.2065 20.4882 40.0525 21.4573 39.7444 22.303C39.4363 23.1135 39.0426 23.9593 38.5634 24.8402C38.1184 25.6507 37.7247 26.4084 37.3824 27.1131C37.0743 27.8179 36.9202 28.8398 36.9202 30.1789V32.1875C36.9202 33.9142 37.2797 35.1828 37.9986 35.9933C38.7517 36.7686 39.8128 37.1562 41.1821 37.1562C42.6541 37.1562 43.6982 36.7509 44.3143 35.9405C44.9647 35.0947 45.2899 33.9671 45.2899 32.5575V27.4303C45.2899 26.3731 45.0503 25.545 44.5711 24.946C44.126 24.3117 43.3558 23.9945 42.2604 23.9945H42.0037V19.8187H42.3118C43.3729 19.8187 44.1603 19.5192 44.6738 18.9201C45.1872 18.3211 45.5124 17.5634 45.6494 16.6472C45.8205 15.6958 45.9061 14.7091 45.9061 13.6872H53.5569C53.5569 15.8367 53.2831 17.6163 52.7354 19.0258C52.1876 20.4354 51.2292 21.3868 49.8599 21.8802V22.0916C51.058 22.444 51.8624 23.1135 52.2732 24.1002C52.7182 25.0517 52.9408 26.1441 52.9408 27.3774V32.769C52.9408 36.2576 51.948 38.9005 49.9626 40.6977C47.9771 42.4596 45.0503 43.3406 41.1821 43.3406Z" fill={theme.t2}/>
-            <path d="M58.5625 39.9688C58.5625 38.9688 58.8542 38.1354 59.4375 37.4688C60.0417 36.8021 60.9375 36.4688 62.125 36.4688C63.3125 36.4688 64.2083 36.8021 64.8125 37.4688C65.4375 38.1354 65.75 38.9688 65.75 39.9688C65.75 40.9271 65.4375 41.7292 64.8125 42.375C64.2083 43.0208 63.3125 43.3438 62.125 43.3438C60.9375 43.3438 60.0417 43.0208 59.4375 42.375C58.8542 41.7292 58.5625 40.9271 58.5625 39.9688Z" fill={theme.t2}/>
+          <svg
+            width="67"
+            height="44"
+            viewBox="0 0 67 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            x="1305"
+            y="1672"
+          >
+            <path
+              d="M0.513478 42.6534V33.8261C0.513478 31.6061 0.941376 29.897 1.79717 28.6989C2.65297 27.5008 3.8682 26.655 5.44286 26.1617L5.49421 25.9503L0 23.8888V22.5145C0 20.7878 0.496362 19.202 1.48909 17.7572C2.48181 16.3124 3.93666 15.1672 5.85365 14.3215C7.80486 13.4405 10.1669 13 12.9396 13C16.8078 13 19.8887 13.9338 22.1822 15.8015C24.4758 17.6339 25.6225 20.4178 25.6225 24.1531V42.6534H17.9204V24.6288C17.9204 22.8669 17.4582 21.5454 16.534 20.6644C15.644 19.7835 14.3774 19.343 12.7342 19.343C11.1596 19.343 9.97858 19.6954 9.19125 20.4001C8.40392 21.0697 7.97602 21.8978 7.90756 22.8845L12.4775 25.0517L11.9127 28.4875C10.6803 28.5579 9.75608 29.016 9.1399 29.8618C8.52373 30.7075 8.21564 31.8528 8.21564 33.2975V42.6534H0.513478Z"
+              fill={theme.t2}
+            />
+            <path
+              d="M41.1821 43.3406C37.2797 43.3406 34.3186 42.4596 32.2989 40.6977C30.3135 38.9005 29.3208 36.3281 29.3208 32.9804V30.9189C29.3208 29.4741 29.4748 28.276 29.7829 27.3246C30.1252 26.3731 30.5702 25.5098 31.1179 24.7345C31.6657 23.9593 32.1107 23.2721 32.453 22.673C32.8295 22.0387 33.0178 21.3868 33.0178 20.7173C33.0178 20.083 32.8638 19.6425 32.5557 19.3958C32.2818 19.1139 31.9053 18.973 31.426 18.973C30.8099 18.973 30.0568 19.1844 29.1667 19.6073L27.9344 14.6386C28.8929 14.11 29.9198 13.7576 31.0153 13.5814C32.1449 13.37 33.1376 13.2643 33.9934 13.2643C36.2527 13.2643 37.8445 13.8281 38.7688 14.9558C39.7273 16.0482 40.2065 17.5282 40.2065 19.3958C40.2065 20.4882 40.0525 21.4573 39.7444 22.303C39.4363 23.1135 39.0426 23.9593 38.5634 24.8402C38.1184 25.6507 37.7247 26.4084 37.3824 27.1131C37.0743 27.8179 36.9202 28.8398 36.9202 30.1789V32.1875C36.9202 33.9142 37.2797 35.1828 37.9986 35.9933C38.7517 36.7686 39.8128 37.1562 41.1821 37.1562C42.6541 37.1562 43.6982 36.7509 44.3143 35.9405C44.9647 35.0947 45.2899 33.9671 45.2899 32.5575V27.4303C45.2899 26.3731 45.0503 25.545 44.5711 24.946C44.126 24.3117 43.3558 23.9945 42.2604 23.9945H42.0037V19.8187H42.3118C43.3729 19.8187 44.1603 19.5192 44.6738 18.9201C45.1872 18.3211 45.5124 17.5634 45.6494 16.6472C45.8205 15.6958 45.9061 14.7091 45.9061 13.6872H53.5569C53.5569 15.8367 53.2831 17.6163 52.7354 19.0258C52.1876 20.4354 51.2292 21.3868 49.8599 21.8802V22.0916C51.058 22.444 51.8624 23.1135 52.2732 24.1002C52.7182 25.0517 52.9408 26.1441 52.9408 27.3774V32.769C52.9408 36.2576 51.948 38.9005 49.9626 40.6977C47.9771 42.4596 45.0503 43.3406 41.1821 43.3406Z"
+              fill={theme.t2}
+            />
+            <path
+              d="M58.5625 39.9688C58.5625 38.9688 58.8542 38.1354 59.4375 37.4688C60.0417 36.8021 60.9375 36.4688 62.125 36.4688C63.3125 36.4688 64.2083 36.8021 64.8125 37.4688C65.4375 38.1354 65.75 38.9688 65.75 39.9688C65.75 40.9271 65.4375 41.7292 64.8125 42.375C64.2083 43.0208 63.3125 43.3438 62.125 43.3438C60.9375 43.3438 60.0417 43.0208 59.4375 42.375C58.8542 41.7292 58.5625 40.9271 58.5625 39.9688Z"
+              fill={theme.t2}
+            />
           </svg>
 
           {/* <path
@@ -242,7 +271,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
                     d="M139.22 1005.24H142.928L144.116 1014.99L144.548 1020.54H144.764L146.132 1014.99L148.796 1005.24H151.784L154.448 1014.99L155.816 1020.54H156.032L156.464 1014.99L157.652 1005.24H161.288L158.48 1025H154.304L151.388 1013.77L150.344 1009.41H150.164L149.12 1013.77L146.204 1025H142.028L139.22 1005.24ZM155.051 1031.7H152.603V1028.92H155.879C156.791 1028.92 157.451 1029.14 157.859 1029.57C158.267 1030 158.471 1030.59 158.471 1031.34V1037.49H155.051V1031.7ZM165.311 1017.66H168.875V1021.94H177.407V1018.48C177.407 1017.93 177.359 1017.46 177.263 1017.08C177.167 1016.67 176.975 1016.34 176.687 1016.07C176.399 1015.78 175.991 1015.57 175.463 1015.42C174.959 1015.26 174.299 1015.14 173.483 1015.06L164.951 1014.34V1011.86C164.951 1009.6 165.683 1007.86 167.147 1006.64C168.611 1005.42 170.687 1004.8 173.375 1004.8C175.199 1004.8 176.735 1005.07 177.983 1005.6C179.231 1006.12 180.275 1006.83 181.115 1007.72L178.991 1010.17C178.439 1009.54 177.671 1009.02 176.687 1008.58C175.727 1008.15 174.551 1007.94 173.159 1007.94C171.719 1007.94 170.603 1008.24 169.811 1008.84C169.019 1009.41 168.623 1010.26 168.623 1011.39V1011.64L174.095 1012.15C176.399 1012.34 178.163 1012.87 179.387 1013.73C180.611 1014.6 181.223 1016.06 181.223 1018.12V1021.04C181.223 1022.29 180.899 1023.26 180.251 1023.96C179.603 1024.65 178.595 1025 177.227 1025H165.311V1017.66Z"
                     fill={isDarkOrLightRGBAStringD(theme.c3) === "light" ? "#444" : "#fff"}
                   />
-                </g> 
+                </g>
               </g>
             </g>
             <g filter="url(#filter9_d_359_50841)">
@@ -271,144 +300,142 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
             </g>
             <g filter="url(#filter15_d_359_50841)">
               {/* <rect x="727" y="576" width="76" height="898" rx="17.1636" fill={theme.bg} /> */}
-              <rect x="727" y="576" width="76" height="717" rx="17.1636" fill={theme.bg} />
+              <rect x="727" y="576" width="76" height="717" rx="17.1636" fill={bgtext} />
             </g>
             <g filter="url(#filter16_d_359_50841)">
               {/* <rect x="1820" y="576" width="76" height="717" rx="17.1636" fill={theme.bg} /> */}
-              <rect x="2039" y="576" width="76" height="717" rx="17.1636" fill={theme.bg} />
+              <rect x="2039" y="576" width="76" height="717" rx="17.1636" fill={bgtext} />
             </g>
             <g filter="url(#filter17_d_359_50841)">
               {/* <rect x="1261" y="576" width="101" height="717" rx="26.8181" fill={theme.bg} /> */}
-              <rect x="1480" y="576" width="101" height="717" rx="26.8181" fill={theme.bg} />
+              <rect x="1480" y="576" width="101" height="717" rx="26.8181" fill={bgtext} />
             </g>
             <g filter="url(#filter18_d_359_50841)">
               <path
                 d="M289 595.845C289 584.885 297.885 576 308.845 576H468.155C479.115 576 488 584.885 488 595.845V708.155C488 719.115 479.115 728 468.155 728H308.845C297.885 728 289 719.115 289 708.155V595.845Z"
-                fill={theme.bg}
+                fill={bgtext}
               />
             </g>
             <g filter="url(#filter19_d_359_50841)">
-              <rect x="289" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="289" y="763" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter20_d_359_50841)">
-              <rect x="289" y="950" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="289" y="950" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter21_d_359_50841)">
-              <rect x="289" y="1137" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="289" y="1137" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter22_d_359_50841)">
               {/* <rect x="289" y="1323" width="199" height="151" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="289" y="1323" width="2239" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="289" y="1323" width="2239" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter23_d_359_50841)">
-              <rect x="508" y="576" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="508" y="576" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter24_d_359_50841)">
-              <rect x="508" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="508" y="763" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter25_d_359_50841)">
-              <rect x="508" y="950" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="508" y="950" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter26_d_359_50841)">
-              <rect x="508" y="1137" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="508" y="1137" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             {/* <g filter="url(#filter27_d_359_50841)">
               <rect x="508" y="1323" width="199" height="151" rx="19.8454" fill={theme.bg} />
             </g> */}
             <g filter="url(#filter28_d_359_50841)">
-              <rect x="823" y="576" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="823" y="576" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter29_d_359_50841)">
-              <rect x="823" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="823" y="763" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter30_d_359_50841)">
-              <rect x="823" y="950" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="823" y="950" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter31_d_359_50841)">
-              <rect x="823" y="1136" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="823" y="1136" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             {/* <g filter="url(#filter32_d_359_50841)">
               <rect x="823" y="1323" width="199" height="152" rx="19.8454" fill={theme.bg} />
             </g> */}
             <g filter="url(#filter33_d_359_50841)">
-              <rect x="1042" y="576" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="1042" y="576" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter34_d_359_50841)">
-              <rect x="1042" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="1042" y="763" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter35_d_359_50841)">
-              <rect x="1042" y="950" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="1042" y="950" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter36_d_359_50841)">
-              <rect x="1042" y="1136" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="1042" y="1136" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter37_d_359_50841)">
               {/* <rect x="1382" y="576" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1261" y="576" width="199" height="152" rx="19.8454" fill={theme.bg} />
-
+              <rect x="1261" y="576" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter38_d_359_50841)">
-              {/* <rect x="1382" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1261" y="763" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1382" y="763" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1261" y="763" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter39_d_359_50841)">
-              {/* <rect x="1382" y="950" width="199" height="151" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1261" y="950" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1382" y="950" width="199" height="151" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1261" y="950" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter40_d_359_50841)">
-              {/* <rect x="1382" y="1136" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1261" y="1136" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1382" y="1136" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1261" y="1136" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter41_d_359_50841)">
-              <rect x="1601" y="576" width="199" height="157" rx="19.8454" fill={theme.bg} />
+              <rect x="1601" y="576" width="199" height="157" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter42_d_359_50841)">
-              <rect x="1601" y="768" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="1601" y="768" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter43_d_359_50841)">
-              <rect x="1601" y="955" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              <rect x="1601" y="955" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter44_d_359_50841)">
-              <rect x="1601" y="1141" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              <rect x="1601" y="1141" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter45_d_359_50841)">
-            {/* <rect x="1913" y="574" width="199" height="157" rx="19.8454" fill={theme.bg} /> */}
-            <rect x="1820" y="574" width="199" height="157" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1913" y="574" width="199" height="157" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1820" y="574" width="199" height="157" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter46_d_359_50841)">
-              {/* <rect x="1913" y="766" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1820" y="766" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1913" y="766" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1820" y="766" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter47_d_359_50841)">
-              {/* <rect x="1913" y="953" width="199" height="151" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1820" y="953" width="199" height="151" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1913" y="953" width="199" height="151" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1820" y="953" width="199" height="151" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter48_d_359_50841)">
-              {/* <rect x="1913" y="1139" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="1820" y="1139" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="1913" y="1139" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="1820" y="1139" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter49_d_359_50841)">
-              {/* <rect x="2129" y="574" width="199" height="157" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="2135" y="574" width="199" height="157" rx="19.8454" fill={theme.bg} />
-
+              {/* <rect x="2129" y="574" width="199" height="157" rx="19.8454" fill={bgtext} /> */}
+              <rect x="2135" y="574" width="199" height="157" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter50_d_359_50841)">
-              {/* <rect x="2129" y="766" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="2135" y="766" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="2129" y="766" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="2135" y="766" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter51_d_359_50841)">
-              {/* <rect x="2129" y="953" width="199" height="151" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="2135" y="953" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="2129" y="953" width="199" height="151" rx="19.8454" fill={bgtext} /> */}
+              <rect x="2135" y="953" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter52_d_359_50841)">
-              {/* <rect x="2129" y="1139" width="199" height="152" rx="19.8454" fill={theme.bg} /> */}
-              <rect x="2135" y="1139" width="199" height="152" rx="19.8454" fill={theme.bg} />
+              {/* <rect x="2129" y="1139" width="199" height="152" rx="19.8454" fill={bgtext} /> */}
+              <rect x="2135" y="1139" width="199" height="152" rx="19.8454" fill={bgtext} />
             </g>
             <g filter="url(#filter53_d_359_50841)">
-              <rect x="2354" y="574" width="199" height="157" rx="19.8454" fill={theme.bg} />
+              <rect x="2354" y="574" width="199" height="157" rx="19.8454" fill={bgtext} />
             </g>
           </g>
-          
+
           <defs>
             <filter
               id="filter0_d_359_50841"
@@ -1680,7 +1707,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
             </clipPath>
           </defs>
         </svg>
-      </div>
+
     </div>
   )
 }

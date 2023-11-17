@@ -9,8 +9,8 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments, Sticker, Flower } from "@components/Background"
-import { selOpt } from '@handlers/server/optHandler'
+import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain } from "@components/Background"
+import { selOpt } from "@handlers/server/optHandler"
 
 const defaultColors = {
   bg: rawRgbColorToCss(hexToRgbA("#FFFFFF")),
@@ -41,7 +41,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2565"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2566"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -58,9 +58,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const room = params?.room
   let scheduleData: ScheduleData | null = null
-
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2565/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2566/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
   }
@@ -77,7 +76,7 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain"
 
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
@@ -110,37 +109,32 @@ const Room = ({ scheduleData }: RoomProps) => {
     return (
       <>
         {Array(4)
-         .fill("")
-         .map((_, i) => {
-             const name = period in scheduleData?.body[i+1]
-             ? scheduleData?.body[i+1][period][0]
-             : "" ?? ""
-             const teacher = period in scheduleData?.body[i+1]
-             ? scheduleData?.body[i+1][period][1]
-             : "" ?? ""
+          .fill("")
+          .map((_, i) => {
+            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : "" ?? ""
+            const teacher = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][1] : "" ?? ""
 
-            if (name || teacher) return (
-              <div style={{ backgroundColor: color.bg }} className="button" key={i}>
-                {/* <div className="line" style={{ backgroundColor: Days[i].color }}></div> */}
-                <div className="text">
-                  <strong
-                    className="subject"
-                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#fff" }}
-                  >
-                    {name}
-                  </strong>
-                  <p
-                    className="teacher"
-                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#a6a8ab" : "#e8e8e8" }}
-                  >
-                    {teacher?.replace(/\+/g, " ")}
-                  </p>
+            if (name || teacher)
+              return (
+                <div style={{ backgroundColor: "#fff" }} className="button" key={i}>
+                  {/* <div className="line" style={{ backgroundColor: Days[i].color }}></div> */}
+                  <div className="text">
+                    <strong
+                      className="subject"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#000" }}
+                    >
+                      {name}
+                    </strong>
+                    <p
+                      className="teacher"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#a6a8ab" : "#000" }}
+                    >
+                      {teacher?.replace(/\+/g, " ")}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )
-            else return(
-              <div className="blank" ></div>
-            )
+              )
+            else return <div className="blank"></div>
           })}
       </>
     )
@@ -150,50 +144,54 @@ const Room = ({ scheduleData }: RoomProps) => {
     {
       name: "จันทร์",
       color: color.c1,
-      order: 1
+      order: 1,
     },
     {
       name: "อังคาร",
       color: color.c2,
-      order: 2
+      order: 2,
     },
     {
       name: "พุธ",
       color: color.c3,
-      order: 3
+      order: 3,
     },
     {
       name: "พฤหัสฯ",
       color: color.c4,
-      order: 4
+      order: 4,
     },
     {
       name: "ศุกร์",
       color: color.c5,
-      order: 5
+      order: 5,
     },
   ]
 
   const getClassNumber = (day: number) => {
     let classNumber = 0
-    for(let i in scheduleData.body[day]){
-      if(scheduleData.body[day][i] != ""){
+    for (let i in scheduleData.body[day]) {
+      if (scheduleData.body[day][i] != "") {
         classNumber++
-      }}
-      return classNumber
+      }
     }
- 
+    return classNumber
+  }
+
   return (
     <>
       {/* <div className="absolute top-0 left-0 w-[2388px] h-[1668px] opacity-20 z-20">
         <Image src="/ref.png" width={2388} height={1668} />
       </div> */}
-      <div style={{ backgroundColor: color.bg }} className="w-[2700px] h-[1886px]">
+      <div style={{ backgroundColor: color.bg }} className="h-[1886px] w-[2700px]">
         <div style={{ backgroundColor: color.bg }} className="wrapper">
           {background === "mistletoe" && <Mistletoe />}
           {background === "ordaments" && <Ordaments color={color.c1} />}
           {background === "sticker" && <Sticker />}
           {background === "flower" && <Flower />}
+          {background === "colorful" && <Colorful />}
+          {background === "halloween" && <Halloween />}
+          {background === "sweetintherain" && <SweetInTheRain />}
           <div className="header">
             <div className="left">
               {/*<div className="bar"></div>*/}
@@ -202,7 +200,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 2/2565
+                  ภาคเรียนที่ 2/2566
                 </p>
               </div>
             </div>
@@ -232,7 +230,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                   >
                     {day.name}
                   </div>
-                  <div className="line" style={{ backgroundColor: day.color , width: 300 + (230 * getClassNumber(day.order))}}></div>
+                  <div
+                    className="line"
+                    style={{ backgroundColor: day.color, width: 300 + 230 * getClassNumber(day.order) }}
+                  ></div>
                 </div>
               ))}
             </div>
@@ -260,10 +261,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="break10-button">
-                    <p className="text">พัก</p>
-                    <p className="text">10</p>
-                    <p className="text">นาที</p>
+                  <div style={{ backgroundColor: "#fff" }} className="break10-button">
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>10</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>นาที</p>
                   </div>
                 </div>
                 {/* 3 */}
@@ -298,10 +299,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* lunchbreak */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="lunch-button">
-                    <p className="text">พัก</p>
-                    <p className="text">กลาง</p>
-                    <p className="text">วัน</p>
+                  <div style={{ backgroundColor: "#fff" }} className="lunch-button">
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>กลาง</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>วัน</p>
                   </div>
                 </div>
                 {/* 6 */}
@@ -326,10 +327,10 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
                 {/* break10 */}
                 <div className="col">
-                  <div style={{ backgroundColor: color.bg }} className="break10-button">
-                    <p className="text">พัก</p>
-                    <p className="text">10</p>
-                    <p className="text">นาที</p>
+                  <div style={{ backgroundColor: "#fff" }} className="break10-button">
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>10</p>
+                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>นาที</p>
                   </div>
                 </div>
                 {/* 8 */}
@@ -353,11 +354,13 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </div>
               </div>
               <div className="fri">
-                <div className="button" style={{ backgroundColor: color.bg }}>
-                  <div className="text"
-                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#eee" }}
-                    >
-                      วิชารักษาดินแดน</div>
+                <div className="button" style={{ backgroundColor: "#fff" }}>
+                  <div
+                    className="text"
+                    style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#000" : "#000" }}
+                  >
+                    วิชารักษาดินแดน
+                  </div>
                 </div>
               </div>
             </div>
