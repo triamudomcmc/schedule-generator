@@ -1,29 +1,45 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills.js"
+    "static/chunks/polyfills-c67a75d1b6f99dc8.js"
   ],
-  "devFiles": [
-    "static/chunks/react-refresh.js"
-  ],
-  "ampDevFiles": [
-    "static/chunks/webpack.js",
-    "static/chunks/amp.js"
-  ],
+  "devFiles": [],
+  "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js",
-    "static/development/_middlewareManifest.js"
+    "static/6oQ7PqiFpS2Hri0WhOIsF/_buildManifest.js",
+    "static/6oQ7PqiFpS2Hri0WhOIsF/_ssgManifest.js"
   ],
+  "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack-24780b5468e42e63.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-005bdf76005efab4.js",
+      "static/chunks/7112840a-c6e261e30af5dc7a.js",
+      "static/chunks/541-99254bee760cdce3.js",
+      "static/chunks/237-2fb36f324a8cad2c.js",
+      "static/chunks/941-a218a1beac8d3264.js",
+      "static/chunks/pages/index-d00fcef13cd9a4e6.js"
+    ],
     "/_app": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_app.js"
+      "static/chunks/webpack-24780b5468e42e63.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-005bdf76005efab4.js",
+      "static/css/4746c947eacb761b.css",
+      "static/chunks/pages/_app-cf4aa8b8c2584565.js"
     ],
     "/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_error.js"
+      "static/chunks/webpack-24780b5468e42e63.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-005bdf76005efab4.js",
+      "static/chunks/pages/_error-a4ba2246ff8fb532.js"
+    ],
+    "/renderer/[room]": [
+      "static/chunks/webpack-24780b5468e42e63.js",
+      "static/chunks/framework-5f4595e5518b5600.js",
+      "static/chunks/main-005bdf76005efab4.js",
+      "static/chunks/541-99254bee760cdce3.js",
+      "static/chunks/941-a218a1beac8d3264.js",
+      "static/chunks/pages/renderer/[room]-9ba1dd777082fee3.js"
     ]
   },
   "ampFirstPages": []

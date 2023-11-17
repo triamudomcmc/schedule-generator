@@ -1,4 +1,5 @@
-import NextDocument, { DocumentContext, Head, Html, Main, NextScript } from "next/document"
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from "next/document"
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
