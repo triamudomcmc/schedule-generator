@@ -9,11 +9,10 @@
 /coverage
 
 # next.js
-/.next/
 /out/
 
 # batch export
-/output/
+/_output/
 
 # production
 /build

@@ -9,22 +9,22 @@ import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
-export type ScreenSizeType = "ipad" | "iphoneX" | "iphone8" | "huawei"
-export type ThemeType = "single" | "left" | "right"
+export type ScreenSizeType = "ipad" | "iphonex" | "iphone8" | "huawei"
+export type ThemeType = "blue" | "red" | "yellow"
 
 export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
   const [level, setLevel] = useState<LevelType>("4")
   const [program, setProgram] = useState<ProgramType>("sci-math")
   const [screenSize, setScreenSize] = useState<ScreenSizeType>("ipad")
-  const [theme, setTheme] = useState<ThemeType>("single")
+  const [theme, setTheme] = useState<ThemeType>("blue")
 
   const getPrimaryTextColor = () => {
-    return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff"
+    return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#252525" : "#fff"
   }
 
   const isTheSame = <T,>(a: T, b: T) => {
     const bgColor = a === b ? primaryColor : getPrimaryTextColor()
-    const textColor = a === b ? "#fff" : "rgb(17 24 39)"
+    const textColor = "#FF69B4"
     return { backgroundColor: bgColor, color: textColor }
   }
 
@@ -54,6 +54,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
           <br />
           ภาคเรียนที่ 1 ปีการศึกษา 2566
         </h1>
+        <p className="mt-3 text-sm leading-5 text-gray-400">เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
 
       <section className="mt-6 space-y-2">
@@ -134,11 +135,11 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             style={genBGButton("screenSize", "ipad")}
           />
           <ScreenSizeButton
-            screenSizeID="iphoneX"
+            screenSizeID="iphonex"
             title="iPhone X (19.5:9)"
             imgSrc="/assets/images/placeholder/iphonex.png"
             setScreenSize={setScreenSize}
-            style={genBGButton("screenSize", "iphoneX")}
+            style={genBGButton("screenSize", "iphonex")}
           />
           <ScreenSizeButton
             screenSizeID="iphone8"
@@ -157,16 +158,45 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
         </div>
       </section>
 
+      {/* <section className="mt-10 space-y-2">
+        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ธีมสี</h2>
+
+        <div className="grid grid-cols-2 gap-4">
+          <ThemeButton
+            themeID="blue"
+            title="Whale of a Time"
+            imgSrc="/assets/images/placeholder/blue.png"
+            setTheme={setTheme}
+            style={genBGButton("theme", "blue")}
+          />
+          <ThemeButton
+            themeID="red"
+            title="Paint the Town Red"
+            imgSrc="/assets/images/placeholder/red.png"
+            setTheme={setTheme}
+            style={genBGButton("theme", "red")}
+          />
+          <ThemeButton
+            themeID="yellow"
+            title="That‘s the Cheese !"
+            imgSrc="/assets/images/placeholder/yellow.png"
+            setTheme={setTheme}
+            style={genBGButton("theme", "yellow")}
+          />
+        </div>
+      </section> */}
+
       <section className="mt-10 space-y-2">
         <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/final-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
+        <ExamPreview
+          imgSrc={`/assets/images/exam/final-1-2566/preview/m${level}/${screenSize}/${program}.JPG`}
+        />
       </section>
 
       <Downloadbutton
         level={level}
         program={program}
         screenSize={screenSize}
-        theme={theme}
         style={{ backgroundColor: primaryColor, color: getPrimaryTextColor() }}
       />
 

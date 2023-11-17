@@ -8,17 +8,14 @@ export const Downloadbutton: FC<{
   level: LevelType
   program: ProgramType
   screenSize: ScreenSizeType
-  theme: ThemeType
   style: CSSProperties
-}> = ({ level, program, screenSize, theme, style }) => {
+}> = ({ level, program, screenSize, style }) => {
   const [waiting, setWaiting] = useState(false)
 
-  let imgUrl = `/assets/images/exam/final-1-2566/src/m${level}/${screenSize}/${program}.png`
+  const imgUrl = `/assets/images/exam/final-1-2566/src/m${level}/${screenSize}/${program}.png`
 
   const download = async () => {
-    if (waiting) {
-      return
-    }
+    if (waiting) return
 
     setWaiting(true)
 
@@ -27,7 +24,6 @@ export const Downloadbutton: FC<{
       level,
       program,
       screenSize,
-      theme,
     })
 
     const a = document.createElement("a")

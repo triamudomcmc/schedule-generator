@@ -1,6 +1,17 @@
+import { opt1, opt2, opt3, opt4, opt5, opt6 } from "@utils/constants"
+
 export const selOpt = (og: any) => {
   let finalRes = og
-  const opt = og?.meta.opt
+  const { room } = og?.meta
+  let opt = 0
+
+  if (opt1.includes(parseInt(room))) opt = 1
+  else if (opt2.includes(parseInt(room))) opt = 2
+  else if (opt3.includes(parseInt(room))) opt = 3
+  else if (opt4.includes(parseInt(room))) opt = 4
+  else if (opt5.includes(parseInt(room))) opt = 5
+  else if (opt6.includes(parseInt(room))) opt = 6
+  
   switch (opt) {
     case 1:
     case 3: {
