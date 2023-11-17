@@ -3,8 +3,8 @@ import Image from "next/image"
 
 export const HalloweenPreview: FC = () => {
   return (
-    // <div className="absolute top-0 left-0 z-[2] h-full w-full">
-    <div className="absolute top-[0px] left-[2.5px] -z-[2] h-[277px] w-[406px]">
+    <div className="absolute top-0 left-0 z-[2] h-full w-full">
+      {/* <div className="absolute top-[0px] left-[2.5px] -z-[2] h-[277px] w-[406px]"> */}
       {/* <Image src="/assets/christmas-bg-preview.png" width={2388} height={1668} /> */}
       <Image src="/assets/halloween-bg.png" width={2388} height={1668} />
     </div>
