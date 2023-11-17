@@ -26,9 +26,8 @@ import Image from "next/image"
 import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
-import {log} from "util";
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain"
 
 export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
@@ -138,7 +137,7 @@ export const LearnSchedulePage: FC<{
 
   const genBGButton = (inputBG: BGType) => {
     if (inputBG === background)
-      return `text-${isDarkOrLightRGBACustom(colors.t1, 400) === "light" ? "gray-900" : "white"}`
+      return `text-${isDarkOrLightRGBACustom(colors.t1, 400) === "light" ? "gray-600" : "white"}`
     else return "text-gray-900"
   }
 
@@ -163,20 +162,20 @@ export const LearnSchedulePage: FC<{
         }}
       >
         <div className="flex flex-col items-center px-4 py-4">
-          <div className="p-3 mt-1 mb-2">
+          <div className="mt-1 mb-2 p-3">
             <Image src="/assets/art-and-design.png" layout="intrinsic" width={60} height={60} />
           </div>
           <div className="space-y-1">
             <h2 className="text-center text-gray-900">สร้างธีมสีใหม่</h2>
           </div>
         </div>
-        <div className="w-full px-4 py-4 space-y-6 bg-gray-100 rounded-b-lg">
+        <div className="w-full space-y-6 rounded-b-lg bg-gray-100 px-4 py-4">
           <div className="space-y-2">
             <input
               onChange={(e) => setThemeName(e.target.value)}
               value={themeName}
               type="text"
-              className="w-full h-10 px-4 py-2 placeholder-gray-500 border border-gray-300 rounded-md shadow-sm outline-none appearance-none focus:border-pink-500 focus:ring-pink-500"
+              className="outline-none h-10 w-full appearance-none rounded-md border border-gray-300 px-4 py-2 placeholder-gray-500 shadow-sm focus:border-pink-500 focus:ring-pink-500"
               placeholder="ชื่อธีมสี"
             />
             <button
@@ -195,16 +194,16 @@ export const LearnSchedulePage: FC<{
                 setCloseState(true)
                 setThemeName("")
               }}
-              className="flex items-center justify-center w-full py-2 space-x-1 text-white bg-green-400 rounded-lg"
+              className="flex w-full items-center justify-center space-x-1 rounded-lg bg-green-400 py-2 text-white"
             >
-              <CheckCircleIcon className="w-5 h-5" />
+              <CheckCircleIcon className="h-5 w-5" />
               <span>ยืนยัน</span>
             </button>
             <button
               onClick={() => {
                 setCloseState(true)
               }}
-              className="w-full py-2 text-gray-600 bg-white border border-gray-400 rounded-lg"
+              className="w-full rounded-lg border border-gray-400 bg-white py-2 text-gray-600"
             >
               ยกเลิก
             </button>
@@ -216,7 +215,7 @@ export const LearnSchedulePage: FC<{
         <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2565
+          ภาคเรียนที่ 2 ปีการศึกษา 2566
         </h1>
         <p className="mt-3 text-sm leading-5 text-gray-400">
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
@@ -236,7 +235,7 @@ export const LearnSchedulePage: FC<{
           ) : (
             <button
               onClick={() => signOut()}
-              className="px-6 py-2 text-center transition-colors bg-white border border-gray-400 rounded-full w-36 hover:border-gray-600 hover:bg-gray-100"
+              className="w-36 rounded-full border border-gray-400 bg-white px-6 py-2 text-center transition-colors hover:border-gray-600 hover:bg-gray-100"
             >
               ออกจากระบบ
             </button>
@@ -263,9 +262,9 @@ export const LearnSchedulePage: FC<{
             />
             <div className="absolute top-0 right-3.5 flex h-full items-center justify-end">
               {!invalidRoom ? (
-                <CheckIcon className="w-5 h-5 text-green-500" />
+                <CheckIcon className="h-5 w-5 text-green-500" />
               ) : (
-                <XIcon className="w-5 h-5 text-red-400" />
+                <XIcon className="h-5 w-5 text-red-400" />
               )}
             </div>
           </div>
@@ -280,11 +279,11 @@ export const LearnSchedulePage: FC<{
 
           <div className="relative flex h-[44px] w-[240px]">
             {/* dropdown */}
-            <div className="flex w-full border border-gray-300 rounded-xl">
-              <div className="flex items-center justify-center w-9/12 cursor-pointer">
+            <div className="flex w-full rounded-xl border border-gray-300">
+              <div className="flex w-9/12 cursor-pointer items-center justify-center">
                 <div
                   style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
-                  className="w-5 h-5 mr-2 rounded-full shadow-sm"
+                  className="mr-2 h-5 w-5 rounded-full shadow-sm"
                 />
                 <span className="mt-1 text-gray-600">{getColorsFromID(theme).name}</span>
               </div>
@@ -292,10 +291,10 @@ export const LearnSchedulePage: FC<{
                 onClick={() => {
                   setPreset((prev) => !prev)
                 }}
-                className="flex items-center justify-center w-3/12 transition-colors border-l border-gray-300 cursor-pointer rounded-r-xl hover:bg-gray-100"
+                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
               >
                 <motion.div variants={toggle} animate={preset ? "close" : "open"}>
-                  <ChevronUpIcon className="w-5 h-5 text-gray-700" />
+                  <ChevronUpIcon className="h-5 w-5 text-gray-700" />
                 </motion.div>
               </button>
             </div>
@@ -313,19 +312,19 @@ export const LearnSchedulePage: FC<{
                 <div className="absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg bg-white px-6 py-4 shadow-lg">
                   <div className="py-2">
                     <h3 className="mb-2">ธีมสีเบื้องต้น</h3>
-                    <hr className="mb-3 border-gray-300 rounded-lg border-1" />
+                    <hr className="border-1 mb-3 rounded-lg border-gray-300" />
                     <div className="space-y-2.5">
                       {Object.keys(DefaultTheme).map((colorID) => (
                         <div
                           onClick={() => {
                             setTheme(`d-${colorID}`)
                           }}
-                          className="flex mb-1 text-gray-400 cursor-pointer"
+                          className="mb-1 flex cursor-pointer text-gray-400"
                           key={`d-${colorID}`}
                         >
                           <div
                             style={{ backgroundColor: rawRgbColorToCss(DefaultTheme[colorID].t1) }}
-                            className="w-5 h-5 mr-2 rounded-full shadow-sm"
+                            className="mr-2 h-5 w-5 rounded-full shadow-sm"
                           />
                           <span
                             className={classnames(
@@ -340,7 +339,7 @@ export const LearnSchedulePage: FC<{
                   </div>
 
                   <div className="py-2">
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="mb-2 flex items-center justify-between">
                       <h3 className="">ธีมสีที่สร้าง</h3>
                       {!loggedUser ? (
                         <div></div>
@@ -350,11 +349,11 @@ export const LearnSchedulePage: FC<{
                             setModalState(true)
                           }}
                         >
-                          <PlusIcon className="w-4 h-4 text-gray-600" />
+                          <PlusIcon className="h-4 w-4 text-gray-600" />
                         </button>
                       )}
                     </div>
-                    <hr className="mb-3 border-gray-300 rounded-lg border-1" />
+                    <hr className="border-1 mb-3 rounded-lg border-gray-300" />
                     <div className="space-y-2.5">
                       {!loggedUser ? (
                         <p className="text-sm text-gray-400">เข้าสู่ระบบเพื่อบันทึกธีมสีที่สร้าง</p>
@@ -365,7 +364,7 @@ export const LearnSchedulePage: FC<{
                               onClick={() => {
                                 setTheme(`c-${cTheme}`)
                               }}
-                              className="flex mb-1 text-gray-400 cursor-pointer"
+                              className="mb-1 flex cursor-pointer text-gray-400"
                               key={`c-${cTheme}`}
                             >
                               <button
@@ -380,11 +379,11 @@ export const LearnSchedulePage: FC<{
                                   toggleSuccess()
                                 }}
                               >
-                                <TrashIcon className="w-5 h-5 mr-2 text-gray-400 transition-colors hover:text-red-400" />
+                                <TrashIcon className="mr-2 h-5 w-5 text-gray-400 transition-colors hover:text-red-400" />
                               </button>
                               <div
                                 style={{ backgroundColor: rawRgbColorToCss(customThemes[cTheme].t1) }}
-                                className="w-5 h-5 mr-2 rounded-full shadow-sm"
+                                className="mr-2 h-5 w-5 rounded-full shadow-sm"
                               />
                               <span
                                 className={classnames(
@@ -408,7 +407,7 @@ export const LearnSchedulePage: FC<{
         {/* color swatches */}
         <section className="flex flex-col items-start sm:flex-row sm:items-center">
           <div className="flex flex-col justify-center">
-            <div className="flex items-center justify-between mb-4 space-x-4">
+            <div className="mb-4 flex items-center justify-between space-x-4">
               <h3 className="text-lg font-medium text-gray-600">ชุดสี </h3>
               {loggedUser ? (
                 <button
@@ -426,7 +425,7 @@ export const LearnSchedulePage: FC<{
                       toggleSuccess()
                     }
                   }}
-                  className="px-6 py-2 text-center transition-colors bg-white border border-gray-300 rounded-full hover:bg-gray-100"
+                  className="rounded-full border border-gray-300 bg-white px-6 py-2 text-center transition-colors hover:bg-gray-100"
                 >
                   บันทึก
                 </button>
@@ -436,7 +435,7 @@ export const LearnSchedulePage: FC<{
             </div>
 
             <div className="flex flex-row flex-wrap gap-2">
-              <div className="flex items-center mr-2 space-x-1">
+              <div className="mr-2 flex items-center space-x-1">
                 <ColorPicker
                   onChange={(c) => {
                     setColors((prev) => {
@@ -513,14 +512,14 @@ export const LearnSchedulePage: FC<{
           <h3 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง </h3>
           <div className="flex">
             <div className="space-x-1 space-y-1">
-            <button
-              onClick={() => setBackground("none")}
-              className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              ไม่มี
-            </button>
-            {/* <button
+              <button
+                onClick={() => setBackground("none")}
+                className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                ไม่มี
+              </button>
+              {/* <button
               onClick={() => setBackground("ordaments")}
               className={classNames(genBGButton("ordaments"), "rounded-xl border border-gray-300 px-4 py-2")}
               style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
@@ -534,20 +533,41 @@ export const LearnSchedulePage: FC<{
             >
               Mistletoe
             </button> */}
-            <button
-              onClick={() => setBackground("sticker")}
-              className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              COOL KIDS starter pack
-            </button>
-            <button
-              onClick={() => setBackground("flower")}
-              className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-               Dans le Jardin
-            </button>
+              <button
+                onClick={() => setBackground("sticker")}
+                className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                COOL KIDS starter pack
+              </button>
+              <button
+                onClick={() => setBackground("flower")}
+                className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                Dans le Jardin
+              </button>
+              <button
+                onClick={() => setBackground("colorful")}
+                className={classNames(genBGButton("colorful"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "colorful" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                Colorful
+              </button>
+              <button
+                onClick={() => setBackground("halloween")}
+                className={classNames(genBGButton("halloween"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "halloween" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                Halloween
+              </button>
+              <button
+                onClick={() => setBackground("sweetintherain")}
+                className={classNames(genBGButton("sweetintherain"), "rounded-xl border border-gray-300 px-4 py-2")}
+                style={{ backgroundColor: background === "sweetintherain" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+              >
+                Sweet in the Rain
+              </button>
             </div>
           </div>
         </section>
@@ -559,7 +579,7 @@ export const LearnSchedulePage: FC<{
       </>
 
       {/* download */}
-      <div className="flex justify-center mt-8 sm:mt-10">
+      <div className="mt-8 flex justify-center sm:mt-10">
         <motion.button
           whileHover={{ scale: !waiting ? 1.05 : 1 }}
           onClick={download}
