@@ -1,19 +1,19 @@
 import { MutableRefObject, useEffect, useState, RefObject } from "react"
 
-export const useDetectOuside = (ref: RefObject<HTMLElement>, dep: boolean, callback: () => void) => {
+export const useDetectOutside = (ref: RefObject<HTMLElement>, dep: boolean, callback: () => void) => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node | null) && dep) {
-        callback()
+        callback();
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [ref, dep])
-}
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, dep, callback]);
+};
 
 export function useWindowDimensions() {
   function getWindowDimensions() {

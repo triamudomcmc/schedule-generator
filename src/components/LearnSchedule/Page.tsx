@@ -11,8 +11,9 @@ import { motion } from "framer-motion"
 import { Ellipsis } from "@components/Loader/Ellipsis"
 import classNames from "classnames"
 import { DescribeRoute } from "@components/Meta/DescribeRoute"
-import {TUCMCLogin, useAuth} from "tucmc-auth"
+import { TUCMCLogin, useAuth } from "tucmc-auth"
 import { ColorTheme, DefaultTheme } from "@config/defaultTheme"
+import { BackgroundDecorations } from "@config/background"
 import { LongLogo } from "@components/Logo/LongLogo"
 import { downloadScreenshot } from "@handlers/client/downloadScreenshot"
 import { rooms } from "@utils/constants"
@@ -32,7 +33,8 @@ type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "color
 export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
   setPrimaryColor: Dispatch<SetStateAction<string>>
-}> = ({ setBGcolor, setPrimaryColor }) => {
+  darkMode: boolean
+}> = ({ setBGcolor, setPrimaryColor, darkMode }) => {
   const { loggedUser, signOut } = useAuth()
   const toast = useToast()
 
@@ -41,11 +43,17 @@ export const LearnSchedulePage: FC<{
   const [modalState, setModalState] = useState(false)
   const [closeState, setCloseState] = useState(false)
 
-  const [background, setBackground] = useState("none")
   const [colors, setColors] = useState<ColorTheme>(DefaultTheme.Pink)
   const [customThemes, setCustomThemes] = useState<Record<string, ColorTheme>>({})
   const [theme, setTheme] = useState("d-Pink") // d: default, c: custom
+  const [background, setBackground] = useState("none")
   const [themeName, setThemeName] = useState("")
+
+  const primaryBackgroundColor = darkMode ? "bg-black" : "bg-white"
+  const primaryTextColor = darkMode ? "text-white" : "text-gray-800"
+  const secondaryTextColor = darkMode ? "text-white" : "text-gray-700"
+  const tertiaryTextColor = darkMode ? "text-white" : "text-gray-400"
+  const hoverTextColor = darkMode ? "text-white" : "text-black font-semibold"
 
   const getColorsFromID = (themeID: string) => {
     const trimmedTheme = themeID.replace(/(c|d)-/, "")
@@ -59,6 +67,11 @@ export const LearnSchedulePage: FC<{
     }
   }
 
+  const getBackgroundValueFromName = (backgroundVal: string) => {
+    const background = backgroundVal.replace(" ", "").toLowerCase()
+    return BackgroundDecorations[background]
+  }
+
   useEffect(() => {
     if (theme.startsWith("c-") || theme.startsWith("d-")) {
       setColors(getColorsFromID(theme))
@@ -67,6 +80,14 @@ export const LearnSchedulePage: FC<{
       setTheme("d-Pink")
     }
   }, [theme])
+
+  useEffect(() => {
+    if (background !== "none") {
+      setBackground(background)
+    } else {
+      setBackground("none")
+    }
+  }, [background])
 
   useEffect(() => {
     if (loggedUser) {
@@ -87,6 +108,7 @@ export const LearnSchedulePage: FC<{
 
   const [invalidRoom, setInvalidRoom] = useState(false)
   const [preset, setPreset] = useState(false)
+  const [bgPreset, setbgPreset] = useState(false)
   const [room, setRoom] = useState("")
 
   useEffect(() => {
@@ -212,24 +234,24 @@ export const LearnSchedulePage: FC<{
       </Modal>
 
       <header>
-        <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
+        <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
           ระบบจัดการตารางเรียน
           <br />
           ภาคเรียนที่ 2 ปีการศึกษา 2566
         </h1>
-        <p className="mt-3 text-sm leading-5 text-gray-400">
+        <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
           <br className="hidden sm:block" />
           จัดทำขึ้น ไม่ได้มีความเกี่ยวข้องกับทางโรงเรียนแต่อย่างใด
           <br />
         </p>
 
-        <div className="flex flex-col mt-4 space-y-2">
+        <div className="mt-6 flex flex-col space-y-2">
           {!loggedUser ? (
             <>
-              <p>เข้าสู่ระบบเพื่อบันทึกธีมสีของคุณ</p>
+              <p className={`text-sm ${tertiaryTextColor}`}>เข้าสู่ระบบเพื่อบันทึกธีมสีของคุณ</p>
               <div className="w-48 transition-transform hover:scale-105">
-                <TUCMCLogin/>
+                <TUCMCLogin />
               </div>
             </>
           ) : (
@@ -245,7 +267,7 @@ export const LearnSchedulePage: FC<{
 
       {/* classroom */}
       <section className="mt-12 space-y-2">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ใส่เลขห้องเรียน</h2>
+        <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>ใส่เลขห้องเรียน</h2>
         <div className="flex flex-col items-start sm:flex-row sm:items-center">
           <div className="relative w-48">
             <input
@@ -256,8 +278,8 @@ export const LearnSchedulePage: FC<{
               value={room}
               placeholder="เลขห้อง"
               className={classnames(
-                "w-full rounded-xl border border-gray-300 pl-4 pt-2 pb-1.5 text-xl text-gray-500",
-                invalidRoom ? "border-red-400" : " border-green-400"
+                "w-full rounded-xl border border-gray-300 pl-4 pt-2 pb-1.5 text-xl text-gray-600",
+                invalidRoom ? "border-red-400" : " border border-green-400"
               )}
             />
             <div className="absolute top-0 right-3.5 flex h-full items-center justify-end">
@@ -273,11 +295,11 @@ export const LearnSchedulePage: FC<{
 
       {/* themes */}
       <section className="mt-12 space-y-4 sm:space-y-6">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ปรับแต่งตารางเรียน</h2>
+        <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>ปรับแต่งตารางเรียน</h2>
         <div className="flex flex-col justify-center">
-          <h3 className="mb-2 text-lg font-medium text-gray-600">ธีมสี </h3>
+          <h3 className={`mb-2 text-lg font-medium ${secondaryTextColor}`}>ธีมสี </h3>
 
-          <div className="relative flex h-[44px] w-[240px]">
+          <div className={`relative flex h-[44px] w-[240px]`}>
             {/* dropdown */}
             <div className="flex w-full rounded-xl border border-gray-300">
               <div className="flex w-9/12 cursor-pointer items-center justify-center">
@@ -285,7 +307,7 @@ export const LearnSchedulePage: FC<{
                   style={{ backgroundColor: rawRgbColorToCss(colors.t1) }}
                   className="mr-2 h-5 w-5 rounded-full shadow-sm"
                 />
-                <span className="mt-1 text-gray-600">{getColorsFromID(theme).name}</span>
+                <span className={`mt-1 ${secondaryTextColor}`}>{getColorsFromID(theme).name}</span>
               </div>
               <button
                 onClick={() => {
@@ -294,7 +316,7 @@ export const LearnSchedulePage: FC<{
                 className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
               >
                 <motion.div variants={toggle} animate={preset ? "close" : "open"}>
-                  <ChevronUpIcon className="h-5 w-5 text-gray-700" />
+                  <ChevronUpIcon className="h-5 w-5 text-gray-500" />
                 </motion.div>
               </button>
             </div>
@@ -309,9 +331,11 @@ export const LearnSchedulePage: FC<{
                     setPreset(false)
                   }}
                 />
-                <div className="absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg bg-white px-6 py-4 shadow-lg">
-                  <div className="py-2">
-                    <h3 className="mb-2">ธีมสีเบื้องต้น</h3>
+                <div
+                  className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${secondaryTextColor} ${primaryBackgroundColor} border border-gray-300`}
+                >
+                  <div className="border-white py-2">
+                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>ธีมสีเบื้องต้น</h3>
                     <hr className="border-1 mb-3 rounded-lg border-gray-300" />
                     <div className="space-y-2.5">
                       {Object.keys(DefaultTheme).map((colorID) => (
@@ -328,7 +352,7 @@ export const LearnSchedulePage: FC<{
                           />
                           <span
                             className={classnames(
-                              `d-${colorID}` !== theme ? "transition-colors hover:text-gray-500" : "text-gray-800"
+                              `d-${colorID}` !== theme ? `transition-colors hover:text-gray-500` : `${hoverTextColor}`
                             )}
                           >
                             {DefaultTheme[colorID.replace(/(c|d)-/, "")].name}
@@ -356,7 +380,7 @@ export const LearnSchedulePage: FC<{
                     <hr className="border-1 mb-3 rounded-lg border-gray-300" />
                     <div className="space-y-2.5">
                       {!loggedUser ? (
-                        <p className="text-sm text-gray-400">เข้าสู่ระบบเพื่อบันทึกธีมสีที่สร้าง</p>
+                        <p className={`text-sm ${secondaryTextColor}`}>เข้าสู่ระบบเพื่อบันทึกธีมสีที่สร้าง</p>
                       ) : (
                         Object.keys(customThemes).map((cTheme) => {
                           return (
@@ -371,7 +395,7 @@ export const LearnSchedulePage: FC<{
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   setTheme("d-Pink")
-
+                                  
                                   const newCustomThemes = removeKey(customThemes, cTheme)
                                   setCustomThemes(newCustomThemes)
                                   // save to db
@@ -387,7 +411,9 @@ export const LearnSchedulePage: FC<{
                               />
                               <span
                                 className={classnames(
-                                  `c-${cTheme}` !== theme ? "transition-colors hover:text-gray-500" : "text-gray-800"
+                                  `c-${cTheme}` !== theme
+                                    ? "transition-colors hover:text-gray-500"
+                                    : `${hoverTextColor}`
                                 )}
                               >
                                 {customThemes[cTheme].name}
@@ -408,7 +434,7 @@ export const LearnSchedulePage: FC<{
         <section className="flex flex-col items-start sm:flex-row sm:items-center">
           <div className="flex flex-col justify-center">
             <div className="mb-4 flex items-center justify-between space-x-4">
-              <h3 className="text-lg font-medium text-gray-600">ชุดสี </h3>
+              <h3 className={`text-lg font-medium ${secondaryTextColor}`}>ชุดสี</h3>
               {loggedUser ? (
                 <button
                   onClick={() => {
@@ -425,7 +451,7 @@ export const LearnSchedulePage: FC<{
                       toggleSuccess()
                     }
                   }}
-                  className="rounded-full border border-gray-300 bg-white px-6 py-2 text-center transition-colors hover:bg-gray-100"
+                  className={`rounded-full border border-gray-300 bg-white px-6 py-2 text-center transition-colors hover:${hoverTextColor}`}
                 >
                   บันทึก
                 </button>
@@ -443,6 +469,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.bg}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -451,6 +478,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.t1}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -459,6 +487,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.t2}
+                  darkMode={darkMode}
                 />
               </div>
               <div className="flex items-center space-x-1">
@@ -469,6 +498,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.c1}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -477,6 +507,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.c2}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -485,6 +516,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.c3}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -493,6 +525,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.c4}
+                  darkMode={darkMode}
                 />
                 <ColorPicker
                   onChange={(c) => {
@@ -501,6 +534,7 @@ export const LearnSchedulePage: FC<{
                     })
                   }}
                   defaultColor={colors.c5}
+                  darkMode={darkMode}
                 />
               </div>
             </div>
@@ -508,69 +542,68 @@ export const LearnSchedulePage: FC<{
         </section>
 
         {/* background */}
-        <section className="flex flex-col justify-center space-y-2">
-          <h3 className="mb-2 text-lg font-medium text-gray-600">พื้นหลัง </h3>
-          <div className="flex">
-            <div className="space-x-1 space-y-1">
+        <div className="flex flex-col justify-center">
+          <h3 className={`mb-2 text-lg font-medium ${secondaryTextColor}`}>พื้นหลัง</h3>
+
+          <div className="relative flex h-[44px] w-[240px]">
+            {/* dropdown */}
+            <div className="flex w-full rounded-xl border">
+              <div className="flex w-9/12 cursor-pointer items-center justify-center">
+                <span className={`mt-1 ${secondaryTextColor}`}>{getBackgroundValueFromName(background).name}</span>
+              </div>
               <button
-                onClick={() => setBackground("none")}
-                className={classNames(genBGButton("none"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "none" ? rawRgbColorToCss(colors.t1) : "#fff" }}
+                onClick={() => {
+                  setbgPreset((prev) => !prev)
+                }}
+                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
               >
-                ไม่มี
-              </button>
-              {/* <button
-              onClick={() => setBackground("ordaments")}
-              className={classNames(genBGButton("ordaments"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "ordaments" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              Christmas Town
-            </button>
-            <button
-              onClick={() => setBackground("mistletoe")}
-              className={classNames(genBGButton("mistletoe"), "rounded-xl border border-gray-300 px-4 py-2")}
-              style={{ backgroundColor: background === "mistletoe" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-            >
-              Mistletoe
-            </button> */}
-              <button
-                onClick={() => setBackground("sticker")}
-                className={classNames(genBGButton("sticker"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "sticker" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-              >
-                COOL KIDS starter pack
-              </button>
-              <button
-                onClick={() => setBackground("flower")}
-                className={classNames(genBGButton("flower"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "flower" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-              >
-                Dans le Jardin
-              </button>
-              <button
-                onClick={() => setBackground("colorful")}
-                className={classNames(genBGButton("colorful"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "colorful" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-              >
-                Colorful
-              </button>
-              <button
-                onClick={() => setBackground("halloween")}
-                className={classNames(genBGButton("halloween"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "halloween" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-              >
-                Halloween
-              </button>
-              <button
-                onClick={() => setBackground("sweetintherain")}
-                className={classNames(genBGButton("sweetintherain"), "rounded-xl border border-gray-300 px-4 py-2")}
-                style={{ backgroundColor: background === "sweetintherain" ? rawRgbColorToCss(colors.t1) : "#fff" }}
-              >
-                Sweet in the Rain
+                <motion.div variants={toggle} animate={bgPreset ? "close" : "open"}>
+                  <ChevronUpIcon className="h-5 w-5 text-gray-500" />
+                </motion.div>
               </button>
             </div>
+
+            {/* expand */}
+            {bgPreset && (
+              <>
+                {/* default presets */}
+                <div
+                  style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
+                  onClick={() => {
+                    setbgPreset(false)
+                  }}
+                />
+                <div
+                  className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${primaryBackgroundColor} border border-gray-500`}
+                >
+                  <div className={`py-2`}>
+                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>พื้นหลัง</h3>
+                    <hr className={`border-1 mb-3 rounded-lg border-gray-300`} />
+                    <div className="space-y-2.5">
+                      {Object.keys(BackgroundDecorations).map((value) => (
+                        <div
+                          onClick={() => {
+                            setBackground(value)
+                          }}
+                          className="mb-1 flex cursor-pointer text-gray-400"
+                          key={value}
+                        >
+                          <span
+                            className={classnames(
+                              value !== background ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                            )}
+                          >
+                            {BackgroundDecorations[value.replace(" ", "").toLowerCase()].name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </section>
+        </div>
       </section>
 
       {/* preview */}

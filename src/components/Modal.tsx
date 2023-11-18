@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import classnames from "classnames"
-import { useDetectOuside } from "@utils/document"
+import { useDetectOutside } from "@utils/document"
 import { useEffect, useRef, useState } from "react"
 
 const Modal = ({
@@ -86,7 +86,7 @@ const Modal = ({
     }
   }, [TriggerDep])
 
-  useDetectOuside(panel, !prevent, () => {
+  useDetectOutside(panel, !prevent, () => {
     close()
   })
 

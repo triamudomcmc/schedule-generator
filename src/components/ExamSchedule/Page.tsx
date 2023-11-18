@@ -12,11 +12,20 @@ export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sc
 export type ScreenSizeType = "ipad" | "iphonex" | "iphone8" | "huawei"
 export type ThemeType = "blue" | "red" | "yellow"
 
-export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor }) => {
+export const ExamSchedulePage: FC<{
+  primaryColor: string
+  darkMode: boolean
+}> = ({ primaryColor, darkMode }) => {
   const [level, setLevel] = useState<LevelType>("4")
   const [program, setProgram] = useState<ProgramType>("sci-math")
   const [screenSize, setScreenSize] = useState<ScreenSizeType>("ipad")
   const [theme, setTheme] = useState<ThemeType>("blue")
+
+  const primaryBackgroundColor = darkMode ? "bg-black" : "bg-white"
+  const primaryTextColor = darkMode ? "text-white" : "text-gray-800"
+  const secondaryTextColor = darkMode ? "text-white" : "text-gray-700"
+  const tertiaryTextColor = darkMode ? "text-white" : "text-gray-400"
+  const hoverTextColor = darkMode ? "text-white" : "text-gray-500"
 
   const getPrimaryTextColor = () => {
     return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#252525" : "#fff"
@@ -49,16 +58,16 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
   return (
     <div>
       <header>
-        <h1 className="mb-1 text-xl font-medium text-gray-800 sm:text-2xl">
+        <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
           ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 1 ปีการศึกษา 2566
         </h1>
-        <p className="mt-3 text-sm leading-5 text-gray-400">เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
+        <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
 
       <section className="mt-6 space-y-2">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ระดับชั้น</h2>
+        <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>ระดับชั้น</h2>
 
         <div className="flex space-x-1">
           <button
@@ -86,7 +95,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       </section>
 
       <section className="mt-10 space-y-2">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">สายการเรียน</h2>
+        <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>สายการเรียน</h2>
 
         <div className="flex space-x-1">
           <button
@@ -124,13 +133,14 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       </section>
 
       <section className="mt-10 space-y-2">
-        <h2 className="text-xl font-medium text-gray-600 sm:text-2xl">ขนาดหน้าจอ</h2>
+        <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>ขนาดหน้าจอ</h2>
 
         <div className="grid grid-cols-2 gap-4">
           <ScreenSizeButton
             screenSizeID="ipad"
             title="iPad (3:4)"
             imgSrc="/assets/images/placeholder/ipad.png"
+            darkMode={darkMode}
             setScreenSize={setScreenSize}
             style={genBGButton("screenSize", "ipad")}
           />
@@ -138,6 +148,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             screenSizeID="iphonex"
             title="iPhone X (19.5:9)"
             imgSrc="/assets/images/placeholder/iphonex.png"
+            darkMode={darkMode}
             setScreenSize={setScreenSize}
             style={genBGButton("screenSize", "iphonex")}
           />
@@ -145,6 +156,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             screenSizeID="iphone8"
             title="iPhone 8 (16:9)"
             imgSrc="/assets/images/placeholder/iphone8.png"
+            darkMode={darkMode}
             setScreenSize={setScreenSize}
             style={genBGButton("screenSize", "iphone8")}
           />
@@ -152,6 +164,7 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
             screenSizeID="huawei"
             title="Huawei (19.5:9, centered)"
             imgSrc="/assets/images/placeholder/huawei.png"
+            darkMode={darkMode}
             setScreenSize={setScreenSize}
             style={genBGButton("screenSize", "huawei")}
           />
@@ -187,10 +200,8 @@ export const ExamSchedulePage: FC<{ primaryColor: string }> = ({ primaryColor })
       </section> */}
 
       <section className="mt-10 space-y-2">
-        <h2 className="text-center text-xl font-medium text-gray-600 sm:text-2xl">Preview</h2>
-        <ExamPreview
-          imgSrc={`/assets/images/exam/final-1-2566/preview/m${level}/${screenSize}/${program}.JPG`}
-        />
+        <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
+        <ExamPreview imgSrc={`/assets/images/exam/final-1-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
       </section>
 
       <Downloadbutton
