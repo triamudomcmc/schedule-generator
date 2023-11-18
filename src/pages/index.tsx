@@ -5,7 +5,6 @@ import { AnimateSharedLayout } from "framer-motion"
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
 import { CSSProperties, Dispatch, FC, SetStateAction, useEffect, useState } from "react"
-import { styled } from "@mui/material/styles"
 import { CheckIcon, ExclamationIcon, StarIcon, XIcon } from "@heroicons/react/solid"
 import { rawRgbColorToCss } from "@utils/hexToRgb"
 import { DefaultTheme } from "@config/defaultTheme"
@@ -176,7 +175,7 @@ export const Home: NextPage = () => {
   const [darkMode, setDarkMode] = useState(false)
   const { query } = useRouter()
 
-  let bgInsideColor = darkMode ? "#252525" : "#fff"
+  let bgInsideColor = darkMode ? "#000" : "#fff"
 
   useEffect(() => {
     if (query?.type && ["learn", "exam"].includes(query?.type as string)) {
