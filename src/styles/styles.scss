@@ -1,8 +1,8 @@
-// $width: 2388px;
-// $height: 1768px;
+$width: 2388px;
+$height: 1768px;
 
-$width: 2700px;
-$height: 1886;
+// $width: 2700px;
+// $height: 1886px;
 
 
 body {
@@ -101,7 +101,7 @@ body {
 .wrapper > .main {
   margin: 115px auto 0 auto;
   position: relative;
-  padding-top: 25px;
+  // padding-top: 25px;
 }
 
 .wrapper > .main > .days {
@@ -110,7 +110,7 @@ body {
   justify-content: center;
   width: 90%;
   margin-left: 30px;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 
 .wrapper > .main > .days > .day {
@@ -155,7 +155,6 @@ body {
 .schedules > .mon-to-thurs {
   display: flex;
   flex-direction: row;
-  padding-top: 50px;
 }
 
 .schedules > .mon-to-thurs > .col {
