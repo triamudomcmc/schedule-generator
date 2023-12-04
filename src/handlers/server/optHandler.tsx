@@ -20,11 +20,11 @@ export const selOpt = (og: any) => {
       // Tue per8 use per1 from Fri
       // Thu per8 use per2 from Fri
 
-      finalRes.body["1"]["9"] = ["กิจกรรม"]
-      finalRes.body["1"]["8"] = og?.body["5"]["3"]
-      finalRes.body["2"]["8"] = og?.body["5"]["1"]
-      finalRes.body["4"]["8"] = og?.body["5"]["2"]
-      finalRes.body["5"] = {}
+      // finalRes.body["1"]["9"] = ["กิจกรรม"]
+      // finalRes.body["1"]["8"] = og?.body["5"]["3"]
+      // finalRes.body["2"]["8"] = og?.body["5"]["1"]
+      // finalRes.body["4"]["8"] = og?.body["5"]["2"]
+      // finalRes.body["5"] = {}
       return finalRes
     }
     case 2:
@@ -34,11 +34,11 @@ export const selOpt = (og: any) => {
       // Tue per9 use per1 from Fri
       // Thu per9 use per2 from Fri
 
-      finalRes.body["1"]["9"] = ["กิจกรรม"]
-      finalRes.body["1"]["8"] = og?.body["5"]["3"]
-      finalRes.body["2"]["9"] = og?.body["5"]["1"]
-      finalRes.body["4"]["9"] = og?.body["5"]["2"]
-      finalRes.body["5"] = {}
+      // finalRes.body["1"]["9"] = ["กิจกรรม"]
+      // finalRes.body["1"]["8"] = og?.body["5"]["3"]
+      // finalRes.body["2"]["9"] = og?.body["5"]["1"]
+      // finalRes.body["4"]["9"] = og?.body["5"]["2"]
+      // finalRes.body["5"] = {}
       return finalRes
     }
     case 5: {
@@ -46,11 +46,11 @@ export const selOpt = (og: any) => {
       // Mon per8 use per3 from Fri, then per9 = club
       // Tue per7 use per1 from Fri, then per8 use per2 from Fri
 
-      finalRes.body["1"]["9"] = ["กิจกรรม"]
-      finalRes.body["1"]["8"] = og?.body["5"]["3"]
-      finalRes.body["2"]["7"] = og?.body["5"]["1"]
-      finalRes.body["2"]["8"] = og?.body["5"]["2"]
-      finalRes.body["5"] = {}
+      // finalRes.body["1"]["9"] = ["กิจกรรม"]
+      // finalRes.body["1"]["8"] = og?.body["5"]["3"]
+      // finalRes.body["2"]["7"] = og?.body["5"]["1"]
+      // finalRes.body["2"]["8"] = og?.body["5"]["2"]
+      // finalRes.body["5"] = {}
       return finalRes
     }
     case 6: {
@@ -58,11 +58,11 @@ export const selOpt = (og: any) => {
       // Mon per8 use per3 from Fri
       // Tue per6 use per1 from Fri, then per7 use per2 from Fri
 
-      finalRes.body["1"]["9"] = ["กิจกรรม"]
-      finalRes.body["1"]["8"] = og?.body["5"]["3"]
-      finalRes.body["2"]["6"] = og?.body["5"]["1"]
-      finalRes.body["2"]["7"] = og?.body["5"]["2"]
-      finalRes.body["5"] = {}
+      // finalRes.body["1"]["9"] = ["กิจกรรม"]
+      // finalRes.body["1"]["8"] = og?.body["5"]["3"]
+      // finalRes.body["2"]["6"] = og?.body["5"]["1"]
+      // finalRes.body["2"]["7"] = og?.body["5"]["2"]
+      // finalRes.body["5"] = {}
       return finalRes
     }
     default: {
