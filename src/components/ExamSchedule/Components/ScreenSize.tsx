@@ -21,4 +21,4 @@ export const ScreenSizeButton: FC<{
       <p className={`${textColor}`}>{title}</p>
     </button>
   )
-}
+} 
