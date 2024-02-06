@@ -199,10 +199,16 @@ export const Home: NextPage = () => {
           style={{ backgroundColor: bgColor }}
         >
           <main
-            className="max-w-[470px] rounded-xl py-10 px-8 font-ui shadow-lg transition-colors duration-500"
+            className="max-w-[470px] rounded-xl py-10 px-5 font-ui shadow-lg transition-colors duration-500"
             style={{ backgroundColor: bgInsideColor }}
           >
-            <PageTab primaryColor={primaryColor} tab={tab} setTab={setTab} darkMode={darkMode} setDarkMode={setDarkMode}/>
+            <PageTab
+              primaryColor={primaryColor}
+              tab={tab}
+              setTab={setTab}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
 
             <AnimatePresence>
               <motion.div
