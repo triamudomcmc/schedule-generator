@@ -201,7 +201,7 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/final-2-2566/preview/M${level}/${screenSize}/${program}.JPG`} />
+        <ExamPreview imgSrc={`/assets/images/exam/Final-2-2566/preview/M${level}/${screenSize}/${program}.JPG`} />
       </section>
 
       <Downloadbutton
