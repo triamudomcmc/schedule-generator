@@ -59,7 +59,7 @@ export const ExamSchedulePage: FC<{
     <div>
       <header>
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
-          ตารางสอบกลางภาค &#40;SUM&#41;
+          ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 2 ปีการศึกษา 2566
         </h1>
@@ -97,7 +97,7 @@ export const ExamSchedulePage: FC<{
       <section className="mt-10 space-y-2">
         <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>สายการเรียน</h2>
 
-        <div className="flex space-x-1">
+        <div className="flex space-x-1 text-sm font-normal sm:text-base">
           <button
             onClick={() => setProgram("sci-math")}
             className="rounded-xl border border-gray-300 px-4 py-2"
@@ -201,7 +201,7 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/sum-2-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
+        <ExamPreview imgSrc={`/assets/images/exam/final-2-2566/preview/m${level}/${screenSize}/${program}.JPG`} />
       </section>
 
       <Downloadbutton
