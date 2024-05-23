@@ -1,5 +1,8 @@
 import { LongLogo } from "@components/Logo/LongLogo"
 import { isDarkOrLightRGBAString } from "@utils/isDarkOrLight"
+import { CheckCircleIcon, ChevronUpIcon, PlusIcon, TrashIcon } from "@heroicons/react/outline"
+import { motion } from "framer-motion"
+import classnames from "classnames"
 import classNames from "classnames"
 import { FC, useState } from "react"
 import { Downloadbutton } from "./Components/DownloadButton"
@@ -9,6 +12,7 @@ import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
+export type ProgramTHType = "วิทย์-คณิต" | "ศิลป์คำนวณ" | "ศิลป์ภาษา" | "ภาษาคณิต(วิทย์)"
 export type ScreenSizeType = "ipad" | "iphoneX" | "iphone8" | "huawei"
 export type ThemeType = "blue" | "red" | "yellow"
 
@@ -18,14 +22,16 @@ export const ExamSchedulePage: FC<{
 }> = ({ primaryColor, darkMode }) => {
   const [level, setLevel] = useState<LevelType>("4")
   const [program, setProgram] = useState<ProgramType>("sci-math")
+  const [programTH, setProgramTH] = useState<ProgramTHType>("วิทย์-คณิต")
   const [screenSize, setScreenSize] = useState<ScreenSizeType>("ipad")
   const [theme, setTheme] = useState<ThemeType>("blue")
+  const [programPresent,setProgramPresent] = useState(false)
 
   const primaryBackgroundColor = darkMode ? "bg-black" : "bg-white"
   const primaryTextColor = darkMode ? "text-white" : "text-gray-800"
   const secondaryTextColor = darkMode ? "text-white" : "text-gray-700"
   const tertiaryTextColor = darkMode ? "text-white" : "text-gray-400"
-  const hoverTextColor = darkMode ? "text-white" : "text-gray-500"
+  const hoverTextColor = darkMode ? "text-white" : "text-black font-semibold"
 
   const getPrimaryTextColor = () => {
     return isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#252525" : "#fff"
@@ -53,6 +59,15 @@ export const ExamSchedulePage: FC<{
       default:
         return { backgroundColor: "", color: "" }
     }
+  }
+
+  const toggle = {
+    open: {
+      rotate: 0,
+    },
+    close: {
+      rotate: 180,
+    },
   }
 
   return (
@@ -96,40 +111,110 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>สายการเรียน</h2>
+        <div className="relative flex h-[44px] w-[240px]">
+            {/* dropdown */}
+            <div className="flex w-full rounded-xl border">
+              <div className="flex w-9/12 cursor-pointer items-center justify-center">
+                <span className={`mt-1 ${secondaryTextColor}`} style={{color:"#FF69B4"}}>{programTH}</span>
+              </div>
+              <button
+                onClick={() => {
+                  setProgramPresent((prev) => !prev)
+                }}
+                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
+              >
+                <motion.div variants={toggle} animate={programPresent ? "close" : "open"}>
+                  <ChevronUpIcon className="h-5 w-5 text-gray-500" />
+                </motion.div>
+              </button>
+            </div>
 
-        <div className="flex space-x-1 text-sm font-normal sm:text-base">
-          <button
-            onClick={() => setProgram("sci-math")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButton("program", "sci-math")}
-          >
-            วิทย์-คณิต
-          </button>
-          <button
-            onClick={() => setProgram("arts-math")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButton("program", "arts-math")}
-          >
-            ศิลป์คำนวณ
-          </button>
-          <button
-            onClick={() => setProgram("arts-lang")}
-            className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButton("program", "arts-lang")}
-          >
-            ศิลป์ภาษา
-          </button>
-          <button
-            onClick={() => {
-              setLevel("6")
-              setProgram("arts-math-sci")
-            }}
-            className="rounded-xl border border-gray-300 px-4 py-2"
-            style={genBGButton("program", "arts-math-sci")}
-          >
-            ภาษาคณิต(วิทย์)
-          </button>
-        </div>
+            {/* expand */}
+            {programPresent && (
+              <>
+                {/* default presets */}
+                <div
+                  style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
+                  onClick={() => {
+                    setProgramPresent(false)
+                  }}
+                />
+                <div
+                  className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${primaryBackgroundColor} border border-gray-500`}
+                >
+                  <div className={`py-2`}>
+                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>พื้นหลัง</h3>
+                    <hr className={`border-1 mb-3 rounded-lg border-gray-300`} />
+                    <div className="space-y-2.5">
+                        <div
+                          onClick={() => {
+                            setProgram("sci-math")
+                            setProgramTH("วิทย์-คณิต")
+                          }}
+                          className="mb-1 flex cursor-pointer text-gray-400"
+                        >
+                          <span
+                            className={classnames(
+                              program !== "sci-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                            )}
+                          >
+                            วิทย์-คณิต
+                          </span>
+                        </div>
+                        <div
+                          onClick={() => {
+                            setProgram("arts-math")
+                            setProgramTH("ศิลป์คำนวณ")
+                          }}
+                          className="mb-1 flex cursor-pointer text-gray-400"
+                        >
+                          <span
+                            className={classnames(
+                              program !== "arts-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                            )}
+                          >
+                            ศิลป์คำนวณ
+                          </span>
+                        </div>
+                        <div
+                          onClick={() => {
+                            setProgram("arts-lang")
+                            setProgramTH("ศิลป์ภาษา")
+                          }}
+                          className="mb-1 flex cursor-pointer text-gray-400"
+                        >
+                          <span
+                            className={classnames(
+                              program !== "arts-lang" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                            )}
+                          >
+                            ศิลป์ภาษา
+                          </span>
+                        </div>
+                        <div
+                          onClick={() => {
+                            setProgram("arts-math-sci")
+                            setProgramTH("ภาษาคณิต(วิทย์)")
+                            setLevel("6")
+                          }}
+                          className="mb-1 flex cursor-pointer text-gray-400"
+                        >
+                          <span
+                            className={classnames(
+                              program !== "arts-math-sci" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                            )}
+                          >
+                            ภาษาคณิต(วิทย์)
+                          </span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+        
       </section>
 
       <section className="mt-10 space-y-2">
