@@ -10,6 +10,8 @@ import {
   ColorfulPreview,
   HalloweenPreview,
   SweetInTheRainPreview,
+  NauticalMermaidPreview,
+  NishikigoiWaterGardenPreview
 } from "@components/Background"
 
 interface Scheme {
@@ -65,6 +67,8 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
       <div>{background === "colorful" && <ColorfulPreview />}</div>
       <div>{background === "halloween" && <HalloweenPreview />}</div>
       <div>{background === "sweetintherain" && <SweetInTheRainPreview />}</div>
+      <div>{background === "nauticalmermaid" && <NauticalMermaidPreview />}</div>
+      <div>{background === "nishikigoiwatergarden" && <NishikigoiWaterGardenPreview />}</div>
         <svg
           width="2388"
           height="1668"

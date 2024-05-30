@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain } from "@components/Background"
+import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain, NauticalMermaid, NishikigoiWaterGarden } from "@components/Background"
 import { selOpt } from "@handlers/server/optHandler"
 
 const defaultColors = {
@@ -76,7 +76,7 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden"
 
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
@@ -193,8 +193,10 @@ const Room = ({ scheduleData }: RoomProps) => {
           {background === "colorful" && <Colorful />}
           {background === "halloween" && <Halloween />}
           {background === "sweetintherain" && <SweetInTheRain />}
-          <div className="header">
-            <div className="left">
+          {background === "nauticalmermaid" && <NauticalMermaid />}
+          {background === "nishikigoiwatergarden" && <NishikigoiWaterGarden />}
+          <div className="header ">
+            <div className="left z-10">
               {/*<div className="bar"></div>*/}
               <div className="title-container">
                 <h1 className="title" style={{ color: color.t1 }}>
@@ -205,7 +207,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                 </p>
               </div>
             </div>
-            <div className="right">
+            <div className="right z-10">
               <h2 className="room" style={{ color: color.t2 }}>
                 ห้อง {scheduleData.room} | {scheduleData.meta.branch}
               </h2>
