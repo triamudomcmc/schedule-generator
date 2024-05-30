@@ -143,7 +143,7 @@ export const ExamSchedulePage: FC<{
                   className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${primaryBackgroundColor} border border-gray-500`}
                 >
                   <div className={`py-2`}>
-                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>พื้นหลัง</h3>
+                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>สายการเรียน</h3>
                     <hr className={`border-1 mb-3 rounded-lg border-gray-300`} />
                     <div className="space-y-2.5">
                         <div

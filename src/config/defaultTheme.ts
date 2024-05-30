@@ -162,5 +162,27 @@ export const DefaultTheme: Record<string, ColorTheme> = {
     c3: hexToRgbA("#FE929F"),
     c4: hexToRgbA("#7CD0D0"),
     c5: hexToRgbA("#859AD1"),
+  },
+  NauticalMermaid: {
+    name: "Nautical Mermaid",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#5257BD"),
+    t2: hexToRgbA("#8E92DE"),
+    c1: hexToRgbA("#9BA5FF"),
+    c2: hexToRgbA("#F3A3F4"),
+    c3: hexToRgbA("#1FBABF"),
+    c4: hexToRgbA("#895FD9"),
+    c5: hexToRgbA("#28ACF6"),
+  },
+  NishikigoiWaterGarden: {
+    name: "Nishikigoi Garden",
+    bg: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#0F6D69"),
+    t2: hexToRgbA("#26A58D"),
+    c1: hexToRgbA("#0B7158"),
+    c2: hexToRgbA("#5BC87E"),
+    c3: hexToRgbA("#F89B59"),
+    c4: hexToRgbA("#F2CB63"),
+    c5: hexToRgbA("#2FCCA6"),
   }
 }
