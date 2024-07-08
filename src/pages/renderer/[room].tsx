@@ -135,7 +135,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   </div>
                 </div>
               )
-            else return <div className="blank"></div>
+            else return <div className="blank" key={i}></div>
           })}
       </>
     )
