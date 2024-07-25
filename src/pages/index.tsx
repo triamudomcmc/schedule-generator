@@ -165,12 +165,21 @@ export const Home: NextPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem("darkMode") === null) {
-      localStorage.setItem("darkMode", window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches.toString())
+      localStorage.setItem(
+        "darkMode",
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches.toString()
+      )
     }
     {
       setDarkMode(localStorage.getItem("darkMode") === "true")
     }
   }, [])
+
+  useEffect(() => {
+    if (query?.type && ["learn", "exam"].includes(query?.type as string)) {
+      setTab(query?.type as TabType)
+    }
+  }, [query?.type])
 
   return (
     <>
