@@ -1,6 +1,6 @@
 import { LearnSchedulePage } from "@components/LearnSchedule/Page"
 import { DescribeRoute } from "@components/Meta/DescribeRoute"
-import Switch from "@components/Switch"
+import ModeToggleButton from "@components/ModeToggle/ModeToggleButton"
 import { AnimateSharedLayout } from "framer-motion"
 import { NextPage } from "next"
 import { motion, AnimatePresence } from "framer-motion"
@@ -31,57 +31,21 @@ const PageTab: FC<{
           color: isDarkOrLightRGBAString(primaryColor, 400) === "light" ? "#111827" : "#fff",
         }
       : {
-          backgroundColor: "#fff",
+          backgroundColor: "transparent",
           color: primaryColor,
         }
   }
 
   const toggleDarkTheme = () => {
     setDarkMode(!darkMode)
+    localStorage.setItem("darkMode", darkMode ? "false" : "true")
   }
 
-  const text = darkMode ? "Dark Mode" : "Light Mode"
   const textColor = darkMode ? "text-white" : "text-black"
-  
+
   return (
     <div>
-      <div className="flex justify-end">
-        <motion.label 
-          initial="initial"
-          animate="animate"
-          variants={{
-            intiial: { y: -20, opacity: 0},
-            animate: { 
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 0.7,
-                ease: [0.6, -0.05, 0.01, 0.99]
-              }
-            }
-          }}
-          className={`mt-1.5 ${textColor} text-sm`}>{text}
-        </motion.label>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={{
-            initial: { y: -20, opacity: 0 },
-            animate: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 0.7,
-                ease: [0.6, -0.05, 0.01, 0.99],
-              },
-            },
-          }}
-          className="ml-2 flex"
-        >
-          <Switch checked={darkMode} onChange={toggleDarkTheme} />
-        </motion.div>
-      </div>
-      <div className="relative mt-3 mb-6 rounded-lg bg-white">
+      <div className="relative mt-3 mb-6 rounded-lg ">
         <div className="mx-auto">
           <div className="grid grid-cols-2 items-center justify-center rounded-lg border border-gray-300">
             <button
@@ -110,6 +74,26 @@ const PageTab: FC<{
             </button>
           </div>
         </div>
+      </div>
+      <div className=" mt-2 -mb-7  flex w-full justify-end">
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: { y: -20, opacity: 0 },
+            animate: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.7,
+                ease: [0.6, -0.05, 0.01, 0.99],
+              },
+            },
+          }}
+          className="ml-2 flex"
+        >
+          <ModeToggleButton checked={darkMode} onChange={toggleDarkTheme} />
+        </motion.div>
       </div>
     </div>
   )
@@ -175,16 +159,17 @@ export const Home: NextPage = () => {
   const [darkMode, setDarkMode] = useState(false)
   const { query } = useRouter()
 
-  let bgInsideColor = darkMode ? "#000" : "#fff"
+  let bgInsideColor = darkMode
+    ? `radial-gradient(90.95% 22.66% at top right, ${primaryColor} 0%, #434343 50%, #2D2D2D 100%)`
+    : `radial-gradient(90.95% 22.66% at top right, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)`
 
   useEffect(() => {
-    if (query?.type && ["learn", "exam"].includes(query?.type as string)) {
-      setTab(query?.type as TabType)
+    if (localStorage.getItem("darkMode") === null) {
+      localStorage.setItem("darkMode", window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches.toString())
     }
-  }, [query?.type])
-
-  useEffect(() => {
-    setDarkMode(window.matchMedia("(prefers-colors-scheme): dark").matches)
+    {
+      setDarkMode(localStorage.getItem("darkMode") === "true")
+    }
   }, [])
 
   return (
@@ -195,12 +180,12 @@ export const Home: NextPage = () => {
         imgURL="/preview.png"
       >
         <div
-          className="flex min-h-screen w-full flex-col items-center justify-center px-4 py-4 transition-colors"
-          style={{ backgroundColor: bgColor }}
+          className="flex min-h-screen w-full flex-col items-center justify-center px-4 py-4 transition-colors duration-500"
+          style={{ backgroundColor: darkMode ? "#252424" : bgColor }}
         >
           <main
-            className="max-w-[470px] rounded-xl py-10 px-5 font-ui shadow-lg transition-colors duration-500"
-            style={{ backgroundColor: bgInsideColor }}
+            className={`max-w-[470px] rounded-xl border-[1px] border-white py-10 px-5 font-ui shadow-lg transition-colors duration-500`}
+            style={{ background: bgInsideColor }}
           >
             <PageTab
               primaryColor={primaryColor}

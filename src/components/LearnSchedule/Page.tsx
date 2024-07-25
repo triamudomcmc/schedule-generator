@@ -269,7 +269,7 @@ export const LearnSchedulePage: FC<{
       <section className="mt-12 space-y-2">
         <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>ใส่เลขห้องเรียน</h2>
         <div className="flex flex-col items-start sm:flex-row sm:items-center">
-          <div className="relative w-48">
+          <div className="relative w-48 bg-transparent">
             <input
               onChange={(e) => {
                 if (e.target.value.length > 3) return
@@ -278,7 +278,7 @@ export const LearnSchedulePage: FC<{
               value={room}
               placeholder="เลขห้อง"
               className={classnames(
-                "w-full rounded-xl border border-gray-300 pl-4 pt-2 pb-1.5 text-xl text-gray-600",
+                "w-full rounded-xl border border-gray-300 pl-4 pt-2 pb-1.5 text-xl bg-transparent " , secondaryTextColor ,
                 invalidRoom ? "border-red-400" : " border border-green-400"
               )}
             />
@@ -313,7 +313,7 @@ export const LearnSchedulePage: FC<{
                 onClick={() => {
                   setPreset((prev) => !prev)
                 }}
-                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
+                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"}`}
               >
                 <motion.div variants={toggle} animate={preset ? "close" : "open"}>
                   <ChevronUpIcon className="h-5 w-5 text-gray-500" />
@@ -555,7 +555,7 @@ export const LearnSchedulePage: FC<{
                 onClick={() => {
                   setbgPreset((prev) => !prev)
                 }}
-                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
+                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"}`}
               >
                 <motion.div variants={toggle} animate={bgPreset ? "close" : "open"}>
                   <ChevronUpIcon className="h-5 w-5 text-gray-500" />
