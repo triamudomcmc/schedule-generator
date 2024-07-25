@@ -160,7 +160,7 @@ export const Home: NextPage = () => {
   const { query } = useRouter()
 
   let bgInsideColor = darkMode
-    ? `radial-gradient(90.95% 22.66% at top right, ${primaryColor} 0%, #434343 50%, #2D2D2D 100%)`
+    ? `radial-gradient(90.95% 22.66% at top right, ${bgColor} 0%, #434343 50%, #2D2D2D 100%)`
     : `radial-gradient(90.95% 22.66% at top right, #FFFFFF 0%, #FFFFFF 50%, #FFFFFF 100%)`
 
   useEffect(() => {
