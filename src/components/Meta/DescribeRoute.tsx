@@ -31,6 +31,11 @@ export const DescribeRoute: FC<{ title: string; description: string; imgURL: str
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={imgURL} />
+
+        {/* Color Tags*/}
+        <meta name="theme-color" content="#ED87D2" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#252424" media="(prefers-color-scheme: dark)" />
+
       </Head>
       {children}
     </>
