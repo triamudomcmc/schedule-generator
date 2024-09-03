@@ -24,7 +24,6 @@ export const ColorPicker = ({
   const [displayColorPicker, setDCP] = useState(false)
   const [color, setColor] = useState(defaultColor)
 
-  const borderColor = darkMode ? "border border-white" : "" 
 
   const handleClick = () => {
     setDCP((prev) => !prev)
@@ -44,13 +43,12 @@ export const ColorPicker = ({
   }, [defaultColor])
 
   return (
-    <div className={`${borderColor} rounded-[11px] sm:h-[32px] sm:w-[42px]`}>
+    <div className={` rounded-[11px] sm:h-[32px] sm:w-[42px]`}>
       <motion.div whileHover={{ scale: 1.1 }} onClick={handleClick}>
         <div
-          className="h-[30px] w-[30px] cursor-pointer rounded-[10px] border sm:h-[32px] sm:w-[42px]"
+          className={`h-[30px] w-[30px] cursor-pointer rounded-[10px] border ${darkMode ? "border-[#FFFFFF] border-opacity-40":"border-[#000000] border-opacity-20"}  sm:h-[32px] sm:w-[42px]`}
           style={{
             background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
-            border: "1px solid rgba(0, 0, 0, 0.2)",
           }}
         />
       </motion.div>

@@ -38,8 +38,8 @@ export const ExamSchedulePage: FC<{
   }
 
   const isTheSame = <T,>(a: T, b: T) => {
-    const bgColor = a === b ? primaryColor : getPrimaryTextColor()
-    const textColor = "#FF69B4"
+    const bgColor = a === b ? primaryColor : "transparent"
+    const textColor = a === b ? "#FFFFFF" : primaryColor
     return { backgroundColor: bgColor, color: textColor }
   }
 
@@ -74,7 +74,7 @@ export const ExamSchedulePage: FC<{
     <div>
       <header>
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
-          ตารางสอบกลางภาค &#40;SUM&#41;
+          ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 1 ปีการศึกษา 2567
         </h1>
@@ -86,14 +86,26 @@ export const ExamSchedulePage: FC<{
 
         <div className="flex space-x-1">
           <button
-            onClick={() => setLevel("4")}
+            onClick={() => {
+              setLevel("4")
+              if (program === "arts-math-sci") {
+                setProgram("sci-math")
+                setProgramTH("วิทย์-คณิต")
+              }
+            }}
             className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("level", "4")}
           >
             ม.4
           </button>
           <button
-            onClick={() => setLevel("5")}
+            onClick={() => {
+              setLevel("5")
+              if (program === "arts-math-sci") {
+                setProgram("sci-math")
+                setProgramTH("วิทย์-คณิต")
+              }
+            }}
             className="rounded-xl border border-gray-300 px-4 py-2"
             style={genBGButton("level", "5")}
           >
@@ -112,109 +124,111 @@ export const ExamSchedulePage: FC<{
       <section className="mt-10 space-y-2">
         <h2 className={`text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>สายการเรียน</h2>
         <div className="relative flex h-[44px] w-[240px]">
-            {/* dropdown */}
-            <div className="flex w-full rounded-xl border">
-              <div className="flex w-9/12 cursor-pointer items-center justify-center">
-                <span className={`mt-1 ${secondaryTextColor}`} style={{color:"#FF69B4"}}>{programTH}</span>
-              </div>
-              <button
-                onClick={() => {
-                  setProgramPresent((prev) => !prev)
-                }}
-                className="flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors hover:bg-gray-100"
-              >
-                <motion.div variants={toggle} animate={programPresent ? "close" : "open"}>
-                  <ChevronUpIcon className="h-5 w-5 text-gray-500" />
-                </motion.div>
-              </button>
+          {/* dropdown */}
+          <div className="flex w-full rounded-xl border">
+            <div className="flex w-9/12 cursor-pointer items-center justify-center">
+              <span className={`mt-1 ${secondaryTextColor}`} style={{ color: primaryColor }}>
+                {programTH}
+              </span>
             </div>
+            <button
+              onClick={() => {
+                setProgramPresent((prev) => !prev)
+              }}
+              className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${
+                darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"
+              }`}
+            >
+              <motion.div variants={toggle} animate={programPresent ? "close" : "open"}>
+                <ChevronUpIcon className="h-5 w-5 text-gray-500" />
+              </motion.div>
+            </button>
+          </div>
 
-            {/* expand */}
-            {programPresent && (
-              <>
-                {/* default presets */}
-                <div
-                  style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
-                  onClick={() => {
-                    setProgramPresent(false)
-                  }}
-                />
-                <div
-                  className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${primaryBackgroundColor} border border-gray-500`}
-                >
-                  <div className={`py-2`}>
-                    <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>สายการเรียน</h3>
-                    <hr className={`border-1 mb-3 rounded-lg border-gray-300`} />
-                    <div className="space-y-2.5">
-                        <div
-                          onClick={() => {
-                            setProgram("sci-math")
-                            setProgramTH("วิทย์-คณิต")
-                          }}
-                          className="mb-1 flex cursor-pointer text-gray-400"
-                        >
-                          <span
-                            className={classnames(
-                              program !== "sci-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
-                            )}
-                          >
-                            วิทย์-คณิต
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => {
-                            setProgram("arts-math")
-                            setProgramTH("ศิลป์คำนวณ")
-                          }}
-                          className="mb-1 flex cursor-pointer text-gray-400"
-                        >
-                          <span
-                            className={classnames(
-                              program !== "arts-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
-                            )}
-                          >
-                            ศิลป์คำนวณ
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => {
-                            setProgram("arts-lang")
-                            setProgramTH("ศิลป์ภาษา")
-                          }}
-                          className="mb-1 flex cursor-pointer text-gray-400"
-                        >
-                          <span
-                            className={classnames(
-                              program !== "arts-lang" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
-                            )}
-                          >
-                            ศิลป์ภาษา
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => {
-                            setProgram("arts-math-sci")
-                            setProgramTH("ภาษาคณิต(วิทย์)")
-                            setLevel("6")
-                          }}
-                          className="mb-1 flex cursor-pointer text-gray-400"
-                        >
-                          <span
-                            className={classnames(
-                              program !== "arts-math-sci" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
-                            )}
-                          >
-                            ภาษาคณิต(วิทย์)
-                          </span>
-                        </div>
+          {/* expand */}
+          {programPresent && (
+            <>
+              {/* default presets */}
+              <div
+                style={{ position: "fixed", top: "0px", right: "0px", bottom: "0px", left: "0px" }}
+                onClick={() => {
+                  setProgramPresent(false)
+                }}
+              />
+              <div
+                className={`absolute bottom-12 max-h-[28rem] w-full space-y-2 overflow-y-auto rounded-lg px-6 py-4 shadow-lg ${primaryBackgroundColor} border border-gray-500`}
+              >
+                <div className={`py-2`}>
+                  <h3 className={`mb-2 ${secondaryTextColor} font-semibold`}>สายการเรียน</h3>
+                  <hr className={`border-1 mb-3 rounded-lg border-gray-300`} />
+                  <div className="space-y-2.5">
+                    <div
+                      onClick={() => {
+                        setProgram("sci-math")
+                        setProgramTH("วิทย์-คณิต")
+                      }}
+                      className="mb-1 flex cursor-pointer text-gray-400"
+                    >
+                      <span
+                        className={classnames(
+                          program !== "sci-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                        )}
+                      >
+                        วิทย์-คณิต
+                      </span>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setProgram("arts-math")
+                        setProgramTH("ศิลป์คำนวณ")
+                      }}
+                      className="mb-1 flex cursor-pointer text-gray-400"
+                    >
+                      <span
+                        className={classnames(
+                          program !== "arts-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                        )}
+                      >
+                        ศิลป์คำนวณ
+                      </span>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setProgram("arts-lang")
+                        setProgramTH("ศิลป์ภาษา")
+                      }}
+                      className="mb-1 flex cursor-pointer text-gray-400"
+                    >
+                      <span
+                        className={classnames(
+                          program !== "arts-lang" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                        )}
+                      >
+                        ศิลป์ภาษา
+                      </span>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setProgram("arts-math-sci")
+                        setProgramTH("ภาษาคณิต(วิทย์)")
+                        setLevel("6")
+                      }}
+                      className="mb-1 flex cursor-pointer text-gray-400"
+                    >
+                      <span
+                        className={classnames(
+                          program !== "arts-math-sci" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
+                        )}
+                      >
+                        ภาษาคณิต(วิทย์)
+                      </span>
                     </div>
                   </div>
                 </div>
-              </>
-            )}
-          </div>
-
-        
+              </div>
+            </>
+          )}
+        </div>
       </section>
 
       <section className="mt-10 space-y-2">
@@ -286,7 +300,7 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/Sum-1-2567/preview/M${level}/${screenSize}/${program}.JPG`} />
+        <ExamPreview imgSrc={`/assets/images/exam/Final-1-2567/preview/M${level}/${screenSize}/${program}.JPG`} />
       </section>
 
       <Downloadbutton
