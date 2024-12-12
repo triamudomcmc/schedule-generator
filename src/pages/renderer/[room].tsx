@@ -41,7 +41,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2567"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2567"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const room = params?.room
   let scheduleData: ScheduleData | null = null
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2567/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2567/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
   }
@@ -112,8 +112,8 @@ const Room = ({ scheduleData }: RoomProps) => {
         // {Array(4)
           .fill("")
           .map((_, i) => {
-            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : "" ?? ""
-            const teacher = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][1] : "" ?? ""
+            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : "" 
+            const teacher = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][1] : ""
 
             if (name || teacher)
               return (
@@ -203,7 +203,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 1/2567
+                  ภาคเรียนที่ 2/2567
                 </p>
               </div>
             </div>
