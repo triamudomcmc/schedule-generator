@@ -12,7 +12,7 @@ export const Downloadbutton: FC<{
 }> = ({ level, program, screenSize, style }) => {
   const [waiting, setWaiting] = useState(false)
 
-  const imgUrl = `/assets/images/exam/Sum-2-2567/src/M${level}/${screenSize}/${program}.png`
+  const imgUrl = `/assets/images/exam/Final-2-2567/src/M${level}/${screenSize}/${program}.png`
 
   const download = async () => {
     if (waiting) return
@@ -39,10 +39,10 @@ export const Downloadbutton: FC<{
   return (
     <div className="mt-2 flex justify-center sm:mt-10">
       <motion.button
-        whileHover={{ scale: !waiting ? 1.05 : 1 }}
+        // whileHover={{ scale: !waiting ? 1.05 : 1 }}
         onClick={download}
         className={classNames(
-          "w-full rounded-xl text-white transition-colors sm:w-max",
+          "w-full rounded-xl text-white transition-colors sm:w-max ",
           waiting ? "cursor-not-allowed px-[60px] pb-[10px] pt-[2px]" : "py-2.5 px-6"
         )}
         style={style}
