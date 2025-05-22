@@ -36,4 +36,8 @@ export const BackgroundDecorations: Record<string, BackgroundTheme> = {
     name: "Nishikigoi Water Garden",
     value: "nishikigoiwatergarden",
   },
+  bloomandbasket: {
+    name: "Bloom and Basket",
+    value: "bloomandbasket",
+  }
 }

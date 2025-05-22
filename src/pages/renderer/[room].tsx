@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain, NauticalMermaid, NishikigoiWaterGarden } from "@components/Background"
+import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain, NauticalMermaid, NishikigoiWaterGarden, Bloomandbasket } from "@components/Background"
 import { selOpt } from "@handlers/server/optHandler"
 
 const defaultColors = {
@@ -76,7 +76,7 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden" | "bloomandbasket"
 
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
@@ -195,6 +195,7 @@ const Room = ({ scheduleData }: RoomProps) => {
           {background === "sweetintherain" && <SweetInTheRain />}
           {background === "nauticalmermaid" && <NauticalMermaid />}
           {background === "nishikigoiwatergarden" && <NishikigoiWaterGarden />}
+          {background === "bloomandbasket" && <Bloomandbasket />}
           <div className="header ">
             <div className="left z-10">
               {/*<div className="bar"></div>*/}
@@ -203,7 +204,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 2/2567
+                  ภาคเรียนที่ 1/2568
                 </p>
               </div>
             </div>
