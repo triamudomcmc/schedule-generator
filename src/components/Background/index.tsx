@@ -7,5 +7,6 @@ export { default as Halloween, HalloweenPreview} from "./halloween"
 export { default as SweetInTheRain, SweetInTheRainPreview} from "./sweetintherain"
 export { default as NauticalMermaid, NauticalMermaidPreview} from "./nauticalmermaid"
 export { default as NishikigoiWaterGarden, NishikigoiWaterGardenPreview} from "./nishikigoiwatergarden"
+export { default as Bloomandbasket, BloomandbasketPreview} from "./bloomandbasket"
 
 // Edit this

@@ -11,7 +11,8 @@ import {
   HalloweenPreview,
   SweetInTheRainPreview,
   NauticalMermaidPreview,
-  NishikigoiWaterGardenPreview
+  NishikigoiWaterGardenPreview,
+  BloomandbasketPreview
 } from "@components/Background"
 
 interface Scheme {
@@ -69,6 +70,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
       <div>{background === "sweetintherain" && <SweetInTheRainPreview />}</div>
       <div>{background === "nauticalmermaid" && <NauticalMermaidPreview />}</div>
       <div>{background === "nishikigoiwatergarden" && <NishikigoiWaterGardenPreview />}</div>
+      <div>{background === "bloomandbasket" && <BloomandbasketPreview />}</div>
         <svg
           width="2388"
           height="1668"
@@ -112,7 +114,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
             ตารางเรียน
           </text> */}
           <text x="1800" y="408" fontSize="40px" fontWeight={500} fill={theme.t2}>
-            ห้อง 656 | ภาษา-ฝรั่งเศส
+            ห้อง 656 | ภาษา-คณิต
           </text>
           <text x="2025" y="460" fontSize="28px" fontWeight={200} fill={theme.t2}>
             ครูเรียนเด่น เล่นดี
@@ -159,7 +161,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
           /> */}
           {/* === */}
           <text x="164" y="483" fontSize="36px" fill={theme.t2}>
-            ภาคเรียนที่ 1/2567
+            ภาคเรียนที่ 1/2568
           </text>
           <svg
             width="67"
