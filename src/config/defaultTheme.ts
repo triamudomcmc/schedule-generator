@@ -184,5 +184,16 @@ export const DefaultTheme: Record<string, ColorTheme> = {
     c3: hexToRgbA("#F89B59"),
     c4: hexToRgbA("#F2CB63"),
     c5: hexToRgbA("#2FCCA6"),
-  }
+  },
+  Bloomandbasket: {
+    name: "Bloom and Basket",
+    bg: hexToRgbA("#FFFFFC"),
+    t1: hexToRgbA("#F874AA"),
+    t2: hexToRgbA("#FFA5BE"),
+    c1: hexToRgbA("#FFD1DF"),
+    c2: hexToRgbA("#FFD080"),
+    c3: hexToRgbA("#FFF1AC"),
+    c4: hexToRgbA("#DAE299"),
+    c5: hexToRgbA("#B7EFEE"),
+  },
 }

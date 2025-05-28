@@ -28,7 +28,7 @@ import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden"
+type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden" | "bloomandbasket"
 
 export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
@@ -237,7 +237,7 @@ export const LearnSchedulePage: FC<{
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2567
+          ภาคเรียนที่ 1 ปีการศึกษา 2568
         </h1>
         <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
