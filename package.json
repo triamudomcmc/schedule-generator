@@ -28,7 +28,8 @@
     "react-dropdown": "^1.9.2",
     "reactcss": "^1.2.3",
     "tucmc-auth": "^0.3.9",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@types/react": "^16.14.51",

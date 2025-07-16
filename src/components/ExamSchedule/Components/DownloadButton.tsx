@@ -13,6 +13,8 @@ export const Downloadbutton: FC<{
   const [waiting, setWaiting] = useState(false)
 
   const imgUrl = `/assets/images/exam/Summative-1-2568/src/M${level}/${screenSize}/${program}.png`
+  // example path:       /assets/images/exam/Summative-1-2568/src/M4/iPhoneX/sci-math.png
+  //http://localhost:3000/assets/images/exam/Summative-1-2568/src/M4/iphoneX/sci-math.png
 
   const download = async () => {
     if (waiting) return
