@@ -12,7 +12,7 @@ import { ThemeButton } from "./Components/ThemeButton"
 
 export type LevelType = "4" | "5" | "6"
 export type ProgramType = "sci-math" | "arts-math" | "arts-lang" | "arts-math-sci"
-export type ProgramTHType = "วิทย์-คณิต" | "ศิลป์คำนวณ" | "ศิลป์ภาษา" | "ภาษาคณิต(วิทย์)"
+export type ProgramTHType = "วิทย์-คณิต" | "ศิลป์-คำนวณ" | "ศิลป์-ภาษา" | "ภาษา-คณิต (วิทย์)"
 export type ScreenSizeType = "ipad" | "iphoneX" | "iphone8" | "huawei"
 export type ThemeType = "blue" | "red" | "yellow"
 
@@ -74,9 +74,9 @@ export const ExamSchedulePage: FC<{
     <div>
       <header>
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
-          ตารางสอบปลายภาค &#40;FINAL&#41;
+          ตารางสอบกลางภาค &#40;SUMMATIVE&#41;
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2567
+          ภาคเรียนที่ 1 ปีการศึกษา 2568
         </h1>
         <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>เลือกแบบที่ต้องการแล้วกด Download เลย !</p>
       </header>
@@ -180,7 +180,7 @@ export const ExamSchedulePage: FC<{
                     <div
                       onClick={() => {
                         setProgram("arts-math")
-                        setProgramTH("ศิลป์คำนวณ")
+                        setProgramTH("ศิลป์-คำนวณ")
                       }}
                       className="mb-1 flex cursor-pointer text-gray-400"
                     >
@@ -189,13 +189,13 @@ export const ExamSchedulePage: FC<{
                           program !== "arts-math" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
                         )}
                       >
-                        ศิลป์คำนวณ
+                        ศิลป์-คำนวณ
                       </span>
                     </div>
                     <div
                       onClick={() => {
                         setProgram("arts-lang")
-                        setProgramTH("ศิลป์ภาษา")
+                        setProgramTH("ศิลป์-ภาษา")
                       }}
                       className="mb-1 flex cursor-pointer text-gray-400"
                     >
@@ -204,13 +204,13 @@ export const ExamSchedulePage: FC<{
                           program !== "arts-lang" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
                         )}
                       >
-                        ศิลป์ภาษา
+                        ศิลป์-ภาษา
                       </span>
                     </div>
                     <div
                       onClick={() => {
                         setProgram("arts-math-sci")
-                        setProgramTH("ภาษาคณิต(วิทย์)")
+                        setProgramTH("ภาษา-คณิต (วิทย์)")
                         setLevel("6")
                       }}
                       className="mb-1 flex cursor-pointer text-gray-400"
@@ -220,7 +220,7 @@ export const ExamSchedulePage: FC<{
                           program !== "arts-math-sci" ? "transition-colors hover:text-gray-800" : `${hoverTextColor}`
                         )}
                       >
-                        ภาษาคณิต(วิทย์)
+                        ภาษา-คณิต (วิทย์)
                       </span>
                     </div>
                   </div>
@@ -300,7 +300,7 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/Final-2-2567/preview/M${level}/${screenSize}/${program}.JPG`} />
+        <ExamPreview imgSrc={`/assets/images/exam/Summative-1-2568/preview/M${level}/${screenSize}/${program}.jpg`} /> 
       </section>
 
       <Downloadbutton
