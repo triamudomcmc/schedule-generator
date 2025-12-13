@@ -185,7 +185,7 @@ export const LearnSchedulePage: FC<{
       >
         <div className="flex flex-col items-center px-4 py-4">
           <div className="mt-1 mb-2 p-3">
-            <Image src="/assets/art-and-design.png" layout="intrinsic" width={60} height={60} />
+            <Image src="/assets/art-and-design.png" layout="intrinsic" width={60} height={60} alt={""}/>
           </div>
           <div className="space-y-1">
             <h2 className="text-center text-gray-900">สร้างธีมสีใหม่</h2>
@@ -237,7 +237,7 @@ export const LearnSchedulePage: FC<{
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 1 ปีการศึกษา 2568
+          ภาคเรียนที่ 2 ปีการศึกษา 2568
         </h1>
         <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;

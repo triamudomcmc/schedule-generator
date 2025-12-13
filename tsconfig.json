@@ -65,6 +65,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.d.ts",
     "src/components/ExamSchedule/Components/ThemeButton.tsx.tmp"
   ],
   "exclude": [
