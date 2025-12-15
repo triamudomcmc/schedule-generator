@@ -161,7 +161,7 @@ const Preview: FC<PreviewProps> = ({ rawTheme, background }) => {
           /> */}
           {/* === */}
           <text x="164" y="483" fontSize="36px" fill={theme.t2}>
-            ภาคเรียนที่ 1/2568
+            ภาคเรียนที่ 2/2568
           </text>
           <svg
             width="67"
