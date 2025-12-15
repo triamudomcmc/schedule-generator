@@ -204,7 +204,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 1/2568
+                  ภาคเรียนที่ 2/2568
                 </p>
               </div>
             </div>
