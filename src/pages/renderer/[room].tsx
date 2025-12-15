@@ -41,7 +41,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2568"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2568"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const room = params?.room
   let scheduleData: ScheduleData | null = null
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2568/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2568/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
   }
