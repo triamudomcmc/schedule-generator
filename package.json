@@ -25,9 +25,8 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "reactcss": "^1.2.3",
-    "tucmc-auth": "^0.3.9",
-    "uuid": "^8.3.2",
-    "yarn": "^1.22.22"
+    "tucmc-auth": "^0.4.8",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "^16.14.51",
