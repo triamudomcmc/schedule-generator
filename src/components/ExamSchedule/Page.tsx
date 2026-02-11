@@ -74,7 +74,7 @@ export const ExamSchedulePage: FC<{
     <div>
       <header>
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
-          ตารางสอบกลางภาค &#40;SUMMATIVE&#41;
+          ตารางสอบปลายภาค &#40;FINAL&#41;
           <br />
           ภาคเรียนที่ 2 ปีการศึกษา 2568
         </h1>
@@ -300,7 +300,7 @@ export const ExamSchedulePage: FC<{
 
       <section className="mt-10 space-y-2">
         <h2 className={`text-center text-xl font-medium ${secondaryTextColor} sm:text-2xl`}>Preview</h2>
-        <ExamPreview imgSrc={`/assets/images/exam/Summative-2-2568/preview/M${level}/${screenSize}/${program}.jpg`} /> 
+        <ExamPreview imgSrc={`/assets/images/exam/Final-2-2568/preview/M${level}/${screenSize}/${program}.jpg`} /> 
       </section>
 
       <Downloadbutton
