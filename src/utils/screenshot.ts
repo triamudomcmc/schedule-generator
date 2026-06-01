@@ -6,7 +6,7 @@ export default async function screenshot(url: string, width: number = 2388, heig
     args: chromium.args,
     defaultViewport: { width, height },
     executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    headless: true,
   })
   const page = await browser.newPage()
   await page.goto(url, { waitUntil: "networkidle2" })
