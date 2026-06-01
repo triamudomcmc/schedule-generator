@@ -9,7 +9,21 @@ import { useRouter } from "next/router"
 import { isDarkOrLightHEX, isDarkOrLightRGBAString, isDarkOrLightRGBAStringD } from "@utils/isDarkOrLight"
 import Image from "next/image"
 import classNames from "classnames"
-import { Mistletoe, Ordaments, Sticker, Flower, Colorful, Halloween, SweetInTheRain, NauticalMermaid, NishikigoiWaterGarden, Bloomandbasket } from "@components/Background"
+import {
+  Mistletoe,
+  Ordaments,
+  Sticker,
+  Flower,
+  Colorful,
+  Halloween,
+  SweetInTheRain,
+  NauticalMermaid,
+  NishikigoiWaterGarden,
+  Bloomandbasket,
+  StarlightExpress,
+  LaPatisserie,
+  TheCastleOfCountlessLegacies,
+} from "@components/Background"
 import { selOpt } from "@handlers/server/optHandler"
 
 const defaultColors = {
@@ -41,7 +55,7 @@ interface ScheduleData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/2-2568"))
+  const files = fs.readdirSync(path.join(process.cwd(), "_keep/data/1-2569"))
 
   const paths = files
     .filter((i) => i.includes(".json"))
@@ -59,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const room = params?.room
   let scheduleData: ScheduleData | null = null
   if (params) {
-    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/2-2568/${room}.json`)).toString()
+    const raw = fs.readFileSync(path.join(process.cwd(), `_keep/data/1-2569/${room}.json`)).toString()
     scheduleData = JSON.parse(raw)
     scheduleData = selOpt(scheduleData)
   }
@@ -76,8 +90,21 @@ interface RoomProps {
   query: any
 }
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden" | "bloomandbasket"
-
+type BGType =
+  | "none"
+  | "mistletoe"
+  | "ordaments"
+  | "sticker"
+  | "flower"
+  | "colorful"
+  | "halloween"
+  | "sweetintherain"
+  | "nauticalmermaid"
+  | "nishikigoiwatergarden"
+  | "bloomandbasket"
+  | "starlightexpress"
+  | "lapatisserie"
+  | "thecastleofcountlesslegacies"
 const Room = ({ scheduleData }: RoomProps) => {
   const router = useRouter()
 
@@ -109,10 +136,10 @@ const Room = ({ scheduleData }: RoomProps) => {
     return (
       <>
         {Array(period <= 3 ? 5 : 4)
-        // {Array(4)
+          // {Array(4)
           .fill("")
           .map((_, i) => {
-            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : "" 
+            const name = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][0] : ""
             const teacher = period in scheduleData?.body[i + 1] ? scheduleData?.body[i + 1][period][1] : ""
 
             if (name || teacher)
@@ -196,6 +223,9 @@ const Room = ({ scheduleData }: RoomProps) => {
           {background === "nauticalmermaid" && <NauticalMermaid />}
           {background === "nishikigoiwatergarden" && <NishikigoiWaterGarden />}
           {background === "bloomandbasket" && <Bloomandbasket />}
+          {background === "starlightexpress" && <StarlightExpress />}
+          {background === "lapatisserie" && <LaPatisserie />}
+          {background === "thecastleofcountlesslegacies" && <TheCastleOfCountlessLegacies />}
           <div className="header ">
             <div className="left z-10">
               {/*<div className="bar"></div>*/}
@@ -204,7 +234,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   ตารางเรียน
                 </h1>
                 <p className="subtitle" style={{ color: color.t2 }}>
-                  ภาคเรียนที่ 2/2568
+                  ภาคเรียนที่ 1/2569
                 </p>
               </div>
             </div>
@@ -266,9 +296,24 @@ const Room = ({ scheduleData }: RoomProps) => {
                 {/* break10 */}
                 <div className="col">
                   <div style={{ backgroundColor: "#fff" }} className="break10-button">
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>10</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>นาที</p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      พัก
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      10
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      นาที
+                    </p>
                   </div>
                 </div>
                 {/* 3 */}
@@ -291,13 +336,28 @@ const Room = ({ scheduleData }: RoomProps) => {
                   </div>
                   {genSchedule(4)}
                 </div>
-                
+
                 {/* lunchbreak */}
                 <div className="col">
                   <div style={{ backgroundColor: "#fff" }} className="lunch-button no-afternoon">
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>กลาง</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>วัน</p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      พัก
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      กลาง
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      วัน
+                    </p>
                   </div>
                 </div>
                 {/* 5 */}
@@ -323,9 +383,24 @@ const Room = ({ scheduleData }: RoomProps) => {
                 {/* break10 */}
                 <div className="col">
                   <div style={{ backgroundColor: "#fff" }} className="break10-button no-afternoon">
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>พัก</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>10</p>
-                    <p className="text" style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000"}}>นาที</p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      พัก
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      10
+                    </p>
+                    <p
+                      className="text"
+                      style={{ color: isDarkOrLightRGBAString(color.bg) === "light" ? "#404040" : "#000" }}
+                    >
+                      นาที
+                    </p>
                   </div>
                 </div>
                 {/* 7 */}
@@ -338,7 +413,7 @@ const Room = ({ scheduleData }: RoomProps) => {
                   </div>
                   {genSchedule(7)}
                 </div>
-                
+
                 {/* 8 */}
                 <div className="col">
                   <div
@@ -371,7 +446,11 @@ const Room = ({ scheduleData }: RoomProps) => {
               </div> */}
             </div>
           </div>
-          <Logo color={color.t1} />
+          <Logo
+            color={
+              color.bg === rawRgbColorToCss(hexToRgbA("#FFF6D6")) ? rawRgbColorToCss(hexToRgbA("#FFFFFF")) : color.t1
+            }
+          />
         </div>
       </div>
     </>

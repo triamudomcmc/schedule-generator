@@ -28,7 +28,18 @@ import { v4 as uuidv4 } from "uuid"
 import { useTimeout } from "@hooks/useTimeout"
 import { useToast } from "@components/Toast/Context"
 
-type BGType = "none" | "mistletoe" | "ordaments" | "sticker" | "flower" | "colorful" | "halloween" | "sweetintherain" | "nauticalmermaid" | "nishikigoiwatergarden" | "bloomandbasket"
+type BGType =
+  | "none"
+  | "mistletoe"
+  | "ordaments"
+  | "sticker"
+  | "flower"
+  | "colorful"
+  | "halloween"
+  | "sweetintherain"
+  | "nauticalmermaid"
+  | "nishikigoiwatergarden"
+  | "bloomandbasket"
 
 export const LearnSchedulePage: FC<{
   setBGcolor: Dispatch<SetStateAction<string>>
@@ -185,7 +196,7 @@ export const LearnSchedulePage: FC<{
       >
         <div className="flex flex-col items-center px-4 py-4">
           <div className="mt-1 mb-2 p-3">
-            <Image src="/assets/art-and-design.png" layout="intrinsic" width={60} height={60} alt={""}/>
+            <Image src="/assets/art-and-design.png" layout="intrinsic" width={60} height={60} alt={""} />
           </div>
           <div className="space-y-1">
             <h2 className="text-center text-gray-900">สร้างธีมสีใหม่</h2>
@@ -237,7 +248,7 @@ export const LearnSchedulePage: FC<{
         <h1 className={`mb-1 text-xl font-medium ${primaryTextColor} sm:text-2xl`}>
           ระบบจัดการตารางเรียน
           <br />
-          ภาคเรียนที่ 2 ปีการศึกษา 2568
+          ภาคเรียนที่ 1 ปีการศึกษา 2569
         </h1>
         <p className={`mt-3 text-sm leading-5 ${secondaryTextColor}`}>
           ระบบนี้เป็นระบบสำหรับดาวน์โหลดตารางเรียนที่ทาง กช.&nbsp;
@@ -278,7 +289,8 @@ export const LearnSchedulePage: FC<{
               value={room}
               placeholder="เลขห้อง"
               className={classnames(
-                "w-full rounded-xl border border-gray-300 pl-4 pt-2 pb-1.5 text-xl bg-transparent " , secondaryTextColor ,
+                "w-full rounded-xl border border-gray-300 bg-transparent pl-4 pt-2 pb-1.5 text-xl ",
+                secondaryTextColor,
                 invalidRoom ? "border-red-400" : " border border-green-400"
               )}
             />
@@ -313,7 +325,9 @@ export const LearnSchedulePage: FC<{
                 onClick={() => {
                   setPreset((prev) => !prev)
                 }}
-                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"}`}
+                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${
+                  darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"
+                }`}
               >
                 <motion.div variants={toggle} animate={preset ? "close" : "open"}>
                   <ChevronUpIcon className="h-5 w-5 text-gray-500" />
@@ -395,7 +409,7 @@ export const LearnSchedulePage: FC<{
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   setTheme("d-Pink")
-                                  
+
                                   const newCustomThemes = removeKey(customThemes, cTheme)
                                   setCustomThemes(newCustomThemes)
                                   // save to db
@@ -555,7 +569,9 @@ export const LearnSchedulePage: FC<{
                 onClick={() => {
                   setbgPreset((prev) => !prev)
                 }}
-                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"}`}
+                className={`flex w-3/12 cursor-pointer items-center justify-center rounded-r-xl border-l border-gray-300 transition-colors ${
+                  darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"
+                }`}
               >
                 <motion.div variants={toggle} animate={bgPreset ? "close" : "open"}>
                   <ChevronUpIcon className="h-5 w-5 text-gray-500" />
