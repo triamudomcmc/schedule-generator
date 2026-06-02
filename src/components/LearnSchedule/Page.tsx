@@ -257,11 +257,12 @@ export const LearnSchedulePage: FC<{
           <br />
         </p>
 
-        <div className="mt-6 flex flex-col space-y-2">
+        <div className="mt-6 flex  cursor-not-allowed flex-col space-y-2 opacity-50 transition-opacity hover:opacity-20">
           {!loggedUser ? (
             <>
               <p className={`text-sm ${tertiaryTextColor}`}>เข้าสู่ระบบเพื่อบันทึกธีมสีของคุณ</p>
-              <div className="w-48 transition-transform hover:scale-105">
+              {/* <div className="w-48 transition-transform hover:scale-105"> */}
+              <div className="pointer-events-none w-48 cursor-not-allowed ">
                 <TUCMCLogin />
               </div>
             </>

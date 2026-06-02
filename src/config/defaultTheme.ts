@@ -199,7 +199,7 @@ export const DefaultTheme: Record<string, ColorTheme> = {
   starlightexpress: {
     name: "Starlight Express",
     bg: hexToRgbA("#1A3483"),
-    t1: hexToRgbA("#FFFFFF"),
+    t1: hexToRgbA("#FFA8D3"),
     t2: hexToRgbA("#FFFFFF"),
     c1: hexToRgbA("#F2ABBF"),
     c2: hexToRgbA("#1A3483"),
